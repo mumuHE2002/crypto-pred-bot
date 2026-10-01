@@ -43,6 +43,7 @@ module.exports = {
   MIN_BET_USD: num('MIN_BET_USD', 1),
   MAX_BET_USD: num('MAX_BET_USD', 10),
   REQUIRED_EDGE: num('REQUIRED_EDGE', 0.08), // Jev概率 − 买入价 ≥ 8%
+  EDGE_CONFIRM_HITS: num('EDGE_CONFIRM_HITS', 2), // edge 双重确认：同窗口同方向连续达标 N 次才开仓，过滤闪动报价的幻影 edge
   EVAL_COOLDOWN_MS: num('EVAL_COOLDOWN_MS', 30000), // 上次评估结束后等待 30s
   MIN_SECONDS_LEFT: num('MIN_SECONDS_LEFT', 60), // 剩余不足 60s 不再开新仓
   MAX_BUY_PRICE: num('MAX_BUY_PRICE', 0.92), // 买入价高于此视为结果已定

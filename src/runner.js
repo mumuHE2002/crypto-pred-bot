@@ -31,12 +31,41 @@ function logError(ledger, where, e) {
 let ledger = load();
 function persist() { recordEquity(ledger); save(ledger); }
 
+/** edge 双重确认（去抖）：同窗口同方向连续 N 次评估 edge 达标才开仓。
+ *  15m 盘报价闪动快，单次评估的 8% gap 常是过期报价/薄订单簿打印的幻影；
+ *  真实分歧应能挺过约 1 分钟（一次评估间隔）。内存态，重启丢失=保守跳过。 */
+const edgeConfirm = new Map(); // `${coin}:${slug}` → { side, hits }
+const confirmKey = (coin, mkt) => `${coin}:${mkt.slug}`;
+function edgeConfirmed(coin, mkt, d2, judgment, label) {
+  const ck = confirmKey(coin, mkt);
+  const need = Math.max(1, cfg.EDGE_CONFIRM_HITS || 2);
+  const prev = edgeConfirm.get(ck);
+  const hits = (prev && prev.side === d2.side) ? prev.hits + 1 : 1;
+  if (hits >= need) {
+    edgeConfirm.delete(ck);
+    judgment.edgeConfirm = `confirmed(${hits}/${need})`;
+    return true;
+  }
+  edgeConfirm.set(ck, { side: d2.side, hits });
+  const edge = d2.side === 'up' ? d2.edgeUp : d2.edgeDown;
+  judgment.bet = false;
+  judgment.side = d2.side; judgment.stake = d2.stake;
+  judgment.edgeConfirm = `pending(${hits}/${need})`;
+  judgment.reason = `edge ${(edge * 100).toFixed(1)}% 达标，等待二次确认（${hits}/${need}，${d2.side}）`;
+  console.log(`[${coin} ${label}] edge 达标，等待二次确认（${hits}/${need}）`);
+  return false;
+}
+
 /** 单盘一次评估：退出复核 →（无持仓时）新开仓判断 */
 async function evaluateMarket(coin) {
   const coinName = pm.COIN_NAME[coin];
   const mkt = await pm.fetchCurrentMarket(coin);
   if (!mkt) { console.log(`[${coin}] 本轮无盘口（slug 未创建），跳过`); return; }
   if (mkt.error) { logError(ledger, `eval-${coin}`, mkt.error); persist(); return; }
+  // 窗口滚动后清理旧确认态（key 含 slug，旧窗口自然过期）
+  for (const k of [...edgeConfirm.keys()]) {
+    if (k.startsWith(`${coin}:`) && k !== confirmKey(coin, mkt)) edgeConfirm.delete(k);
+  }
   const label = windowLabel(mkt.start, mkt.end);
   const t0 = Date.now();
 
@@ -106,7 +135,10 @@ async function evaluateMarket(coin) {
         if (!judgment.refetch.bet) {
           judgment.bet = false;
           judgment.reason = `决策通过但未执行：${judgment.refetch.reason}`;
+          edgeConfirm.delete(confirmKey(coin, mkt)); // 确认链断裂
           console.log(`[${coin} ${label}] 重抓价后放弃：${judgment.refetch.reason}`);
+        } else if (!edgeConfirmed(coin, mkt, d2, judgment, label)) {
+          // edge 双重确认未通过：本轮不拉订单簿、不下单（judgment 已填写）
         } else {
           // 深度撮合：按实际订单簿逐档吃 asks，能成交多少买多少；edge 按加权均价重算
           const token = d2.side === 'up' ? mkt.upToken : mkt.downToken;
@@ -164,10 +196,12 @@ async function evaluateMarket(coin) {
           }
         }
       } else {
+        edgeConfirm.delete(confirmKey(coin, mkt)); // 初判未达标，确认链断裂
         console.log(`[${coin} ${label}] 跳过：${d.reason}`);
       }
     } catch (e) {
       // Jev/DS 失败 → 不下单（铁律），只记录；能拿到的 io 也存档
+      edgeConfirm.delete(confirmKey(coin, mkt)); // 模型失败，确认链断裂
       if (e._io && !judgment.io) judgment.io = {};
       if (e._io) judgment.io.failed = e._io;
       judgment.error = String(e.message || e).slice(0, 200);
@@ -352,4 +386,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { evaluateMarket, settleOnce, loadPrices };
+module.exports = { evaluateMarket, settleOnce, loadPrices, edgeConfirmed, _edgeConfirm: edgeConfirm };

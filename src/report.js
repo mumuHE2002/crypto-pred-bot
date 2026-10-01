@@ -37,7 +37,7 @@ function judgmentSubTable(judgs) {
     }
     return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
   }).join('');
-  return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>盘口</th><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table>${blocks.join('')}`;
+  return `<div class="dh">📝 判断记录</div><div class="twrap"><table class="sub"><tr><th>盘口</th><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
 }
 
 function reviewSubTable(revs) {
@@ -54,7 +54,7 @@ function reviewSubTable(revs) {
     }
     return `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${sellP}</td><td class="${pnlCls(un)}">${usd(un)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td><td>${mioBtn}</td></tr>`;
   }).join('');
-  return `<div class="dh">🛟 退出复核</div><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th><th>模型</th></tr>${rows}</table>${blocks.join('')}`;
+  return `<div class="dh">🛟 退出复核</div><div class="twrap"><div class="twrap"><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
 }
 
 // 模型 io 二级展开：发给模型的完整输入 + 原始输出，烘焙进 HTML
@@ -172,7 +172,7 @@ function renderHtml(ledger, prices, opts = {}) {
     `<tr><td>${tstr(e.time)}</td><td>${esc(e.where)}</td><td class="rs">${esc(e.message)}</td></tr>`).join('');
 
   // 最近评估：无持仓时页面也不至于全空，判断表复用（含模型输入/输出展开）
-  const recentJudgs = ledger.judgments.slice(-10);
+  const recentJudgs = ledger.judgments.slice(-100);
 
   return `<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Polymarket Crypto 15m 模拟盘${live}</title>
@@ -194,6 +194,20 @@ a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d
 .rs{max-width:340px;word-break:break-word;color:#9aa4b8}
 .empty{color:#5c6579;padding:14px;font-size:12px}
 .exp2{background:#2a3348;border:0;color:#c9d1d9;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:12px}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+body{padding:10px}
+h1{font-size:17px}
+.cards{gap:8px;margin-bottom:10px}
+.card{padding:8px 10px;min-width:100px;flex:1 1 30%}
+.card .v{font-size:17px}
+h2{font-size:14px;margin:14px 0 6px}
+th,td{padding:8px 6px;font-size:11px;white-space:nowrap}
+td.rs{white-space:normal;min-width:120px}
+.exp,.exp2{padding:8px 12px;font-size:12px}
+.mio pre{font-size:10px}
+.dh{font-size:11px}
+}
 .mio{margin:6px 0 12px;background:#10182a;border-radius:6px;padding:4px 10px 10px}
 .mioh{font-size:11px;color:#8b93a7;margin:10px 0 4px}
 .mio pre{background:#0b1120;padding:8px;border-radius:4px;font-size:11px;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;margin:0;color:#c9d1d9}
@@ -207,17 +221,17 @@ a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d
 <div class="card"><div class="k">已结算</div><div class="v">${settled.length}（命中${winN}）</div></div>
 <div class="card"><div class="k">成交</div><div class="v">${ledger.trades.length}</div></div>
 </div>
-<h2>🕐 最近评估（近10轮）</h2>
-${recentJudgs.length ? judgmentSubTable(recentJudgs) : '<div class="empty">暂无评估记录</div>'}
 <h2>📦 持仓（点击行展开判断/复核明细）</h2>
-${ledger.positions.length ? `<table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>现价(卖)</th><th>浮盈亏</th><th>买入时间</th><th>明细</th></tr>${posRows}</table>` : '<div class="empty">暂无持仓</div>'}
+${ledger.positions.length ? `<div class="twrap"><table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>现价(卖)</th><th>浮盈亏</th><th>买入时间</th><th>明细</th></tr>${posRows}</table></div>` : '<div class="empty">暂无持仓</div>'}
 <h2>🔴 已卖出（累计 <span class="${pnlCls(soldTotal)}">${usd(soldTotal)}</span>，点击行展开判断/复核明细）</h2>
-${soldData.length ? `<table><tr><th>卖出时间</th><th>市场</th><th>方向</th><th>买入→卖出</th><th>股数</th><th>投入→收回</th><th>实现盈亏</th><th>持有更优</th><th>原因</th><th>明细</th></tr>${soldRows}</table>` : '<div class="empty">暂无卖出</div>'}
+${soldData.length ? `<div class="twrap"><table><tr><th>卖出时间</th><th>市场</th><th>方向</th><th>买入→卖出</th><th>股数</th><th>投入→收回</th><th>实现盈亏</th><th>持有更优</th><th>原因</th><th>明细</th></tr>${soldRows}</table></div>` : '<div class="empty">暂无卖出</div>'}
 <h2>🏁 结算记录（点击行展开判断/复核明细）</h2>
-${settled.length ? `<table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>股数</th><th>收回</th><th>盈亏</th><th>明细</th></tr>${settleRows}</table>` : '<div class="empty">暂无结算</div>'}
+${settled.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>股数</th><th>收回</th><th>盈亏</th><th>明细</th></tr>${settleRows}</table></div>` : '<div class="empty">暂无结算</div>'}
 <h2>📒 成交记录（近60）</h2>
-${ledger.trades.length ? `<table><tr><th>时间</th><th>市场</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table>` : '<div class="empty">暂无成交</div>'}
-${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table>` : ''}
+${ledger.trades.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table></div>` : '<div class="empty">暂无成交</div>'}
+${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><div class="twrap"><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table></div>` : ''}
+<h2>🕐 最近评估（近100轮）</h2>
+${recentJudgs.length ? judgmentSubTable(recentJudgs) : '<div class="empty">暂无评估记录</div>'}
 <script>
 document.addEventListener('click',e=>{
   const b=e.target.closest('.exp');

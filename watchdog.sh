@@ -1,1 +1,26 @@
-IyEvYmluL2Jhc2gKIyBwb2x5bWFya2V0LWNyeXB0by1ib3Qg55yL6Zeo54uX77ya6Z2i5p2/IDozMjAwICsg5Li75b6q546v5L+d5rS777yIcGF0dGVybiDlhpnlnKjohJrmnKzph4zvvIzpgb/lhY0gcGtpbGwg6Ieq5p2A77yJCkRJUj1+L3dvcmtzcGFjZS9wb2x5bWFya2V0LWNyeXB0by1ib3QKY2QgIiRESVIiIHx8IGV4aXQgMQoKYWxpdmUoKSB7ICMgJDE9cGF0dGVybu+8mmN3ZCDlnKjmnKznm67lvZXkuJTlkb3ku6TooYzljLnphY3nmoQgbm9kZSDov5vnqIvmlbAKICBsb2NhbCBwYXQ9IiQxIiBuPTAKICBmb3IgcCBpbiAkKHBncmVwIC1mICIkcGF0IiAyPi9kZXYvbnVsbCk7IGRvCiAgICBpZiByZWFkbGluayAiL3Byb2MvJHAvY3dkIiAyPi9kZXYvbnVsbCB8IGdyZXAgLXEgInBvbHltYXJrZXQtY3J5cHRvLWJvdCQiOyB0aGVuIG49JCgobisxKSk7IGZpCiAgZG9uZQogIGVjaG8gIiRuIgp9CgppZiBbICIkKGFsaXZlICdub2RlIHNyYy9ydW5uZXIuanMnKSIgLWVxIDAgXTsgdGhlbgogIGVjaG8gIlt3YXRjaGRvZ10gcnVubmVyIOaMguS6hu+8jOmHjeWQryIKICBub2h1cCBub2RlIHNyYy9ydW5uZXIuanMgPj4gbG9ncy9ydW5uZXIubG9nIDI+JjEgJgplbHNlIGVjaG8gIlt3YXRjaGRvZ10gcnVubmVyIOWtmOa0uyI7IGZpCgppZiBbICIkKGFsaXZlICdub2RlIHNyYy9zZXJ2ZXIuanMnKSIgLWVxIDAgXTsgdGhlbgogIGVjaG8gIlt3YXRjaGRvZ10gc2VydmVyIOaMguS6hu+8jOmHjeWQryIKICBub2h1cCBub2RlIHNyYy9zZXJ2ZXIuanMgPj4gbG9ncy9zZXJ2ZXIubG9nIDI+JjEgJgplbHNlIGVjaG8gIlt3YXRjaGRvZ10gc2VydmVyIOWtmOa0uyI7IGZpCgppZiAhIGN1cmwgLXMgLW0gNSAtbyAvZGV2L251bGwgaHR0cDovL2xvY2FsaG9zdDozMjAwLzsgdGhlbgogIGVjaG8gIlt3YXRjaGRvZ10g6Z2i5p2/IDozMjAwIOaXoOWTjeW6lCIKZWxzZSBlY2hvICJbd2F0Y2hkb2ddIOmdouadvyA6MzIwMCDmraPluLgiOyBmaQo=
+#!/bin/bash
+# polymarket-crypto-bot 看门狗：面板 :3200 + 主循环保活（pattern 写在脚本里，避免 pkill 自杀）
+DIR=~/workspace/polymarket-crypto-bot
+cd "$DIR" || exit 1
+
+alive() { # $1=pattern：cwd 在本目录且命令行匹配的 node 进程数
+  local pat="$1" n=0
+  for p in $(pgrep -f "$pat" 2>/dev/null); do
+    if readlink "/proc/$p/cwd" 2>/dev/null | grep -q "polymarket-crypto-bot$"; then n=$((n+1)); fi
+  done
+  echo "$n"
+}
+
+if [ "$(alive 'node src/runner.js')" -eq 0 ]; then
+  echo "[watchdog] runner 挂了，重启"
+  nohup node src/runner.js >> logs/runner.log 2>&1 &
+else echo "[watchdog] runner 存活"; fi
+
+if [ "$(alive 'node src/server.js')" -eq 0 ]; then
+  echo "[watchdog] server 挂了，重启"
+  nohup node src/server.js >> logs/server.log 2>&1 &
+else echo "[watchdog] server 存活"; fi
+
+if ! curl -s -m 5 -o /dev/null http://localhost:3200/; then
+  echo "[watchdog] 面板 :3200 无响应"
+else echo "[watchdog] 面板 :3200 正常"; fi

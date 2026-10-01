@@ -1,1 +1,60 @@
-Ly8gQ29pbmJhc2Ug546w6LSnIEsg57q/77yI5L+h5Y+36L6T5YWl77ybQmluYW5jZSDlnKjmraTlh7rlj6PooqvlnLDln5/lsIHvvIkKY29uc3QgeyBnZXRKc29uIH0gPSByZXF1aXJlKCcuL2h0dHAnKTsKCmNvbnN0IFBST0RVQ1QgPSB7IGJ0YzogJ0JUQy1VU0QnLCBldGg6ICdFVEgtVVNEJyB9OwoKLyoqIOWPluacgOi/kSBuIOaguSAxIOWIhumSnyBLIOe6vyDihpIgW3t0LCBvLCBoLCBsLCBjLCB2fV3vvIjml7bpl7TljYfluo/vvIkgKi8KYXN5bmMgZnVuY3Rpb24gZmV0Y2hDYW5kbGVzKGNvaW4sIG4gPSAzMCkgewogIGNvbnN0IHByb2R1Y3QgPSBQUk9EVUNUW2NvaW5dOwogIGlmICghcHJvZHVjdCkgdGhyb3cgbmV3IEVycm9yKGDmnKrnn6XluIHnp40gJHtjb2lufWApOwogIGNvbnN0IGVuZCA9IG5ldyBEYXRlKCk7CiAgY29uc3Qgc3RhcnQgPSBuZXcgRGF0ZShlbmQuZ2V0VGltZSgpIC0gbiAqIDY1ICogMTAwMCk7CiAgY29uc3QgdXJsID0gYGh0dHBzOi8vYXBpLmV4Y2hhbmdlLmNvaW5iYXNlLmNvbS9wcm9kdWN0cy8ke3Byb2R1Y3R9L2NhbmRsZXM/c3RhcnQ9JHtzdGFydC50b0lTT1N0cmluZygpfSZlbmQ9JHtlbmQudG9JU09TdHJpbmcoKX0mZ3JhbnVsYXJpdHk9NjBgOwogIGNvbnN0IHJhdyA9IGF3YWl0IGdldEpzb24odXJsLCAxNTAwMCk7CiAgaWYgKCFBcnJheS5pc0FycmF5KHJhdykgfHwgcmF3Lmxlbmd0aCA9PT0gMCkgdGhyb3cgbmV3IEVycm9yKGBDb2luYmFzZSDml6AgSyDnur8gJHtwcm9kdWN0fWApOwogIHJldHVybiByYXcKICAgIC5tYXAoYyA9PiAoeyB0OiBjWzBdICogMTAwMCwgbDogY1sxXSwgaDogY1syXSwgbzogY1szXSwgYzogY1s0XSwgdjogY1s1XSB9KSkKICAgIC5zb3J0KChhLCBiKSA9PiBhLnQgLSBiLnQpCiAgICAuc2xpY2UoLW4pOwp9CgovKiog5LuOIEsg57q/566X5Yqo6YeP54m55b6B77yI57uZ5qih5Z6L55yL55qE5pGY6KaB77yJICovCmZ1bmN0aW9uIGZlYXR1cmVzKGNhbmRsZXMpIHsKICBjb25zdCBjbG9zZXMgPSBjYW5kbGVzLm1hcChjID0+IGMuYyk7CiAgY29uc3QgcmV0cyA9IFtdOwogIGZvciAobGV0IGkgPSAxOyBpIDwgY2xvc2VzLmxlbmd0aDsgaSsrKSByZXRzLnB1c2goKGNsb3Nlc1tpXSAvIGNsb3Nlc1tpIC0gMV0gLSAxKSAqIDEwMDAwKTsgLy8gYnBzCiAgY29uc3QgbWVhbiA9IHJldHMucmVkdWNlKChhLCBiKSA9PiBhICsgYiwgMCkgLyAocmV0cy5sZW5ndGggfHwgMSk7CiAgY29uc3Qgc2QgPSBNYXRoLnNxcnQocmV0cy5yZWR1Y2UoKGEsIGIpID0+IGEgKyAoYiAtIG1lYW4pICoqIDIsIDApIC8gKHJldHMubGVuZ3RoIHx8IDEpKTsKICBjb25zdCBsYXN0ID0gY2xvc2VzW2Nsb3Nlcy5sZW5ndGggLSAxXTsKICBjb25zdCBmaXJzdCA9IGNsb3Nlc1swXTsKICBjb25zdCBkcmlmdEJwcyA9ICgobGFzdCAvIGZpcnN0IC0gMSkgKiAxMDAwMCk7CiAgY29uc3QgaGkgPSBNYXRoLm1heCguLi5jbG9zZXMpLCBsbyA9IE1hdGgubWluKC4uLmNsb3Nlcyk7CiAgLy8g566A5piTIFJTSSgxNCkKICBjb25zdCBrID0gMTQ7CiAgbGV0IGcgPSAwLCBsID0gMDsKICBjb25zdCB0YWlsID0gcmV0cy5zbGljZSgtayk7CiAgZm9yIChjb25zdCByIG9mIHRhaWwpIHsgaWYgKHIgPiAwKSBnICs9IHI7IGVsc2UgbCAtPSByOyB9CiAgY29uc3QgcnNpID0gbCA9PT0gMCA/IDEwMCA6IDEwMCAtIDEwMCAvICgxICsgKGcgLyBrKSAvIChsIC8gaykpOwogIHJldHVybiB7CiAgICBsYXN0LCBkcmlmdEJwczogcm91bmQyKGRyaWZ0QnBzKSwKICAgIHZvbEJwczogcm91bmQyKHNkKSwgICAgICAgICAgIC8vIOavj+WIhumSn+azouWKqO+8iGJwc++8iQogICAgcmFuZ2VCcHM6IHJvdW5kMigoKGhpIC8gbG8gLSAxKSAqIDEwMDAwKSksCiAgICByc2kxNDogcm91bmQyKHJzaSksCiAgICBuOiBjYW5kbGVzLmxlbmd0aCwKICB9Owp9CmZ1bmN0aW9uIHJvdW5kMih4KSB7IHJldHVybiBNYXRoLnJvdW5kKHggKiAxMDApIC8gMTAwOyB9CgovKiog57uZ5qih5Z6L55qE57Sn5YeRIEsg57q/5paH5pys77yI5pyA6L+RIG4g5qC577ya5pe26Ze0IEhIOk1NICsg5pS255uYICsgYnBzIOa2qOi3jO+8iSAqLwpmdW5jdGlvbiBjYW5kbGVzVGV4dChjYW5kbGVzLCBuID0gMTUpIHsKICByZXR1cm4gY2FuZGxlcy5zbGljZSgtbikubWFwKGMgPT4gewogICAgY29uc3QgZCA9IG5ldyBEYXRlKGMudCk7CiAgICBjb25zdCBoaCA9IFN0cmluZyhkLmdldFVUQ0hvdXJzKCkpLnBhZFN0YXJ0KDIsICcwJyk7CiAgICBjb25zdCBtbSA9IFN0cmluZyhkLmdldFVUQ01pbnV0ZXMoKSkucGFkU3RhcnQoMiwgJzAnKTsKICAgIGNvbnN0IHByZXYgPSBjYW5kbGVzW2NhbmRsZXMuaW5kZXhPZihjKSAtIDFdOwogICAgY29uc3QgY2hnID0gcHJldiA/ICgoKGMuYyAvIHByZXYuYyAtIDEpICogMTAwMDApLnRvRml4ZWQoMSkgKyAnYnBzJykgOiAn4oCUJzsKICAgIHJldHVybiBgJHtoaH06JHttbX0gYz0ke2MuY30gKCR7Y2hnfSlgOwogIH0pLmpvaW4oJ1xuJyk7Cn0KCm1vZHVsZS5leHBvcnRzID0geyBQUk9EVUNULCBmZXRjaENhbmRsZXMsIGZlYXR1cmVzLCBjYW5kbGVzVGV4dCB9Owo=
+// Coinbase 现货 K 线（信号输入；Binance 在此出口被地域封）
+const { getJson } = require('./http');
+
+const PRODUCT = { btc: 'BTC-USD', eth: 'ETH-USD' };
+
+/** 取最近 n 根 1 分钟 K 线 → [{t, o, h, l, c, v}]（时间升序） */
+async function fetchCandles(coin, n = 30) {
+  const product = PRODUCT[coin];
+  if (!product) throw new Error(`未知币种 ${coin}`);
+  const end = new Date();
+  const start = new Date(end.getTime() - n * 65 * 1000);
+  const url = `https://api.exchange.coinbase.com/products/${product}/candles?start=${start.toISOString()}&end=${end.toISOString()}&granularity=60`;
+  const raw = await getJson(url, 15000);
+  if (!Array.isArray(raw) || raw.length === 0) throw new Error(`Coinbase 无 K 线 ${product}`);
+  return raw
+    .map(c => ({ t: c[0] * 1000, l: c[1], h: c[2], o: c[3], c: c[4], v: c[5] }))
+    .sort((a, b) => a.t - b.t)
+    .slice(-n);
+}
+
+/** 从 K 线算动量特征（给模型看的摘要） */
+function features(candles) {
+  const closes = candles.map(c => c.c);
+  const rets = [];
+  for (let i = 1; i < closes.length; i++) rets.push((closes[i] / closes[i - 1] - 1) * 10000); // bps
+  const mean = rets.reduce((a, b) => a + b, 0) / (rets.length || 1);
+  const sd = Math.sqrt(rets.reduce((a, b) => a + (b - mean) ** 2, 0) / (rets.length || 1));
+  const last = closes[closes.length - 1];
+  const first = closes[0];
+  const driftBps = ((last / first - 1) * 10000);
+  const hi = Math.max(...closes), lo = Math.min(...closes);
+  // 简易 RSI(14)
+  const k = 14;
+  let g = 0, l = 0;
+  const tail = rets.slice(-k);
+  for (const r of tail) { if (r > 0) g += r; else l -= r; }
+  const rsi = l === 0 ? 100 : 100 - 100 / (1 + (g / k) / (l / k));
+  return {
+    last, driftBps: round2(driftBps),
+    volBps: round2(sd),           // 每分钟波动（bps）
+    rangeBps: round2(((hi / lo - 1) * 10000)),
+    rsi14: round2(rsi),
+    n: candles.length,
+  };
+}
+function round2(x) { return Math.round(x * 100) / 100; }
+
+/** 给模型的紧凑 K 线文本（最近 n 根：时间 HH:MM + 收盘 + bps 涨跌） */
+function candlesText(candles, n = 15) {
+  return candles.slice(-n).map(c => {
+    const d = new Date(c.t);
+    const hh = String(d.getUTCHours()).padStart(2, '0');
+    const mm = String(d.getUTCMinutes()).padStart(2, '0');
+    const prev = candles[candles.indexOf(c) - 1];
+    const chg = prev ? (((c.c / prev.c - 1) * 10000).toFixed(1) + 'bps') : '—';
+    return `${hh}:${mm} c=${c.c} (${chg})`;
+  }).join('\n');
+}
+
+module.exports = { PRODUCT, fetchCandles, features, candlesText };

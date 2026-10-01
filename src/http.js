@@ -1,1 +1,23 @@
-Ly8g5bim6LaF5pe255qEIGZldGNoIOW3peWFtwphc3luYyBmdW5jdGlvbiBmZXRjaFdpdGhUaW1lb3V0KHVybCwgeyB0aW1lb3V0TXMgPSAxNTAwMCwgLi4ub3B0cyB9ID0ge30pIHsKICBjb25zdCBjdGwgPSBuZXcgQWJvcnRDb250cm9sbGVyKCk7CiAgY29uc3QgdGltZXIgPSBzZXRUaW1lb3V0KCgpID0+IGN0bC5hYm9ydCgpLCB0aW1lb3V0TXMpOwogIHRyeSB7CiAgICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaCh1cmwsIHsKICAgICAgLi4ub3B0cywKICAgICAgc2lnbmFsOiBjdGwuc2lnbmFsLAogICAgICBoZWFkZXJzOiB7ICdVc2VyLUFnZW50JzogJ3BvbHltYXJrZXQtY3J5cHRvLWJvdC8xLjAnLCAuLi4ob3B0cy5oZWFkZXJzIHx8IHt9KSB9LAogICAgfSk7CiAgICByZXR1cm4gcmVzOwogIH0gZmluYWxseSB7CiAgICBjbGVhclRpbWVvdXQodGltZXIpOwogIH0KfQoKYXN5bmMgZnVuY3Rpb24gZ2V0SnNvbih1cmwsIHRpbWVvdXRNcyA9IDE1MDAwKSB7CiAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2hXaXRoVGltZW91dCh1cmwsIHsgdGltZW91dE1zIH0pOwogIGlmICghcmVzLm9rKSB0aHJvdyBuZXcgRXJyb3IoYEhUVFAgJHtyZXMuc3RhdHVzfSDihpAgJHt1cmx9YCk7CiAgcmV0dXJuIHJlcy5qc29uKCk7Cn0KCm1vZHVsZS5leHBvcnRzID0geyBmZXRjaFdpdGhUaW1lb3V0LCBnZXRKc29uIH07Cg==
+// 带超时的 fetch 工具
+async function fetchWithTimeout(url, { timeoutMs = 15000, ...opts } = {}) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      ...opts,
+      signal: ctl.signal,
+      headers: { 'User-Agent': 'polymarket-crypto-bot/1.0', ...(opts.headers || {}) },
+    });
+    return res;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function getJson(url, timeoutMs = 15000) {
+  const res = await fetchWithTimeout(url, { timeoutMs });
+  if (!res.ok) throw new Error(`HTTP ${res.status} ← ${url}`);
+  return res.json();
+}
+
+module.exports = { fetchWithTimeout, getJson };

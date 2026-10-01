@@ -1,1 +1,43 @@
-Ly8g6Z2i5p2/IDozMjAw77yI5LiO6Z2Z5oCB5oql5ZGK5ZCM5LiA5aWX5qih5p2/77yM5q+P5qyh6K+35rGC5a6e5pe25riy5p+T77yJCmNvbnN0IGh0dHAgPSByZXF1aXJlKCdodHRwJyk7CmNvbnN0IGNmZyA9IHJlcXVpcmUoJy4vY29uZmlnJyk7CmNvbnN0IHsgbG9hZCB9ID0gcmVxdWlyZSgnLi9zdG9yZScpOwpjb25zdCB7IHJlbmRlckh0bWwsIGxvYWRQcmljZXMgfSA9IHJlcXVpcmUoJy4vcmVwb3J0Jyk7CgpmdW5jdGlvbiBqc29uKHJlcywgb2JqKSB7CiAgcmVzLndyaXRlSGVhZCgyMDAsIHsgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uOyBjaGFyc2V0PXV0Zi04JyB9KTsKICByZXMuZW5kKEpTT04uc3RyaW5naWZ5KG9iaikpOwp9Cgpjb25zdCBzZXJ2ZXIgPSBodHRwLmNyZWF0ZVNlcnZlcigocmVxLCByZXMpID0+IHsKICB0cnkgewogICAgY29uc3QgdXJsID0gbmV3IFVSTChyZXEudXJsLCAnaHR0cDovL3gnKTsKICAgIGlmICh1cmwucGF0aG5hbWUgPT09ICcvJykgewogICAgICBjb25zdCBodG1sID0gcmVuZGVySHRtbChsb2FkKCksIGxvYWRQcmljZXMoKSwgeyBsaXZlOiB0cnVlIH0pOwogICAgICByZXMud3JpdGVIZWFkKDIwMCwgeyAnQ29udGVudC1UeXBlJzogJ3RleHQvaHRtbDsgY2hhcnNldD11dGYtOCcgfSk7CiAgICAgIHJldHVybiByZXMuZW5kKGh0bWwpOwogICAgfQogICAgY29uc3QgbGVkZ2VyID0gbG9hZCgpOwogICAgaWYgKHVybC5wYXRobmFtZSA9PT0gJy9hcGkvc3RhdHVzJykgcmV0dXJuIGpzb24ocmVzLCB7CiAgICAgIHdhbGxldDogbGVkZ2VyLndhbGxldCwgcG9zaXRpb25zOiBsZWRnZXIucG9zaXRpb25zLmxlbmd0aCwKICAgICAgdHJhZGVzOiBsZWRnZXIudHJhZGVzLmxlbmd0aCwgc2V0dGxlbWVudHM6IGxlZGdlci5zZXR0bGVtZW50cy5sZW5ndGgsCiAgICAgIGp1ZGdtZW50czogbGVkZ2VyLmp1ZGdtZW50cy5sZW5ndGgsIGVycm9yczogbGVkZ2VyLmVycm9ycy5zbGljZSgtNSksCiAgICAgIHRpbWU6IG5ldyBEYXRlKCkudG9JU09TdHJpbmcoKSwKICAgIH0pOwogICAgaWYgKHVybC5wYXRobmFtZSA9PT0gJy9hcGkvcG9zaXRpb25zJykgcmV0dXJuIGpzb24ocmVzLCBsZWRnZXIucG9zaXRpb25zKTsKICAgIGlmICh1cmwucGF0aG5hbWUgPT09ICcvYXBpL3RyYWRlcycpIHJldHVybiBqc29uKHJlcywgbGVkZ2VyLnRyYWRlcy5zbGljZSgtMTAwKSk7CiAgICBpZiAodXJsLnBhdGhuYW1lID09PSAnL2FwaS9qdWRnbWVudHMnKSByZXR1cm4ganNvbihyZXMsIGxlZGdlci5qdWRnbWVudHMuc2xpY2UoLTEwMCkpOwogICAgaWYgKHVybC5wYXRobmFtZSA9PT0gJy9hcGkvZXhpdC1yZXZpZXdzJykgcmV0dXJuIGpzb24ocmVzLCBsZWRnZXIuZXhpdFJldmlld3Muc2xpY2UoLTEwMCkpOwogICAgaWYgKHVybC5wYXRobmFtZSA9PT0gJy9hcGkvc2V0dGxlbWVudHMnKSByZXR1cm4ganNvbihyZXMsIGxlZGdlci5zZXR0bGVtZW50cy5zbGljZSgtMTAwKSk7CiAgICBpZiAodXJsLnBhdGhuYW1lID09PSAnL2FwaS9lcXVpdHknKSByZXR1cm4ganNvbihyZXMsIGxlZGdlci5lcXVpdHlDdXJ2ZSk7CiAgICBpZiAodXJsLnBhdGhuYW1lID09PSAnL2FwaS9wcmljZXMnKSByZXR1cm4ganNvbihyZXMsIGxvYWRQcmljZXMoKSk7CiAgICByZXMud3JpdGVIZWFkKDQwNCk7IHJlcy5lbmQoJ25vdCBmb3VuZCcpOwogIH0gY2F0Y2ggKGUpIHsKICAgIHJlcy53cml0ZUhlYWQoNTAwKTsgcmVzLmVuZChTdHJpbmcoZS5tZXNzYWdlIHx8IGUpKTsKICB9Cn0pOwoKaWYgKHJlcXVpcmUubWFpbiA9PT0gbW9kdWxlKSB7CiAgc2VydmVyLmxpc3RlbihjZmcuUE9SVCwgKCkgPT4gY29uc29sZS5sb2coYHBhbmVsIDoke2NmZy5QT1JUfWApKTsKfQptb2R1bGUuZXhwb3J0cyA9IHNlcnZlcjsK
+// 面板 :3200（与静态报告同一套模板，每次请求实时渲染）
+const http = require('http');
+const cfg = require('./config');
+const { load } = require('./store');
+const { renderHtml, loadPrices } = require('./report');
+
+function json(res, obj) {
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify(obj));
+}
+
+const server = http.createServer((req, res) => {
+  try {
+    const url = new URL(req.url, 'http://x');
+    if (url.pathname === '/') {
+      const html = renderHtml(load(), loadPrices(), { live: true });
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      return res.end(html);
+    }
+    const ledger = load();
+    if (url.pathname === '/api/status') return json(res, {
+      wallet: ledger.wallet, positions: ledger.positions.length,
+      trades: ledger.trades.length, settlements: ledger.settlements.length,
+      judgments: ledger.judgments.length, errors: ledger.errors.slice(-5),
+      time: new Date().toISOString(),
+    });
+    if (url.pathname === '/api/positions') return json(res, ledger.positions);
+    if (url.pathname === '/api/trades') return json(res, ledger.trades.slice(-100));
+    if (url.pathname === '/api/judgments') return json(res, ledger.judgments.slice(-100));
+    if (url.pathname === '/api/exit-reviews') return json(res, ledger.exitReviews.slice(-100));
+    if (url.pathname === '/api/settlements') return json(res, ledger.settlements.slice(-100));
+    if (url.pathname === '/api/equity') return json(res, ledger.equityCurve);
+    if (url.pathname === '/api/prices') return json(res, loadPrices());
+    res.writeHead(404); res.end('not found');
+  } catch (e) {
+    res.writeHead(500); res.end(String(e.message || e));
+  }
+});
+
+if (require.main === module) {
+  server.listen(cfg.PORT, () => console.log(`panel :${cfg.PORT}`));
+}
+module.exports = server;

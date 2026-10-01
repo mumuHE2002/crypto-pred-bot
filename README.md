@@ -1,1 +1,19 @@
-IyBwb2x5bWFya2V0LWNyeXB0by1ib3QKClBvbHltYXJrZXQg5Yqg5a+G6LSn5biBIDE1IOWIhumSn+a2qOi3jO+8iFVwL0Rvd27vvInpooTmtYvmqKHmi5/kuqTmmJPmnLrlmajkurrjgIIKCi0g5qCH55qE77yaQlRDIC8gRVRIIMOXIDE1be+8iHNsdWcg5Y+v55u05o6l566X5Ye677yaYHtidGN8ZXRofS11cGRvd24tMTVtLXvmlbQxNeWIhumSn+aXtumXtOaIs31g77yJCi0g5qih5Z6L77yaRGVlcFNlZWsgVjQuMSBGbGFzaO+8iOWIhuaekOW4iO+8iSsgSmV277yI5qaC546H5qCh5YeG77yJ77yM6LWwIGNvbW1hbmRjb2RlIOe9keWFswotIOavj+ebmOeLrOeri+W+queOr++8muS4iuS4gOasoeivhOS8sOe7k+adn+WQjiAzMCDnp5Llho3or4TkvLDvvIjkuI3mmK/lm7rlrpogMzAg56eS5pW054K55b6q546v77yJCi0g5qih5ouf5Lqk5piT77yIUEFQRVJfTU9ERT10cnVl77yJ77yM5pys6YeRICQyMDDvvIzljZXnrJQgJDHigJMxMO+8jGVkZ2Ug4omlIDglIOaJjeS4i+azqAotIOebmOS4reWPr+aMiSBDTE9CIOWNluWHuuS7t+aPkOWJjeatouebiC/mraLmjZ/vvIjnnJ/lrp7mqKHmi5/miafooYzvvInvvJvliLDmnJ/mjInpk77kuIrnu5PnrpcgMS8wIOiHquWKqOe7k+eulwotIOmdouadv++8mmh0dHA6Ly9sb2NhbGhvc3Q6MzIwMO+8m+mdmeaAgeaKpeWRiu+8mmB+L3dvcmtzcGFjZS95b3VyX2ZpbGVzL2NyeXB0by1wb2x5bWFya2V0LXJlcG9ydC5odG1sYAoKIyMg6L+Q6KGMCgpgYGBiYXNoCm5wbSBzdGFydCAgICAjIOS4u+W+queOr++8iOavj+W4geenjeeLrOeriyAzMHMg6K+E5LywICsg57uT566X6L2u6K+i77yJCm5wbSBydW4gc2VydmVyICAjIOmdouadvyA6MzIwMApgYGAKCmAuZW52YCDkuI3ov5vku5PlupPvvIhrZXkg5rK/55So5aSp5rCU5py65Zmo5Lq66YKj5Lu9IGNvbW1hbmRjb2RlIGtlee+8ieOAggo=
+# polymarket-crypto-bot
+
+Polymarket 加密货币 15 分钟涨跌（Up/Down）预测模拟交易机器人。
+
+- 标的：BTC / ETH × 15m（slug 可直接算出：`{btc|eth}-updown-15m-{整15分钟时间戳}`）
+- 模型：DeepSeek V4.1 Flash（分析师）+ Jev（概率校准），走 commandcode 网关
+- 每盘独立循环：上一次评估结束后 30 秒再评估（不是固定 30 秒整点循环）
+- 模拟交易（PAPER_MODE=true），本金 $200，单笔 $1–10，edge ≥ 8% 才下注
+- 盘中可按 CLOB 卖出价提前止盈/止损（真实模拟执行）；到期按链上结算 1/0 自动结算
+- 面板：http://localhost:3200；静态报告：`~/workspace/your_files/crypto-polymarket-report.html`
+
+## 运行
+
+```bash
+npm start    # 主循环（每币种独立 30s 评估 + 结算轮询）
+npm run server  # 面板 :3200
+```
+
+`.env` 不进仓库（key 沿用天气机器人那份 commandcode key）。

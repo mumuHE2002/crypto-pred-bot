@@ -1,1 +1,5 @@
-bm9kZV9tb2R1bGVzLwouZW52CmRhdGEvCmxvZ3MvCioubG9nCg==
+node_modules/
+.env
+data/
+logs/
+*.log

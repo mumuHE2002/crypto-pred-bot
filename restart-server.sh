@@ -1,1 +1,9 @@
-IyEvYmluL2Jhc2gKIyDph43lkK8gc2VydmVy77yI54us56uL6ISa5pys77yM6YG/5YWNIHBraWxsIC1mIOiHquadgOmZt+mYse+8iQpmb3IgcCBpbiAkKHBncmVwIC1mICJub2RlIHNyYy9zZXJ2ZXIuanMiIDI+L2Rldi9udWxsKTsgZG8KICBpZiByZWFkbGluayAiL3Byb2MvJHAvY3dkIiAyPi9kZXYvbnVsbCB8IGdyZXAgLXEgInBvbHltYXJrZXQtY3J5cHRvLWJvdCQiOyB0aGVuIGtpbGwgIiRwIjsgZmkKZG9uZQpzbGVlcCAyCmNkIH4vd29ya3NwYWNlL3BvbHltYXJrZXQtY3J5cHRvLWJvdCB8fCBleGl0IDEKbm9odXAgbm9kZSBzcmMvc2VydmVyLmpzID4+IGxvZ3Mvc2VydmVyLmxvZyAyPiYxICYKZWNobyAic2VydmVyIHJlc3RhcnRlZCBwaWQgJCEiCg==
+#!/bin/bash
+# 重启 server（独立脚本，避免 pkill -f 自杀陷阱）
+for p in $(pgrep -f "node src/server.js" 2>/dev/null); do
+  if readlink "/proc/$p/cwd" 2>/dev/null | grep -q "polymarket-crypto-bot$"; then kill "$p"; fi
+done
+sleep 2
+cd ~/workspace/polymarket-crypto-bot || exit 1
+nohup node src/server.js >> logs/server.log 2>&1 &
+echo "server restarted pid $!"

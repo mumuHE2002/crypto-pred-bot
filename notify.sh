@@ -1,1 +1,27 @@
-IyEvYmluL2Jhc2gKIyDmnInmlrDlop7miJDkuqQv57uT566XL+mUmeivr+aJjei+k+WHuumAmuefpe+8m+aXoOaWsOWinuS/neaMgeWuiemdmQpMRURHRVI9fi93b3Jrc3BhY2UvcG9seW1hcmtldC1jcnlwdG8tYm90L2RhdGEvbGVkZ2VyLmpzb24KV009fi93b3Jrc3BhY2UvZ29hbHMvcG9seW1hcmtldC9oaWRkZW5fZmlsZXMvbm90aWZ5X3dhdGVybWFya19jcnlwdG8xNW0uanNvbgpbIC1mICIkTEVER0VSIiBdIHx8IGV4aXQgMApta2RpciAtcCAiJChkaXJuYW1lICIkV00iKSIKcHl0aG9uMyAtICIkTEVER0VSIiAiJFdNIiA8PCAnRU9GJwppbXBvcnQganNvbiwgc3lzCmxlZGdlcl9wYXRoLCB3bV9wYXRoID0gc3lzLmFyZ3ZbMV0sIHN5cy5hcmd2WzJdCmwgPSBqc29uLmxvYWQob3BlbihsZWRnZXJfcGF0aCkpCnRyeTogd20gPSBqc29uLmxvYWQob3Blbih3bV9wYXRoKSkKZXhjZXB0OiB3bSA9IHsidHJhZGVzIjogMCwgInNldHRsZW1lbnRzIjogMCwgImVycm9ycyI6IDB9Cm50LCBucywgbmUgPSBsZW4obC5nZXQoInRyYWRlcyIsIFtdKSksIGxlbihsLmdldCgic2V0dGxlbWVudHMiLCBbXSkpLCBsZW4obC5nZXQoImVycm9ycyIsIFtdKSkKbXNncyA9IFtdCmlmIG50ID4gd21bInRyYWRlcyJdOgogICAgZm9yIHQgaW4gbFsidHJhZGVzIl1bd21bInRyYWRlcyJdOm50XToKICAgICAgICBhY3Rpb24gPSB7ImJ1eSI6ICLlvIDku5MiLCAic2VsbCI6ICLlubPku5MiLCAic2V0dGxlIjogIue7k+eulyJ9LmdldCh0WyJzaWRlIl0sIHRbInNpZGUiXSkKICAgICAgICBtc2dzLmFwcGVuZChmIvCfqpkge2FjdGlvbn0ge3QuZ2V0KCdvdXRjb21lJywnJykudXBwZXIoKX0ge3QuZ2V0KCdzbHVnJywnJyl9IOS7t+agvHt0LmdldCgncHJpY2UnKX0g6YeR6aKdJHt0LmdldCgnc3Rha2UnKX3vvIh7dC5nZXQoJ3JlYXNvbicsJycpfe+8iSIpCmlmIG5zID4gd21bInNldHRsZW1lbnRzIl06CiAgICBmb3IgcyBpbiBsWyJzZXR0bGVtZW50cyJdW3dtWyJzZXR0bGVtZW50cyJdOm5zXToKICAgICAgICBtc2dzLmFwcGVuZChmInsn4pyFJyBpZiBzWyd3aW4nXSBlbHNlICfinYwnfSDnu5Pnrpcge3NbJ2NvaW4nXX0ge3NbJ3dpbmRvd0xhYmVsJ119IHtzWydzaWRlJ10udXBwZXIoKX0geyflkb3kuK0nIGlmIHNbJ3dpbiddIGVsc2UgJ+W9kumbtid9IOebiOS6jyR7c1sncG5sJ106LjJmfSIpCmlmIG5lID4gd21bImVycm9ycyJdOgogICAgZm9yIGUgaW4gbFsiZXJyb3JzIl1bd21bImVycm9ycyJdOm5lXToKICAgICAgICBtc2dzLmFwcGVuZChmIuKaoO+4jyDplJnor68gW3tlWyd3aGVyZSddfV0ge2VbJ21lc3NhZ2UnXVs6MTIwXX0iKQpqc29uLmR1bXAoeyJ0cmFkZXMiOiBudCwgInNldHRsZW1lbnRzIjogbnMsICJlcnJvcnMiOiBuZX0sIG9wZW4od21fcGF0aCwgInciKSkKZm9yIG0gaW4gbXNnczogcHJpbnQobSkKRU9GCg==
+#!/bin/bash
+# 有新增成交/结算/错误才输出通知；无新增保持安静
+LEDGER=~/workspace/polymarket-crypto-bot/data/ledger.json
+WM=~/workspace/goals/polymarket/hidden_files/notify_watermark_crypto15m.json
+[ -f "$LEDGER" ] || exit 0
+mkdir -p "$(dirname "$WM")"
+python3 - "$LEDGER" "$WM" << 'EOF'
+import json, sys
+ledger_path, wm_path = sys.argv[1], sys.argv[2]
+l = json.load(open(ledger_path))
+try: wm = json.load(open(wm_path))
+except: wm = {"trades": 0, "settlements": 0, "errors": 0}
+nt, ns, ne = len(l.get("trades", [])), len(l.get("settlements", [])), len(l.get("errors", []))
+msgs = []
+if nt > wm["trades"]:
+    for t in l["trades"][wm["trades"]:nt]:
+        action = {"buy": "开仓", "sell": "平仓", "settle": "结算"}.get(t["side"], t["side"])
+        msgs.append(f"🪙 {action} {t.get('outcome','').upper()} {t.get('slug','')} 价格{t.get('price')} 金额${t.get('stake')}（{t.get('reason','')}）")
+if ns > wm["settlements"]:
+    for s in l["settlements"][wm["settlements"]:ns]:
+        msgs.append(f"{'✅' if s['win'] else '❌'} 结算 {s['coin']} {s['windowLabel']} {s['side'].upper()} {'命中' if s['win'] else '归零'} 盈亏${s['pnl']:.2f}")
+if ne > wm["errors"]:
+    for e in l["errors"][wm["errors"]:ne]:
+        msgs.append(f"⚠️ 错误 [{e['where']}] {e['message'][:120]}")
+json.dump({"trades": nt, "settlements": ns, "errors": ne}, open(wm_path, "w"))
+for m in msgs: print(m)
+EOF

@@ -1,1 +1,106 @@
-Ly8gUG9seW1hcmtldCAxNW0gVXAvRG93biDluILlnLrlsYIKLy8gc2x1ZyDlj6/nm7TmjqXnrpflh7rvvJp7YnRjfGV0aH0tdXBkb3duLTE1bS175pW0MTXliIbpkp91bml45pe26Ze05oizfe+8jOaXoOmcgOaQnOe0ogpjb25zdCBjZmcgPSByZXF1aXJlKCcuL2NvbmZpZycpOwpjb25zdCB7IGdldEpzb24gfSA9IHJlcXVpcmUoJy4vaHR0cCcpOwoKY29uc3QgR0FNTUEgPSAnaHR0cHM6Ly9nYW1tYS1hcGkucG9seW1hcmtldC5jb20nOwpjb25zdCBDTE9CID0gJ2h0dHBzOi8vY2xvYi5wb2x5bWFya2V0LmNvbSc7Cgpjb25zdCBDT0lOX05BTUUgPSB7IGJ0YzogJ0JpdGNvaW4nLCBldGg6ICdFdGhlcmV1bScgfTsKCmZ1bmN0aW9uIGJ1Y2tldFN0YXJ0KHRzU2VjID0gTWF0aC5mbG9vcihEYXRlLm5vdygpIC8gMTAwMCksIHdpbmRvd1NlYyA9IGNmZy5XSU5ET1dfU0VDKSB7CiAgcmV0dXJuIE1hdGguZmxvb3IodHNTZWMgLyB3aW5kb3dTZWMpICogd2luZG93U2VjOwp9CmZ1bmN0aW9uIHNsdWdGb3IoY29pbiwgc3RhcnRTZWMsIHdpbmRvd1NlYyA9IGNmZy5XSU5ET1dfU0VDKSB7CiAgY29uc3QgdGFnID0gd2luZG93U2VjID09PSA5MDAgPyAnMTVtJyA6IGAke3dpbmRvd1NlYyAvIDYwfW1gOwogIHJldHVybiBgJHtjb2lufS11cGRvd24tJHt0YWd9LSR7c3RhcnRTZWN9YDsKfQpmdW5jdGlvbiBldmVudFVybChzbHVnKSB7CiAgcmV0dXJuIGBodHRwczovL3BvbHltYXJrZXQuY29tL2V2ZW50LyR7c2x1Z31gOwp9CgpmdW5jdGlvbiBwYXJzZVRva2VucyhtYXJrZXQpIHsKICBsZXQgb3V0Y29tZXMgPSBtYXJrZXQub3V0Y29tZXM7CiAgbGV0IHByaWNlcyA9IG1hcmtldC5vdXRjb21lUHJpY2VzOwogIGxldCB0aWRzID0gbWFya2V0LmNsb2JUb2tlbklkczsKICB0cnkgeyBpZiAodHlwZW9mIG91dGNvbWVzID09PSAnc3RyaW5nJykgb3V0Y29tZXMgPSBKU09OLnBhcnNlKG91dGNvbWVzKTsgfSBjYXRjaCB7fQogIHRyeSB7IGlmICh0eXBlb2YgcHJpY2VzID09PSAnc3RyaW5nJykgcHJpY2VzID0gSlNPTi5wYXJzZShwcmljZXMpOyB9IGNhdGNoIHt9CiAgdHJ5IHsgaWYgKHR5cGVvZiB0aWRzID09PSAnc3RyaW5nJykgdGlkcyA9IEpTT04ucGFyc2UodGlkcyk7IH0gY2F0Y2gge30KICBjb25zdCB1cElkeCA9IG91dGNvbWVzLmZpbmRJbmRleChvID0+IFN0cmluZyhvKS50b0xvd2VyQ2FzZSgpID09PSAndXAnKTsKICBjb25zdCBkb3duSWR4ID0gb3V0Y29tZXMuZmluZEluZGV4KG8gPT4gU3RyaW5nKG8pLnRvTG93ZXJDYXNlKCkgPT09ICdkb3duJyk7CiAgcmV0dXJuIHsKICAgIHVwSWR4LCBkb3duSWR4LAogICAgdXBUb2tlbjogdXBJZHggPj0gMCA/IHRpZHNbdXBJZHhdIDogbnVsbCwKICAgIGRvd25Ub2tlbjogZG93bklkeCA+PSAwID8gdGlkc1tkb3duSWR4XSA6IG51bGwsCiAgICB1cFByaWNlOiB1cElkeCA+PSAwID8gTnVtYmVyKHByaWNlc1t1cElkeF0pIDogTmFOLCAgIC8vIGxhc3QgdHJhZGUKICAgIGRvd25QcmljZTogZG93bklkeCA+PSAwID8gTnVtYmVyKHByaWNlc1tkb3duSWR4XSkgOiBOYU4sCiAgfTsKfQoKLyoqIOWPluW9k+WJjeeql+WPo+eahOW4guWcuu+8iOWQqyB0b2tlbiDkuI7nm5jlj6Pku7fvvInvvJvnm5jlj6PkuI3lrZjlnKjov5Tlm54gbnVsbCAqLwphc3luYyBmdW5jdGlvbiBmZXRjaEN1cnJlbnRNYXJrZXQoY29pbikgewogIGNvbnN0IG5vd1NlYyA9IE1hdGguZmxvb3IoRGF0ZS5ub3coKSAvIDEwMDApOwogIGNvbnN0IHN0YXJ0ID0gYnVja2V0U3RhcnQobm93U2VjKTsKICBjb25zdCBzbHVnID0gc2x1Z0Zvcihjb2luLCBzdGFydCk7CiAgY29uc3QgZW5kID0gc3RhcnQgKyBjZmcuV0lORE9XX1NFQzsKICBsZXQgZXY7CiAgdHJ5IHsKICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBnZXRKc29uKGAke0dBTU1BfS9ldmVudHM/c2x1Zz0ke3NsdWd9YCwgMTUwMDApOwogICAgaWYgKCFBcnJheS5pc0FycmF5KGRhdGEpIHx8IGRhdGEubGVuZ3RoID09PSAwKSByZXR1cm4gbnVsbDsKICAgIGV2ID0gZGF0YVswXTsKICB9IGNhdGNoIChlKSB7CiAgICByZXR1cm4geyBlcnJvcjogU3RyaW5nKGUubWVzc2FnZSB8fCBlKSwgc2x1Zywgc3RhcnQsIGVuZCB9OwogIH0KICBjb25zdCBtYXJrZXQgPSAoZXYubWFya2V0cyB8fCBbXSlbMF07CiAgaWYgKCFtYXJrZXQpIHJldHVybiB7IGVycm9yOiAnbm8gbWFya2V0cyBpbiBldmVudCcsIHNsdWcsIHN0YXJ0LCBlbmQgfTsKICBjb25zdCB0ID0gcGFyc2VUb2tlbnMobWFya2V0KTsKICByZXR1cm4gewogICAgY29pbiwgc2x1ZywgdGl0bGU6IGV2LnRpdGxlIHx8IG1hcmtldC5xdWVzdGlvbiwgc3RhcnQsIGVuZCwKICAgIHNlY29uZHNMZWZ0OiBlbmQgLSBNYXRoLmZsb29yKERhdGUubm93KCkgLyAxMDAwKSwKICAgIGV2ZW50VXJsOiBldmVudFVybChzbHVnKSwKICAgIGNsb3NlZDogISFtYXJrZXQuY2xvc2VkLAogICAgdW1hU3RhdHVzOiBtYXJrZXQudW1hUmVzb2x1dGlvblN0YXR1cyB8fCBudWxsLAogICAgdXBUb2tlbjogdC51cFRva2VuLCBkb3duVG9rZW46IHQuZG93blRva2VuLAogICAgdXBMYXN0OiB0LnVwUHJpY2UsIGRvd25MYXN0OiB0LmRvd25QcmljZSwKICAgIHZvbHVtZTogTnVtYmVyKG1hcmtldC52b2x1bWUpIHx8IDAsCiAgICBsaXF1aWRpdHk6IE51bWJlcihtYXJrZXQubGlxdWlkaXR5KSB8fCAwLAogICAgcmF3OiBtYXJrZXQsCiAgfTsKfQoKLyoqIENMT0Ig5Y+v5oiQ5Lqk5Lu377yac2lkZT1idXkg5Li65L2g5Lmw5YWl5pe25LuY55qE5Lu377yMc2lkZT1zZWxsIOS4uuS9oOWNluWHuuaXtuW+l+eahOS7tyAqLwphc3luYyBmdW5jdGlvbiBjbG9iUHJpY2UodG9rZW5JZCwgc2lkZSkgewogIGNvbnN0IGQgPSBhd2FpdCBnZXRKc29uKGAke0NMT0J9L3ByaWNlP3Rva2VuX2lkPSR7dG9rZW5JZH0mc2lkZT0ke3NpZGV9YCwgMTIwMDApOwogIGNvbnN0IHAgPSBOdW1iZXIoZCAmJiBkLnByaWNlKTsKICBpZiAoIU51bWJlci5pc0Zpbml0ZShwKSkgdGhyb3cgbmV3IEVycm9yKGBDTE9CIOaXoOaKpeS7tyAke3NpZGV9ICR7U3RyaW5nKHRva2VuSWQpLnNsaWNlKDAsIDEwKX1gKTsKICByZXR1cm4gcDsKfQphc3luYyBmdW5jdGlvbiBjbG9iTWlkKHRva2VuSWQpIHsKICBjb25zdCBkID0gYXdhaXQgZ2V0SnNvbihgJHtDTE9CfS9taWRwb2ludD90b2tlbl9pZD0ke3Rva2VuSWR9YCwgMTIwMDApOwogIGNvbnN0IHAgPSBOdW1iZXIoZCAmJiBkLm1pZCk7CiAgcmV0dXJuIE51bWJlci5pc0Zpbml0ZShwKSA/IHAgOiBOYU47Cn0KCi8qKiDlj5bmn5Agc2x1ZyDnmoTnu5PnrpfnirbmgIHvvJpjbG9zZWQgKyBvdXRjb21lUHJpY2VzIDEvMCAqLwphc3luYyBmdW5jdGlvbiBmZXRjaFNldHRsZW1lbnQoc2x1ZykgewogIGNvbnN0IGRhdGEgPSBhd2FpdCBnZXRKc29uKGAke0dBTU1BfS9ldmVudHM/c2x1Zz0ke3NsdWd9YCwgMTUwMDApOwogIGlmICghQXJyYXkuaXNBcnJheShkYXRhKSB8fCBkYXRhLmxlbmd0aCA9PT0gMCkgcmV0dXJuIHsgZm91bmQ6IGZhbHNlIH07CiAgY29uc3QgbWFya2V0ID0gKGRhdGFbMF0ubWFya2V0cyB8fCBbXSlbMF07CiAgaWYgKCFtYXJrZXQpIHJldHVybiB7IGZvdW5kOiBmYWxzZSB9OwogIGNvbnN0IHQgPSBwYXJzZVRva2VucyhtYXJrZXQpOwogIHJldHVybiB7CiAgICBmb3VuZDogdHJ1ZSwKICAgIGNsb3NlZDogISFtYXJrZXQuY2xvc2VkLAogICAgdW1hU3RhdHVzOiBtYXJrZXQudW1hUmVzb2x1dGlvblN0YXR1cyB8fCBudWxsLAogICAgdXBXb246IHQudXBQcmljZSA9PT0gMSwKICAgIGRvd25Xb246IHQuZG93blByaWNlID09PSAxLAogICAgdXBQcmljZTogdC51cFByaWNlLCBkb3duUHJpY2U6IHQuZG93blByaWNlLAogIH07Cn0KCm1vZHVsZS5leHBvcnRzID0gewogIEdBTU1BLCBDTE9CLCBDT0lOX05BTUUsCiAgYnVja2V0U3RhcnQsIHNsdWdGb3IsIGV2ZW50VXJsLAogIGZldGNoQ3VycmVudE1hcmtldCwgZmV0Y2hTZXR0bGVtZW50LAogIGNsb2JQcmljZSwgY2xvYk1pZCwKfTsK
+// Polymarket 15m Up/Down 市场层
+// slug 可直接算出：{btc|eth}-updown-15m-{整15分钟unix时间戳}，无需搜索
+const cfg = require('./config');
+const { getJson } = require('./http');
+
+const GAMMA = 'https://gamma-api.polymarket.com';
+const CLOB = 'https://clob.polymarket.com';
+
+const COIN_NAME = { btc: 'Bitcoin', eth: 'Ethereum' };
+
+function bucketStart(tsSec = Math.floor(Date.now() / 1000), windowSec = cfg.WINDOW_SEC) {
+  return Math.floor(tsSec / windowSec) * windowSec;
+}
+function slugFor(coin, startSec, windowSec = cfg.WINDOW_SEC) {
+  const tag = windowSec === 900 ? '15m' : `${windowSec / 60}m`;
+  return `${coin}-updown-${tag}-${startSec}`;
+}
+function eventUrl(slug) {
+  return `https://polymarket.com/event/${slug}`;
+}
+
+function parseTokens(market) {
+  let outcomes = market.outcomes;
+  let prices = market.outcomePrices;
+  let tids = market.clobTokenIds;
+  try { if (typeof outcomes === 'string') outcomes = JSON.parse(outcomes); } catch {}
+  try { if (typeof prices === 'string') prices = JSON.parse(prices); } catch {}
+  try { if (typeof tids === 'string') tids = JSON.parse(tids); } catch {}
+  const upIdx = outcomes.findIndex(o => String(o).toLowerCase() === 'up');
+  const downIdx = outcomes.findIndex(o => String(o).toLowerCase() === 'down');
+  return {
+    upIdx, downIdx,
+    upToken: upIdx >= 0 ? tids[upIdx] : null,
+    downToken: downIdx >= 0 ? tids[downIdx] : null,
+    upPrice: upIdx >= 0 ? Number(prices[upIdx]) : NaN,   // last trade
+    downPrice: downIdx >= 0 ? Number(prices[downIdx]) : NaN,
+  };
+}
+
+/** 取当前窗口的市场（含 token 与盘口价）；盘口不存在返回 null */
+async function fetchCurrentMarket(coin) {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const start = bucketStart(nowSec);
+  const slug = slugFor(coin, start);
+  const end = start + cfg.WINDOW_SEC;
+  let ev;
+  try {
+    const data = await getJson(`${GAMMA}/events?slug=${slug}`, 15000);
+    if (!Array.isArray(data) || data.length === 0) return null;
+    ev = data[0];
+  } catch (e) {
+    return { error: String(e.message || e), slug, start, end };
+  }
+  const market = (ev.markets || [])[0];
+  if (!market) return { error: 'no markets in event', slug, start, end };
+  const t = parseTokens(market);
+  return {
+    coin, slug, title: ev.title || market.question, start, end,
+    secondsLeft: end - Math.floor(Date.now() / 1000),
+    eventUrl: eventUrl(slug),
+    closed: !!market.closed,
+    umaStatus: market.umaResolutionStatus || null,
+    upToken: t.upToken, downToken: t.downToken,
+    upLast: t.upPrice, downLast: t.downPrice,
+    volume: Number(market.volume) || 0,
+    liquidity: Number(market.liquidity) || 0,
+    raw: market,
+  };
+}
+
+/** CLOB 可成交价：side=buy 为你买入时付的价，side=sell 为你卖出时得的价 */
+async function clobPrice(tokenId, side) {
+  const d = await getJson(`${CLOB}/price?token_id=${tokenId}&side=${side}`, 12000);
+  const p = Number(d && d.price);
+  if (!Number.isFinite(p)) throw new Error(`CLOB 无报价 ${side} ${String(tokenId).slice(0, 10)}`);
+  return p;
+}
+async function clobMid(tokenId) {
+  const d = await getJson(`${CLOB}/midpoint?token_id=${tokenId}`, 12000);
+  const p = Number(d && d.mid);
+  return Number.isFinite(p) ? p : NaN;
+}
+
+/** 取某 slug 的结算状态：closed + outcomePrices 1/0 */
+async function fetchSettlement(slug) {
+  const data = await getJson(`${GAMMA}/events?slug=${slug}`, 15000);
+  if (!Array.isArray(data) || data.length === 0) return { found: false };
+  const market = (data[0].markets || [])[0];
+  if (!market) return { found: false };
+  const t = parseTokens(market);
+  return {
+    found: true,
+    closed: !!market.closed,
+    umaStatus: market.umaResolutionStatus || null,
+    upWon: t.upPrice === 1,
+    downWon: t.downPrice === 1,
+    upPrice: t.upPrice, downPrice: t.downPrice,
+  };
+}
+
+module.exports = {
+  GAMMA, CLOB, COIN_NAME,
+  bucketStart, slugFor, eventUrl,
+  fetchCurrentMarket, fetchSettlement,
+  clobPrice, clobMid,
+};

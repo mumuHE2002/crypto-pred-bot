@@ -1,1 +1,57 @@
-Ly8g6LSm5pys77ya6ZKx5YyFIC8g5oyB5LuTIC8g5oiQ5LqkIC8g5Yik5patIC8g6YCA5Ye65aSN5qC4IC8g57uT566XIC8g5YeA5YC85puy57q/77yM5Y6f5a2Q5YaZ5YWlCmNvbnN0IGZzID0gcmVxdWlyZSgnZnMnKTsKY29uc3QgcGF0aCA9IHJlcXVpcmUoJ3BhdGgnKTsKY29uc3QgY2ZnID0gcmVxdWlyZSgnLi9jb25maWcnKTsKCmNvbnN0IExFREdFUiA9IHBhdGguam9pbihjZmcuREFUQV9ESVIsICdsZWRnZXIuanNvbicpOwoKZnVuY3Rpb24gYmxhbmsoKSB7CiAgcmV0dXJuIHsKICAgIHN0YXJ0ZWRBdDogbmV3IERhdGUoKS50b0lTT1N0cmluZygpLAogICAgd2FsbGV0OiBjZmcuQkFOS1JPTExfVVNELAogICAgcG9zaXRpb25zOiBbXSwgICAgICAvLyBvcGVu77yae2lkLCBjb2luLCBjb2luTmFtZSwgc2x1Zywgd2luZG93TGFiZWwsIGV2ZW50VXJsLCBzaWRlLCBidXlQcmljZSwgc2hhcmVzLCBzdGFrZSwgYnV5VGltZSwgbGFzdEV4aXRSZXZpZXdBdCwgYnV5UFVwfQogICAgdHJhZGVzOiBbXSwgICAgICAgICAvLyB7dGltZSwgc2x1Zywgc2lkZTonYnV5J3wnc2VsbCcsIG91dGNvbWUsIHByaWNlLCBzaGFyZXMsIHN0YWtlLCByZWFzb259CiAgICBqdWRnbWVudHM6IFtdLCAgICAgIC8vIOavj+asoeivhOS8sOiusOW9le+8iOS/neeVmTMwMO+8iQogICAgZXhpdFJldmlld3M6IFtdLCAgICAvLyDpgIDlh7rlpI3moLjorrDlvZXvvIjkv53nlZkyMDDvvIkKICAgIHNldHRsZW1lbnRzOiBbXSwgICAgLy8ge3RpbWUsIHNsdWcsIHNpZGUsIHdpbiwgc2hhcmVzLCBwYXlvdXQsIHBubH0KICAgIGVxdWl0eUN1cnZlOiBbXSwgICAgLy8ge3QsIGVxdWl0eX0KICAgIGVycm9yczogW10sICAgICAgICAgLy8ge3RpbWUsIHdoZXJlLCBtZXNzYWdlfSDkv53nlZkxMDAKICB9Owp9CgpmdW5jdGlvbiBsb2FkKCkgewogIHRyeSB7CiAgICBjb25zdCBkID0gSlNPTi5wYXJzZShmcy5yZWFkRmlsZVN5bmMoTEVER0VSLCAndXRmOCcpKTsKICAgIGNvbnN0IGIgPSBibGFuaygpOwogICAgcmV0dXJuIHsgLi4uYiwgLi4uZCB9OwogIH0gY2F0Y2ggewogICAgcmV0dXJuIGJsYW5rKCk7CiAgfQp9CgovLyDljZXov5vnqIvlhpkgKyDljp/lrZAgcmVuYW1l77ybcnVubmVyIOaYr+WUr+S4gOWGmeiAhQpmdW5jdGlvbiBzYXZlKGxlZGdlcikgewogIGZzLm1rZGlyU3luYyhjZmcuREFUQV9ESVIsIHsgcmVjdXJzaXZlOiB0cnVlIH0pOwogIGNvbnN0IHRtcCA9IExFREdFUiArICcudG1wJzsKICBmcy53cml0ZUZpbGVTeW5jKHRtcCwgSlNPTi5zdHJpbmdpZnkobGVkZ2VyLCBudWxsLCAxKSk7CiAgZnMucmVuYW1lU3luYyh0bXAsIExFREdFUik7Cn0KCmZ1bmN0aW9uIHB1c2hDYXBwZWQoYXJyLCBpdGVtLCBjYXApIHsKICBhcnIucHVzaChpdGVtKTsKICBpZiAoYXJyLmxlbmd0aCA+IGNhcCkgYXJyLnNwbGljZSgwLCBhcnIubGVuZ3RoIC0gY2FwKTsKfQoKZnVuY3Rpb24gZXF1aXR5KGxlZGdlcikgewogIC8vIOWHgOWAvCA9IOmSseWMhSArIOaMgeS7k+aMieS4remXtOS7t+S8sOWAvO+8iOmdouadv+WxleekuueUqO+8m+e7k+eul+S7peWunumZheS4uuWHhu+8iQogIHJldHVybiBsZWRnZXIud2FsbGV0Owp9CgpmdW5jdGlvbiByZWNvcmRFcXVpdHkobGVkZ2VyKSB7CiAgY29uc3QgbGFzdCA9IGxlZGdlci5lcXVpdHlDdXJ2ZVtsZWRnZXIuZXF1aXR5Q3VydmUubGVuZ3RoIC0gMV07CiAgY29uc3QgZSA9IE1hdGgucm91bmQoZXF1aXR5KGxlZGdlcikgKiAxMDApIC8gMTAwOwogIGlmICghbGFzdCB8fCBsYXN0LmUgIT09IGUpIGxlZGdlci5lcXVpdHlDdXJ2ZS5wdXNoKHsgdDogRGF0ZS5ub3coKSwgZSB9KTsKICBpZiAobGVkZ2VyLmVxdWl0eUN1cnZlLmxlbmd0aCA+IDIwMDApIGxlZGdlci5lcXVpdHlDdXJ2ZS5zcGxpY2UoMCwgbGVkZ2VyLmVxdWl0eUN1cnZlLmxlbmd0aCAtIDIwMDApOwp9Cgptb2R1bGUuZXhwb3J0cyA9IHsgTEVER0VSLCBibGFuaywgbG9hZCwgc2F2ZSwgcHVzaENhcHBlZCwgcmVjb3JkRXF1aXR5IH07Cg==
+// 账本：钱包 / 持仓 / 成交 / 判断 / 退出复核 / 结算 / 净值曲线，原子写入
+const fs = require('fs');
+const path = require('path');
+const cfg = require('./config');
+
+const LEDGER = path.join(cfg.DATA_DIR, 'ledger.json');
+
+function blank() {
+  return {
+    startedAt: new Date().toISOString(),
+    wallet: cfg.BANKROLL_USD,
+    positions: [],      // open：{id, coin, coinName, slug, windowLabel, eventUrl, side, buyPrice, shares, stake, buyTime, lastExitReviewAt, buyPUp}
+    trades: [],         // {time, slug, side:'buy'|'sell', outcome, price, shares, stake, reason}
+    judgments: [],      // 每次评估记录（保留300）
+    exitReviews: [],    // 退出复核记录（保留200）
+    settlements: [],    // {time, slug, side, win, shares, payout, pnl}
+    equityCurve: [],    // {t, equity}
+    errors: [],         // {time, where, message} 保留100
+  };
+}
+
+function load() {
+  try {
+    const d = JSON.parse(fs.readFileSync(LEDGER, 'utf8'));
+    const b = blank();
+    return { ...b, ...d };
+  } catch {
+    return blank();
+  }
+}
+
+// 单进程写 + 原子 rename；runner 是唯一写者
+function save(ledger) {
+  fs.mkdirSync(cfg.DATA_DIR, { recursive: true });
+  const tmp = LEDGER + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(ledger, null, 1));
+  fs.renameSync(tmp, LEDGER);
+}
+
+function pushCapped(arr, item, cap) {
+  arr.push(item);
+  if (arr.length > cap) arr.splice(0, arr.length - cap);
+}
+
+function equity(ledger) {
+  // 净值 = 钱包 + 持仓按中间价估值（面板展示用；结算以实际为准）
+  return ledger.wallet;
+}
+
+function recordEquity(ledger) {
+  const last = ledger.equityCurve[ledger.equityCurve.length - 1];
+  const e = Math.round(equity(ledger) * 100) / 100;
+  if (!last || last.e !== e) ledger.equityCurve.push({ t: Date.now(), e });
+  if (ledger.equityCurve.length > 2000) ledger.equityCurve.splice(0, ledger.equityCurve.length - 2000);
+}
+
+module.exports = { LEDGER, blank, load, save, pushCapped, recordEquity };

@@ -1,1 +1,76 @@
-Ly8gSmV2IOamgueOh+agoeWHhuWxgu+8mue7jyBjb21tYW5kY29kZSDnvZHlhbMgc3lzdGVtb25lICsgbm91bAovLyDpk4HlvovvvJpKZXYg5aSx6LSlIOKGkiDkuI3kuIvmlrDljZXvvIhSRVFVSVJFX0pFVu+8ie+8jOe7neS4jeWbnumAgOWQr+WPkeW8j+S4i+WNlQpjb25zdCBjZmcgPSByZXF1aXJlKCcuL2NvbmZpZycpOwpjb25zdCB7IGZldGNoV2l0aFRpbWVvdXQgfSA9IHJlcXVpcmUoJy4vaHR0cCcpOwoKYXN5bmMgZnVuY3Rpb24gY2FsbEpldihzdGF0ZSwgcXVlc3Rpb25zKSB7CiAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2hXaXRoVGltZW91dChgJHtjZmcuSkVWX0FQSV9CQVNFfS9wcm92aWRlci92MS9zeXN0ZW1vbmVgLCB7CiAgICBtZXRob2Q6ICdQT1NUJywKICAgIHRpbWVvdXRNczogY2ZnLkpFVl9USU1FT1VUX01TLAogICAgaGVhZGVyczogewogICAgICAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nLAogICAgICBBdXRob3JpemF0aW9uOiBgQmVhcmVyICR7Y2ZnLkpFVl9BUElfS0VZfWAsCiAgICB9LAogICAgYm9keTogSlNPTi5zdHJpbmdpZnkoeyBtb2RlbDogY2ZnLkpFVl9NT0RFTCwgc3RhdGUsIHF1ZXN0aW9ucyB9KSwKICB9KTsKICBjb25zdCByYXdUZXh0ID0gYXdhaXQgcmVzLnRleHQoKTsKICBpZiAoIXJlcy5vaykgdGhyb3cgbmV3IEVycm9yKGBKZXYgSFRUUCAke3Jlcy5zdGF0dXN977yaJHtyYXdUZXh0LnNsaWNlKDAsIDIwMCl9YCk7CiAgbGV0IGRhdGE7CiAgdHJ5IHsgZGF0YSA9IEpTT04ucGFyc2UocmF3VGV4dCk7IH0gY2F0Y2ggeyB0aHJvdyBuZXcgRXJyb3IoYEpldiDov5Tlm57kuI3mmK8gSlNPTu+8miR7cmF3VGV4dC5zbGljZSgwLCAxMjApfWApOyB9CiAgcmV0dXJuIGRhdGE7Cn0KZnVuY3Rpb24gbm91bFByb2IoZGF0YSwgbmFtZSkgewogIGNvbnN0IGEgPSBkYXRhLmFuc3dlcnMgJiYgZGF0YS5hbnN3ZXJzW25hbWVdOwogIGNvbnN0IHAgPSBhICYmIE51bWJlcihhLm5vdWwpOwogIGlmICghTnVtYmVyLmlzRmluaXRlKHApKSB0aHJvdyBuZXcgRXJyb3IoYEpldiDmnKrov5Tlm57mnInmlYjmpoLnjocgKCR7bmFtZX0pYCk7CiAgcmV0dXJuIE1hdGgubWF4KDAsIE1hdGgubWluKDEsIHApKTsKfQoKLyoqCiAqIOagoeWHhiBQKFVwKe+8mkRlZXBTZWVrIOWIhuaekCArIOeOsOi0p+WKqOmHjyArIOebmOWPo+S7tyDihpIgVXAg6I636IOc5qaC546HCiAqIEByZXR1cm5zIHsgcFVwOiAwLi4xLCB2aWE6ICdqZXYnIH0KICovCmFzeW5jIGZ1bmN0aW9uIGNhbGlicmF0ZVVwKHsgY29pbk5hbWUsIHdpbmRvd0xhYmVsLCBzZWNvbmRzTGVmdCwgZmVhdCwgZHMsIHVwQnV5LCBkb3duQnV5LCB1cE1pZCwgZG93bk1pZCB9KSB7CiAgaWYgKCFjZmcuSkVWX0FQSV9LRVkpIHRocm93IG5ldyBFcnJvcign5pyq6YWN572uIEpFVl9BUElfS0VZJyk7CiAgY29uc3Qgc3RhdGUgPQogICAgYFlvdSBhcmUgY2FsaWJyYXRpbmcgYSBwcm9iYWJpbGl0eSBmb3IgYSBQQVBFUi1UUkFESU5HIGJvdCAobm8gcmVhbCBtb25leSkuXG5gICsKICAgIGBNYXJrZXQ6IFBvbHltYXJrZXQgIiR7Y29pbk5hbWV9IFVwIG9yIERvd24iIDE1LW1pbnV0ZSB3aW5kb3cgJHt3aW5kb3dMYWJlbH0uXG5gICsKICAgIGBSZXNvbHV0aW9uOiAiVXAiIHdpbnMgaWYgdGhlIENoYWlubGluayBUV0FQIG9mICR7Y29pbk5hbWV9IG92ZXIgdGhlIHdpbmRvdyA+PSB0aGUgcHJpY2UgYXQgd2luZG93IFNUQVJUOyBlbHNlICJEb3duIiB3aW5zLlxuYCArCiAgICBgU2Vjb25kcyBsZWZ0IGluIHdpbmRvdzogJHtzZWNvbmRzTGVmdH0uXG5gICsKICAgIGBBbmFseXN0IHZpZXcgKERlZXBTZWVrKTogZGlyZWN0aW9uPSR7ZHMuZGlyZWN0aW9ufSwgY29uZmlkZW5jZT0keyhkcy5jb25maWRlbmNlICogMTAwKS50b0ZpeGVkKDApfSUsIHJlYXNvbjogJHtkcy5yZWFzb259XG5gICsKICAgIGBTcG90IG1vbWVudHVtIChDb2luYmFzZSAxbSk6IGRyaWZ0PSR7ZmVhdC5kcmlmdEJwc31icHMgb3ZlciBsYXN0ICR7ZmVhdC5ufW1pbiwgcGVyLW1pbiB2b2w9JHtmZWF0LnZvbEJwc31icHMsIGAgKwogICAgYHJhbmdlPSR7ZmVhdC5yYW5nZUJwc31icHMsIFJTSTE0PSR7ZmVhdC5yc2kxNH0uXG5gICsKICAgIGBNYXJrZXQgcHJpY2VzIChpbXBsaWVkIHByb2JhYmlsaXRpZXMpOiBVcCBidXk9JHt1cEJ1eS50b0ZpeGVkKDMpfSBtaWQ9JHt1cE1pZC50b0ZpeGVkKDMpfSB8IGAgKwogICAgYERvd24gYnV5PSR7ZG93bkJ1eS50b0ZpeGVkKDMpfSBtaWQ9JHtkb3duTWlkLnRvRml4ZWQoMyl9LlxuYCArCiAgICBgQ2FsaWJyYXRlIGFnYWluc3QgbW9tZW50dW0gYW5kIHRpbWUgbGVmdDsgZG8gTk9UIGp1c3QgZWNobyB0aGUgbWFya2V0IHByaWNlLiBgICsKICAgIGBXaXRoIGxpdHRsZSB0aW1lIGxlZnQsIHRoZSBjdXJyZW50IHNwb3QgbGV2ZWwgdnMgdGhlIHdpbmRvdy1zdGFydCBwcmljZSBkb21pbmF0ZXMgdGhlIG91dGNvbWUuYDsKICBjb25zdCBkYXRhID0gYXdhaXQgY2FsbEpldihzdGF0ZSwgewogICAgdXA6IHsgdHlwZTogJ25vdWwnLCBpbnN0cnVjdGlvbnM6IGBXaGF0IGlzIHRoZSBwcm9iYWJpbGl0eSAoMC0xMDAlKSB0aGF0IHRoaXMgMTUtbWludXRlICIke2NvaW5OYW1lfSBVcCBvciBEb3duIiBtYXJrZXQgcmVzb2x2ZXMgdG8gIlVwIj9gIH0sCiAgfSk7CiAgcmV0dXJuIHsgcFVwOiBub3VsUHJvYihkYXRhLCAndXAnKSwgdmlhOiAnamV2JyB9Owp9CgovKioKICog6YCA5Ye65aSN5qC477ya5oyB5pyJ5Yiw5pyfIHZzIOeOsOWcqOaMieWNluWHuuS7t+WNluWHuu+8jOWTquS4quaAu+ebiOS6j+abtOmrmO+8nwogKiBAcmV0dXJucyB7IHByb2JIb2xkQmV0dGVyOiAwLi4xLCB2aWE6ICdqZXYnIH3vvIjlpLHotKXnm7TmjqXmipvplJnvvIzkuI3lm57pgIDvvIkKICovCmFzeW5jIGZ1bmN0aW9uIGFza0V4aXQoeyBwb3MsIGN1clNlbGxQcmljZSwgc2Vjb25kc0xlZnQgfSkgewogIGNvbnN0IHVzZCA9IG4gPT4gKG4gPj0gMCA/ICcrJyA6ICcnKSArICckJyArIG4udG9GaXhlZCgyKTsKICBjb25zdCB1bnJlYWwgPSBwb3Muc2hhcmVzICogY3VyU2VsbFByaWNlIC0gcG9zLnN0YWtlOwogIGNvbnN0IHVucmVhbFBjdCA9IHVucmVhbCAvIHBvcy5zdGFrZTsKICBjb25zdCBzdGF0ZSA9CiAgICBgWW91IGFyZSByZXZpZXdpbmcgYSBQQVBFUi1UUkFESU5HIHBvc2l0aW9uIChubyByZWFsIG1vbmV5KS5cbmAgKwogICAgYE1hcmtldDogUG9seW1hcmtldCAiJHtwb3MuY29pbk5hbWV9IFVwIG9yIERvd24iIDE1LW1pbnV0ZSB3aW5kb3cgJHtwb3Mud2luZG93TGFiZWx9ICgke3Bvcy5ldmVudFVybH0pLlxuYCArCiAgICBgUG9zaXRpb246ICR7cG9zLnNpZGUudG9VcHBlckNhc2UoKX0sIGJvdWdodCBhdCAkJHtwb3MuYnV5UHJpY2UudG9GaXhlZCg0KX0vc2hhcmUsIGAgKwogICAgYCR7cG9zLnNoYXJlcy50b0ZpeGVkKDIpfSBzaGFyZXMsICQke3Bvcy5zdGFrZS50b0ZpeGVkKDIpfSBzdGFrZS5cbmAgKwogICAgYEN1cnJlbnQgU0VMTCBwcmljZTogJCR7Y3VyU2VsbFByaWNlLnRvRml4ZWQoNCl9IOKGkiB1bnJlYWxpemVkIFAmTCAke3VzZCh1bnJlYWwpfSAoJHsodW5yZWFsUGN0ICogMTAwKS50b0ZpeGVkKDEpfSUpLlxuYCArCiAgICBgSWYgeW91IFNFTEwgTk9XIHlvdSBsb2NrIGluIOKJiCAke3VzZCh1bnJlYWwpfS4gSWYgeW91IEhPTEQgdG8gZXhwaXJ5ICjiiYgke01hdGgubWF4KDAsIE1hdGgucm91bmQoc2Vjb25kc0xlZnQpKX1zIGxlZnQpLCBgICsKICAgIGB5b3UgcmVjZWl2ZSAkMS9zaGFyZSBpZiAke3Bvcy5zaWRlLnRvVXBwZXJDYXNlKCl9IHdpbnMsICQwIG90aGVyd2lzZS5cbmAgKwogICAgYFJlc29sdXRpb246IENoYWlubGluayBUV0FQIG92ZXIgdGhlIHdpbmRvdyB2cyB3aW5kb3ctc3RhcnQgcHJpY2UuYDsKICBjb25zdCBkYXRhID0gYXdhaXQgY2FsbEpldihzdGF0ZSwgewogICAgZXhpdDogeyB0eXBlOiAnbm91bCcsIGluc3RydWN0aW9uczogYFdoYXQgaXMgdGhlIHByb2JhYmlsaXR5ICgwLTEwMCUpIHRoYXQgSE9MRElORyB0aGlzICR7cG9zLnNpZGUudG9VcHBlckNhc2UoKX0gcG9zaXRpb24gdG8gZXhwaXJ5IHlpZWxkcyBhIEhJR0hFUiB0b3RhbCBQJkwgdGhhbiBTRUxMSU5HIGl0IE5PVyBhdCAkJHtjdXJTZWxsUHJpY2UudG9GaXhlZCg0KX0vc2hhcmU/YCB9LAogIH0pOwogIHJldHVybiB7IHByb2JIb2xkQmV0dGVyOiBub3VsUHJvYihkYXRhLCAnZXhpdCcpLCB2aWE6ICdqZXYnIH07Cn0KCm1vZHVsZS5leHBvcnRzID0geyBjYWxpYnJhdGVVcCwgYXNrRXhpdCB9Owo=
+// Jev 概率校准层：经 commandcode 网关 systemone + noul
+// 铁律：Jev 失败 → 不下新单（REQUIRE_JEV），绝不回退启发式下单
+const cfg = require('./config');
+const { fetchWithTimeout } = require('./http');
+
+async function callJev(state, questions) {
+  const res = await fetchWithTimeout(`${cfg.JEV_API_BASE}/provider/v1/systemone`, {
+    method: 'POST',
+    timeoutMs: cfg.JEV_TIMEOUT_MS,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${cfg.JEV_API_KEY}`,
+    },
+    body: JSON.stringify({ model: cfg.JEV_MODEL, state, questions }),
+  });
+  const rawText = await res.text();
+  if (!res.ok) throw new Error(`Jev HTTP ${res.status}：${rawText.slice(0, 200)}`);
+  let data;
+  try { data = JSON.parse(rawText); } catch { throw new Error(`Jev 返回不是 JSON：${rawText.slice(0, 120)}`); }
+  return data;
+}
+function noulProb(data, name) {
+  const a = data.answers && data.answers[name];
+  const p = a && Number(a.noul);
+  if (!Number.isFinite(p)) throw new Error(`Jev 未返回有效概率 (${name})`);
+  return Math.max(0, Math.min(1, p));
+}
+
+/**
+ * 校准 P(Up)：DeepSeek 分析 + 现货动量 + 盘口价 → Up 获胜概率
+ * @returns { pUp: 0..1, via: 'jev' }
+ */
+async function calibrateUp({ coinName, windowLabel, secondsLeft, feat, ds, upBuy, downBuy, upMid, downMid }) {
+  if (!cfg.JEV_API_KEY) throw new Error('未配置 JEV_API_KEY');
+  const state =
+    `You are calibrating a probability for a PAPER-TRADING bot (no real money).\n` +
+    `Market: Polymarket "${coinName} Up or Down" 15-minute window ${windowLabel}.\n` +
+    `Resolution: "Up" wins if the Chainlink TWAP of ${coinName} over the window >= the price at window START; else "Down" wins.\n` +
+    `Seconds left in window: ${secondsLeft}.\n` +
+    `Analyst view (DeepSeek): direction=${ds.direction}, confidence=${(ds.confidence * 100).toFixed(0)}%, reason: ${ds.reason}\n` +
+    `Spot momentum (Coinbase 1m): drift=${feat.driftBps}bps over last ${feat.n}min, per-min vol=${feat.volBps}bps, ` +
+    `range=${feat.rangeBps}bps, RSI14=${feat.rsi14}.\n` +
+    `Market prices (implied probabilities): Up buy=${upBuy.toFixed(3)} mid=${upMid.toFixed(3)} | ` +
+    `Down buy=${downBuy.toFixed(3)} mid=${downMid.toFixed(3)}.\n` +
+    `Calibrate against momentum and time left; do NOT just echo the market price. ` +
+    `With little time left, the current spot level vs the window-start price dominates the outcome.`;
+  const data = await callJev(state, {
+    up: { type: 'noul', instructions: `What is the probability (0-100%) that this 15-minute "${coinName} Up or Down" market resolves to "Up"?` },
+  });
+  return { pUp: noulProb(data, 'up'), via: 'jev' };
+}
+
+/**
+ * 退出复核：持有到期 vs 现在按卖出价卖出，哪个总盈亏更高？
+ * @returns { probHoldBetter: 0..1, via: 'jev' }（失败直接抛错，不回退）
+ */
+async function askExit({ pos, curSellPrice, secondsLeft }) {
+  const usd = n => (n >= 0 ? '+' : '') + '$' + n.toFixed(2);
+  const unreal = pos.shares * curSellPrice - pos.stake;
+  const unrealPct = unreal / pos.stake;
+  const state =
+    `You are reviewing a PAPER-TRADING position (no real money).\n` +
+    `Market: Polymarket "${pos.coinName} Up or Down" 15-minute window ${pos.windowLabel} (${pos.eventUrl}).\n` +
+    `Position: ${pos.side.toUpperCase()}, bought at $${pos.buyPrice.toFixed(4)}/share, ` +
+    `${pos.shares.toFixed(2)} shares, $${pos.stake.toFixed(2)} stake.\n` +
+    `Current SELL price: $${curSellPrice.toFixed(4)} → unrealized P&L ${usd(unreal)} (${(unrealPct * 100).toFixed(1)}%).\n` +
+    `If you SELL NOW you lock in ≈ ${usd(unreal)}. If you HOLD to expiry (≈${Math.max(0, Math.round(secondsLeft))}s left), ` +
+    `you receive $1/share if ${pos.side.toUpperCase()} wins, $0 otherwise.\n` +
+    `Resolution: Chainlink TWAP over the window vs window-start price.`;
+  const data = await callJev(state, {
+    exit: { type: 'noul', instructions: `What is the probability (0-100%) that HOLDING this ${pos.side.toUpperCase()} position to expiry yields a HIGHER total P&L than SELLING it NOW at $${curSellPrice.toFixed(4)}/share?` },
+  });
+  return { probHoldBetter: noulProb(data, 'exit'), via: 'jev' };
+}
+
+module.exports = { calibrateUp, askExit };

@@ -1,1 +1,133 @@
-Ly8g6Z2Z5oCBIEhUTUwg5oql5ZGK77ya5biC5Zy65ZCN55u06ZO+IFBvbHltYXJrZXQg5a6Y5pa555uY5Y+j77yb5Yik5patL+WkjeaguOaYjue7huaKmOi/m+WvueW6lOihjOeCueWHu+WxleW8gApjb25zdCBmcyA9IHJlcXVpcmUoJ2ZzJyk7CmNvbnN0IGNmZyA9IHJlcXVpcmUoJy4vY29uZmlnJyk7CmNvbnN0IHsgbG9hZCB9ID0gcmVxdWlyZSgnLi9zdG9yZScpOwoKZnVuY3Rpb24gZXNjKHMpIHsKICByZXR1cm4gU3RyaW5nKHMgPT0gbnVsbCA/ICcnIDogcykucmVwbGFjZSgvWyY8PiInXS9nLCBjID0+ICh7ICcmJzogJyZhbXA7JywgJzwnOiAnJmx0OycsICc+JzogJyZndDsnLCAnIic6ICcmcXVvdDsnLCAiJyI6ICcmIzM5OycgfVtjXSkpOwp9CmNvbnN0IHVzZCA9IG4gPT4gKG4gPj0gMCA/ICcrJyA6ICcnKSArICckJyArIE51bWJlcihuKS50b0ZpeGVkKDIpOwpjb25zdCBwY3QgPSBuID0+IChuID49IDAgPyAnKycgOiAnJykgKyAoTnVtYmVyKG4pICogMTAwKS50b0ZpeGVkKDEpICsgJyUnOwpjb25zdCB0c3RyID0gaXNvID0+IHsgY29uc3QgZCA9IG5ldyBEYXRlKGlzbyk7IHJldHVybiBgJHtkLmdldE1vbnRoKCkgKyAxfS8ke2QuZ2V0RGF0ZSgpfSAke1N0cmluZyhkLmdldEhvdXJzKCkpLnBhZFN0YXJ0KDIsICcwJyl9OiR7U3RyaW5nKGQuZ2V0TWludXRlcygpKS5wYWRTdGFydCgyLCAnMCcpfToke1N0cmluZyhkLmdldFNlY29uZHMoKSkucGFkU3RhcnQoMiwgJzAnKX1gOyB9Owpjb25zdCBwbmxDbHMgPSBuID0+IG4gPiAwID8gJ3BvcycgOiBuIDwgMCA/ICduZWcnIDogJyc7CgpmdW5jdGlvbiBwb3NVbnJlYWwocG9zLCBwcmljZXMpIHsKICBjb25zdCBxID0gcHJpY2VzW3Bvcy5zbHVnXTsKICBpZiAoIXEpIHJldHVybiBudWxsOwogIGNvbnN0IHNlbGwgPSBwb3Muc2lkZSA9PT0gJ3VwJyA/IHEudXBTZWxsIDogcS5kb3duU2VsbDsKICBpZiAoIU51bWJlci5pc0Zpbml0ZShzZWxsKSkgcmV0dXJuIG51bGw7CiAgY29uc3QgdW5yZWFsID0gcG9zLnNoYXJlcyAqIHNlbGwgLSBwb3Muc3Rha2U7CiAgcmV0dXJuIHsgc2VsbCwgdW5yZWFsLCB1bnJlYWxQY3Q6IHVucmVhbCAvIHBvcy5zdGFrZSwgdDogcS50IH07Cn0KCmZ1bmN0aW9uIHJlbmRlckh0bWwobGVkZ2VyLCBwcmljZXMsIG9wdHMgPSB7fSkgewogIGNvbnN0IGxpdmUgPSBvcHRzLmxpdmUgPyAnIDxzcGFuIGNsYXNzPSJ0YWciPkxJVkU8L3NwYW4+JyA6ICcnOwogIGNvbnN0IHVwZGF0ZWQgPSBuZXcgRGF0ZSgpLnRvTG9jYWxlU3RyaW5nKCd6aC1DTicsIHsgaG91cjEyOiBmYWxzZSB9KTsKICBjb25zdCB0b3RhbFBubCA9IHJvdW5kMihsZWRnZXIud2FsbGV0IC0gY2ZnLkJBTktST0xMX1VTRCk7CiAgY29uc3Qgc2V0dGxlZCA9IGxlZGdlci5zZXR0bGVtZW50czsKICBjb25zdCB3aW5OID0gc2V0dGxlZC5maWx0ZXIocyA9PiBzLndpbikubGVuZ3RoOwoKICBjb25zdCBwb3NSb3dzID0gbGVkZ2VyLnBvc2l0aW9ucy5tYXAoKHAsIGkpID0+IHsKICAgIGNvbnN0IHUgPSBwb3NVbnJlYWwocCwgcHJpY2VzKTsKICAgIGNvbnN0IGp1ZGdzID0gbGVkZ2VyLmp1ZGdtZW50cy5maWx0ZXIoaiA9PiBqLnNsdWcgPT09IHAuc2x1Zyk7CiAgICBjb25zdCByZXZzID0gbGVkZ2VyLmV4aXRSZXZpZXdzLmZpbHRlcihyID0+IHIuc2x1ZyA9PT0gcC5zbHVnKTsKICAgIGNvbnN0IGRldGFpbElkID0gYHBkJHtpfWA7CiAgICByZXR1cm4gYDx0ciBjbGFzcz0ibWFpbnJvdyIgZGF0YS1kZXRhaWw9IiR7ZGV0YWlsSWR9Ij4KICAgICAgPHRkPjxhIGhyZWY9IiR7ZXNjKHAuZXZlbnRVcmwpfSIgdGFyZ2V0PSJfYmxhbmsiPiR7ZXNjKHAuY29pbk5hbWUpfSAke2VzYyhwLndpbmRvd0xhYmVsKX08L2E+PC90ZD4KICAgICAgPHRkIGNsYXNzPSIke3Auc2lkZSA9PT0gJ3VwJyA/ICdwb3MnIDogJ25lZyd9Ij4ke3Auc2lkZSA9PT0gJ3VwJyA/ICdVcCcgOiAnRG93bid9PC90ZD4KICAgICAgPHRkPiR7cC5idXlQcmljZS50b0ZpeGVkKDMpfTwvdGQ+PHRkPiR7cC5zaGFyZXMudG9GaXhlZCgxKX08L3RkPjx0ZD4kJHtwLnN0YWtlLnRvRml4ZWQoMil9PC90ZD4KICAgICAgPHRkPiR7dSA/IHUuc2VsbC50b0ZpeGVkKDMpIDogJ+KAlCd9PC90ZD4KICAgICAgPHRkIGNsYXNzPSIke3UgPyBwbmxDbHModS51bnJlYWwpIDogJyd9Ij4ke3UgPyB1c2QodS51bnJlYWwpICsgJyAoJyArIHBjdCh1LnVucmVhbFBjdCkgKyAnKScgOiAn4oCUJ308L3RkPgogICAgICA8dGQ+JHt0c3RyKHAuYnV5VGltZSl9PC90ZD4KICAgICAgPHRkPiR7anVkZ3MubGVuZ3RoICsgcmV2cy5sZW5ndGggPyBgPGJ1dHRvbiBjbGFzcz0iZXhwIiBkYXRhLXQ9IiR7ZGV0YWlsSWR9Ij7ilrgg5Yik5patJHtqdWRncy5sZW5ndGh9wrflpI3moLgke3JldnMubGVuZ3RofTwvYnV0dG9uPmAgOiAn4oCUJ308L3RkPgogICAgPC90cj4KICAgIDx0ciBjbGFzcz0iZGV0YWlsIiBpZD0iJHtkZXRhaWxJZH0iIHN0eWxlPSJkaXNwbGF5Om5vbmUiPjx0ZCBjb2xzcGFuPSI5Ij4KICAgICAgJHtqdWRncy5sZW5ndGggPyBgPGRpdiBjbGFzcz0iZGgiPvCfk50g5Yik5pat6K6w5b2VPC9kaXY+PHRhYmxlIGNsYXNzPSJzdWIiPjx0cj48dGg+5pe26Ze0PC90aD48dGg+5Ymp5L2ZPC90aD48dGg+VXDkubDlhaU8L3RoPjx0aD5Eb3du5Lmw5YWlPC90aD48dGg+UChVcCk8L3RoPjx0aD5lZGdlPC90aD48dGg+RFM8L3RoPjx0aD7mk43kvZw8L3RoPjx0aD7ljp/lm6A8L3RoPjwvdHI+JHtqdWRncy5zbGljZSgpLnJldmVyc2UoKS5tYXAoaiA9PgogICAgICAgIGA8dHI+PHRkPiR7dHN0cihqLnRpbWUpfTwvdGQ+PHRkPiR7ai5zZWNvbmRzTGVmdH1zPC90ZD48dGQ+JHtqLnVwQnV5fTwvdGQ+PHRkPiR7ai5kb3duQnV5fTwvdGQ+PHRkPiR7ai5wVXAgIT0gbnVsbCA/IChqLnBVcCAqIDEwMCkudG9GaXhlZCgxKSArICclJyA6ICfigJQnfTwvdGQ+PHRkPiR7ai5lZGdlVXAgIT0gbnVsbCA/IHBjdChNYXRoLm1heChqLmVkZ2VVcCwgai5lZGdlRG93bikpIDogJ+KAlCd9PC90ZD48dGQ+JHtqLmRzRGlyZWN0aW9uIHx8ICfigJQnfSR7ai5kc0NvbmZpZGVuY2UgIT0gbnVsbCA/ICcgJyArIChqLmRzQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnfTwvdGQ+PHRkPiR7ai5iZXQgPyAn5Lmw5YWlJyArIGouc2lkZSArICcgJCcgKyBqLnN0YWtlIDogJ+i3s+i/hyd9PC90ZD48dGQgY2xhc3M9InJzIj4ke2VzYyhqLnJlYXNvbiB8fCAnJyl9JHtqLmRzUmVhc29uID8gJzxicj5EU++8micgKyBlc2Moai5kc1JlYXNvbikgOiAnJ308L3RkPjwvdHI+YCkuam9pbignJyl9PC90YWJsZT5gIDogJyd9CiAgICAgICR7cmV2cy5sZW5ndGggPyBgPGRpdiBjbGFzcz0iZGgiPvCfm58g6YCA5Ye65aSN5qC4PC9kaXY+PHRhYmxlIGNsYXNzPSJzdWIiPjx0cj48dGg+5pe26Ze0PC90aD48dGg+5Lmw5YWl4oaS5Y2W5Ye6PC90aD48dGg+5rWu55uI5LqPPC90aD48dGg+5Ymp5L2ZPC90aD48dGg+5oyB5pyJ5pu05LyYPC90aD48dGg+5Yaz562WPC90aD48dGg+5Y6f5ZugPC90aD48L3RyPiR7cmV2cy5zbGljZSgpLnJldmVyc2UoKS5tYXAociA9PgogICAgICAgIGA8dHI+PHRkPiR7dHN0cihyLnRpbWUpfTwvdGQ+PHRkPiR7ci5idXlQcmljZX3ihpIke3Iuc2VsbFByaWNlfTwvdGQ+PHRkIGNsYXNzPSIke3BubENscyhyLnVucmVhbCl9Ij4ke3VzZChyLnVucmVhbCl9PC90ZD48dGQ+JHtyLnNlY29uZHNMZWZ0fXM8L3RkPjx0ZD4ke3IucHJvYkhvbGRCZXR0ZXIgIT0gbnVsbCA/IChyLnByb2JIb2xkQmV0dGVyICogMTAwKS50b0ZpeGVkKDApICsgJyUnIDogJ+KAlCd9PC90ZD48dGQ+JHtyLmRlY2lzaW9uID09PSAnc2VsbCcgPyAn5Y2W5Ye6JyA6IHIuZGVjaXNpb24gPT09ICdob2xkJyA/ICfmjIHmnIknIDogJ+i3s+i/hyd9PC90ZD48dGQgY2xhc3M9InJzIj4ke2VzYyhyLnJlYXNvbiB8fCAnJyl9PC90ZD48L3RyPmApLmpvaW4oJycpfTwvdGFibGU+YCA6ICcnfQogICAgPC90ZD48L3RyPmA7CiAgfSkuam9pbignJyk7CgogIGNvbnN0IHRyYWRlUm93cyA9IGxlZGdlci50cmFkZXMuc2xpY2UoKS5yZXZlcnNlKCkuc2xpY2UoMCwgNjApLm1hcCh0ID0+CiAgICBgPHRyPjx0ZD4ke3RzdHIodC50aW1lKX08L3RkPjx0ZD4ke2VzYyh0LnNsdWcgfHwgJycpfTwvdGQ+CiAgICAgPHRkIGNsYXNzPSIke3Quc2lkZSA9PT0gJ2J1eScgPyAncG9zJyA6IHQuc2lkZSA9PT0gJ3NlbGwnID8gJ25lZycgOiAnJ30iPiR7dC5zaWRlID09PSAnYnV5JyA/ICfkubDlhaUnIDogdC5zaWRlID09PSAnc2VsbCcgPyAn5Y2W5Ye6JyA6ICfnu5PnrpcnfTwvdGQ+CiAgICAgPHRkPiR7dC5vdXRjb21lID8gdC5vdXRjb21lLnRvVXBwZXJDYXNlKCkgOiAn4oCUJ308L3RkPjx0ZD4ke3QucHJpY2V9PC90ZD48dGQ+JHt0LnNoYXJlc308L3RkPgogICAgIDx0ZD4kJHtOdW1iZXIodC5zdGFrZSkudG9GaXhlZCgyKX08L3RkPjx0ZCBjbGFzcz0icnMiPiR7ZXNjKHQucmVhc29uIHx8ICcnKX08L3RkPjwvdHI+YCkuam9pbignJyk7CgogIGNvbnN0IHNldHRsZVJvd3MgPSBzZXR0bGVkLnNsaWNlKCkucmV2ZXJzZSgpLnNsaWNlKDAsIDQwKS5tYXAocyA9PgogICAgYDx0cj48dGQ+JHt0c3RyKHMudGltZSl9PC90ZD48dGQ+PGEgaHJlZj0iJHtlc2Mocy5ldmVudFVybCl9IiB0YXJnZXQ9Il9ibGFuayI+JHtlc2Mocy5jb2luKX0gJHtlc2Mocy53aW5kb3dMYWJlbCl9PC9hPjwvdGQ+CiAgICAgPHRkPiR7cy5zaWRlLnRvVXBwZXJDYXNlKCl9PC90ZD48dGQgY2xhc3M9IiR7cy53aW4gPyAncG9zJyA6ICduZWcnfSI+JHtzLndpbiA/ICflkb3kuK0nIDogJ+W9kumbtid9PC90ZD4KICAgICA8dGQ+JCR7cy5zaGFyZXMudG9GaXhlZCgxKX3ogqE8L3RkPjx0ZD4kJHsocy5wYXlvdXQpLnRvRml4ZWQoMil9PC90ZD4KICAgICA8dGQgY2xhc3M9IiR7cG5sQ2xzKHMucG5sKX0iPiR7dXNkKHMucG5sKX08L3RkPjwvdHI+YCkuam9pbignJyk7CgogIGNvbnN0IGVyclJvd3MgPSBsZWRnZXIuZXJyb3JzLnNsaWNlKCkucmV2ZXJzZSgpLnNsaWNlKDAsIDEwKS5tYXAoZSA9PgogICAgYDx0cj48dGQ+JHt0c3RyKGUudGltZSl9PC90ZD48dGQ+JHtlc2MoZS53aGVyZSl9PC90ZD48dGQgY2xhc3M9InJzIj4ke2VzYyhlLm1lc3NhZ2UpfTwvdGQ+PC90cj5gKS5qb2luKCcnKTsKCiAgcmV0dXJuIGA8IURPQ1RZUEUgaHRtbD48aHRtbCBsYW5nPSJ6aCI+PGhlYWQ+PG1ldGEgY2hhcnNldD0idXRmLTgiPjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsaW5pdGlhbC1zY2FsZT0xIj4KPHRpdGxlPlBvbHltYXJrZXQgQ3J5cHRvIDE1bSDmqKHmi5/nm5gke2xpdmV9PC90aXRsZT4KPHN0eWxlPgpib2R5e2ZvbnQtZmFtaWx5Oi1hcHBsZS1zeXN0ZW0sIlBpbmdGYW5nIFNDIiwiTWljcm9zb2Z0IFlhSGVpIixzYW5zLXNlcmlmO2JhY2tncm91bmQ6IzBmMTQyMDtjb2xvcjojZTZlOWYwO21hcmdpbjowO3BhZGRpbmc6MTZweH0KaDF7Zm9udC1zaXplOjIwcHg7bWFyZ2luOjAgMCA0cHh9LnRhZ3tiYWNrZ3JvdW5kOiMyZjgxZjc7Ym9yZGVyLXJhZGl1czo0cHg7Zm9udC1zaXplOjExcHg7cGFkZGluZzoycHggNnB4O3ZlcnRpY2FsLWFsaWduOm1pZGRsZX0KLm1ldGF7Y29sb3I6IzhiOTNhNztmb250LXNpemU6MTJweDttYXJnaW4tYm90dG9tOjEycHh9Ci5jYXJkc3tkaXNwbGF5OmZsZXg7Z2FwOjEwcHg7ZmxleC13cmFwOndyYXA7bWFyZ2luLWJvdHRvbToxNHB4fQouY2FyZHtiYWNrZ3JvdW5kOiMxYTIyMzM7Ym9yZGVyLXJhZGl1czo4cHg7cGFkZGluZzoxMHB4IDE0cHg7bWluLXdpZHRoOjEyMHB4fQouY2FyZCAua3tmb250LXNpemU6MTFweDtjb2xvcjojOGI5M2E3fS5jYXJkIC52e2ZvbnQtc2l6ZToyMHB4O2ZvbnQtd2VpZ2h0OjcwMH0KLnBvc3tjb2xvcjojM2ZiOTUwfS5uZWd7Y29sb3I6I2Y4NTE0OX0KaDJ7Zm9udC1zaXplOjE1cHg7bWFyZ2luOjE4cHggMCA4cHg7Y29sb3I6I2M5ZDFkOX0KdGFibGV7d2lkdGg6MTAwJTtib3JkZXItY29sbGFwc2U6Y29sbGFwc2U7Zm9udC1zaXplOjEycHg7YmFja2dyb3VuZDojMWEyMjMzO2JvcmRlci1yYWRpdXM6OHB4O292ZXJmbG93OmhpZGRlbn0KdGgsdGR7cGFkZGluZzo3cHggOHB4O3RleHQtYWxpZ246bGVmdDtib3JkZXItYm90dG9tOjFweCBzb2xpZCAjMmEzMzQ4fQp0aHtjb2xvcjojOGI5M2E3O2ZvbnQtd2VpZ2h0OjYwMDtiYWNrZ3JvdW5kOiMxNjFkMmV9CnRyLm1haW5yb3d7Y3Vyc29yOnBvaW50ZXJ9dHIubWFpbnJvdzpob3ZlciB0ZHtiYWNrZ3JvdW5kOiMyMjJjNDR9CmF7Y29sb3I6IzU4YTZmZjt0ZXh0LWRlY29yYXRpb246bm9uZX0uZXhwe2JhY2tncm91bmQ6IzJhMzM0ODtib3JkZXI6MDtjb2xvcjojYzlkMWQ5O2JvcmRlci1yYWRpdXM6NHB4O3BhZGRpbmc6M3B4IDhweDtjdXJzb3I6cG9pbnRlcjtmb250LXNpemU6MTJweH0KLnN1YnttYXJnaW46OHB4IDA7YmFja2dyb3VuZDojMTQxYjJjfS5kaHtmb250LXNpemU6MTJweDtjb2xvcjojOGI5M2E3O21hcmdpbjoxMHB4IDAgNHB4fQoucnN7bWF4LXdpZHRoOjM0MHB4O3dvcmQtYnJlYWs6YnJlYWstd29yZDtjb2xvcjojOWFhNGI4fQouZW1wdHl7Y29sb3I6IzVjNjU3OTtwYWRkaW5nOjE0cHg7Zm9udC1zaXplOjEycHh9Cjwvc3R5bGU+PC9oZWFkPjxib2R5Pgo8aDE+8J+qmSBQb2x5bWFya2V0IENyeXB0byAxNW0g5qih5ouf55uYJHtsaXZlfTwvaDE+CjxkaXYgY2xhc3M9Im1ldGEiPuabtOaWsO+8miR7dXBkYXRlZH0gwrcgQlRDL0VUSCDDlyAxNW0gwrcg5pys6YeRICQke2NmZy5CQU5LUk9MTF9VU0R9IMK3IFBBUEVSX01PREU8L2Rpdj4KPGRpdiBjbGFzcz0iY2FyZHMiPgo8ZGl2IGNsYXNzPSJjYXJkIj48ZGl2IGNsYXNzPSJrIj7pkrHljIU8L2Rpdj48ZGl2IGNsYXNzPSJ2Ij4kJHtsZWRnZXIud2FsbGV0LnRvRml4ZWQoMil9PC9kaXY+PC9kaXY+CjxkaXYgY2xhc3M9ImNhcmQiPjxkaXYgY2xhc3M9ImsiPuaAu+ebiOS6jzwvZGl2PjxkaXYgY2xhc3M9InYgJHtwbmxDbHModG90YWxQbmwpfSI+JHt1c2QodG90YWxQbmwpfTwvZGl2PjwvZGl2Pgo8ZGl2IGNsYXNzPSJjYXJkIj48ZGl2IGNsYXNzPSJrIj7mjIHku5M8L2Rpdj48ZGl2IGNsYXNzPSJ2Ij4ke2xlZGdlci5wb3NpdGlvbnMubGVuZ3RofTwvZGl2PjwvZGl2Pgo8ZGl2IGNsYXNzPSJjYXJkIj48ZGl2IGNsYXNzPSJrIj7lt7Lnu5Pnrpc8L2Rpdj48ZGl2IGNsYXNzPSJ2Ij4ke3NldHRsZWQubGVuZ3Rofe+8iOWRveS4rSR7d2luTn3vvIk8L2Rpdj48L2Rpdj4KPGRpdiBjbGFzcz0iY2FyZCI+PGRpdiBjbGFzcz0iayI+5oiQ5LqkPC9kaXY+PGRpdiBjbGFzcz0idiI+JHtsZWRnZXIudHJhZGVzLmxlbmd0aH08L2Rpdj48L2Rpdj4KPC9kaXY+CjxoMj7wn5OmIOaMgeS7k++8iOeCueWHu+ihjOWxleW8gOWIpOaWrS/lpI3moLjmmI7nu4bvvIk8L2gyPgoke2xlZGdlci5wb3NpdGlvbnMubGVuZ3RoID8gYDx0YWJsZT48dHI+PHRoPuW4guWcujwvdGg+PHRoPuaWueWQkTwvdGg+PHRoPuS5sOWFpeS7tzwvdGg+PHRoPuiCoeaVsDwvdGg+PHRoPuaKleWFpTwvdGg+PHRoPueOsOS7tyjljZYpPC90aD48dGg+5rWu55uI5LqPPC90aD48dGg+5Lmw5YWl5pe26Ze0PC90aD48dGg+5piO57uGPC90aD48L3RyPiR7cG9zUm93c308L3RhYmxlPmAgOiAnPGRpdiBjbGFzcz0iZW1wdHkiPuaaguaXoOaMgeS7kzwvZGl2Pid9CjxoMj7wn5S0IOe7k+eul+iusOW9lTwvaDI+CiR7c2V0dGxlZC5sZW5ndGggPyBgPHRhYmxlPjx0cj48dGg+5pe26Ze0PC90aD48dGg+5biC5Zy6PC90aD48dGg+5pa55ZCRPC90aD48dGg+57uT5p6cPC90aD48dGg+6IKh5pWwPC90aD48dGg+5pS25ZuePC90aD48dGg+55uI5LqPPC90aD48L3RyPiR7c2V0dGxlUm93c308L3RhYmxlPmAgOiAnPGRpdiBjbGFzcz0iZW1wdHkiPuaaguaXoOe7k+eulzwvZGl2Pid9CjxoMj7wn5OSIOaIkOS6pOiusOW9le+8iOi/kTYw77yJPC9oMj4KJHtsZWRnZXIudHJhZGVzLmxlbmd0aCA/IGA8dGFibGU+PHRyPjx0aD7ml7bpl7Q8L3RoPjx0aD5zbHVnPC90aD48dGg+5Yqo5L2cPC90aD48dGg+5pa55ZCRPC90aD48dGg+5Lu35qC8PC90aD48dGg+6IKh5pWwPC90aD48dGg+6YeR6aKdPC90aD48dGg+5Y6f5ZugPC90aD48L3RyPiR7dHJhZGVSb3dzfTwvdGFibGU+YCA6ICc8ZGl2IGNsYXNzPSJlbXB0eSI+5pqC5peg5oiQ5LqkPC9kaXY+J30KJHtsZWRnZXIuZXJyb3JzLmxlbmd0aCA/IGA8aDI+4pqg77iPIOmUmeivr++8iOi/kTEw77yJPC9oMj48dGFibGU+PHRyPjx0aD7ml7bpl7Q8L3RoPjx0aD7kvY3nva48L3RoPjx0aD7kv6Hmga88L3RoPjwvdHI+JHtlcnJSb3dzfTwvdGFibGU+YCA6ICcnfQo8c2NyaXB0Pgpkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZT0+ewogIGNvbnN0IGI9ZS50YXJnZXQuY2xvc2VzdCgnLmV4cCcpOyBpZighYikgcmV0dXJuOwogIGNvbnN0IGQ9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoYi5kYXRhc2V0LnQpOwogIGNvbnN0IG9wZW49ZC5zdHlsZS5kaXNwbGF5IT09J25vbmUnOwogIGQuc3R5bGUuZGlzcGxheT1vcGVuPydub25lJzondGFibGUtcm93JzsKICBiLnRleHRDb250ZW50PShvcGVuPyfilrggJzon4pa+ICcpK2IudGV4dENvbnRlbnQucmVwbGFjZSgvXlvilrjilr5dIC8sJycpOwp9KTsKPC9zY3JpcHQ+CjwvYm9keT48L2h0bWw+YDsKfQoKZnVuY3Rpb24gcm91bmQyKG4pIHsgcmV0dXJuIE1hdGgucm91bmQobiAqIDEwMCkgLyAxMDA7IH0KCmZ1bmN0aW9uIGxvYWRQcmljZXMoKSB7CiAgdHJ5IHsgcmV0dXJuIEpTT04ucGFyc2UoZnMucmVhZEZpbGVTeW5jKHJlcXVpcmUoJ3BhdGgnKS5qb2luKGNmZy5EQVRBX0RJUiwgJ3ByaWNlcy5qc29uJyksICd1dGY4JykpOyB9CiAgY2F0Y2ggeyByZXR1cm4ge307IH0KfQoKZnVuY3Rpb24gYnVpbGRSZXBvcnQoKSB7CiAgY29uc3QgbGVkZ2VyID0gbG9hZCgpOwogIGNvbnN0IGh0bWwgPSByZW5kZXJIdG1sKGxlZGdlciwgbG9hZFByaWNlcygpKTsKICBmcy53cml0ZUZpbGVTeW5jKGNmZy5SRVBPUlRfUEFUSCwgaHRtbCk7CiAgcmV0dXJuIGNmZy5SRVBPUlRfUEFUSDsKfQoKaWYgKHJlcXVpcmUubWFpbiA9PT0gbW9kdWxlKSB7CiAgY29uc29sZS5sb2coYnVpbGRSZXBvcnQoKSk7Cn0KCm1vZHVsZS5leHBvcnRzID0geyByZW5kZXJIdG1sLCBidWlsZFJlcG9ydCwgbG9hZFByaWNlcyB9Owo=
+// 静态 HTML 报告：市场名直链 Polymarket 官方盘口；判断/复核明细折进对应行点击展开
+const fs = require('fs');
+const cfg = require('./config');
+const { load } = require('./store');
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+const usd = n => (n >= 0 ? '+' : '') + '$' + Number(n).toFixed(2);
+const pct = n => (n >= 0 ? '+' : '') + (Number(n) * 100).toFixed(1) + '%';
+const tstr = iso => { const d = new Date(iso); return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`; };
+const pnlCls = n => n > 0 ? 'pos' : n < 0 ? 'neg' : '';
+
+function posUnreal(pos, prices) {
+  const q = prices[pos.slug];
+  if (!q) return null;
+  const sell = pos.side === 'up' ? q.upSell : q.downSell;
+  if (!Number.isFinite(sell)) return null;
+  const unreal = pos.shares * sell - pos.stake;
+  return { sell, unreal, unrealPct: unreal / pos.stake, t: q.t };
+}
+
+function renderHtml(ledger, prices, opts = {}) {
+  const live = opts.live ? ' <span class="tag">LIVE</span>' : '';
+  const updated = new Date().toLocaleString('zh-CN', { hour12: false });
+  const totalPnl = round2(ledger.wallet - cfg.BANKROLL_USD);
+  const settled = ledger.settlements;
+  const winN = settled.filter(s => s.win).length;
+
+  const posRows = ledger.positions.map((p, i) => {
+    const u = posUnreal(p, prices);
+    const judgs = ledger.judgments.filter(j => j.slug === p.slug);
+    const revs = ledger.exitReviews.filter(r => r.slug === p.slug);
+    const detailId = `pd${i}`;
+    return `<tr class="mainrow" data-detail="${detailId}">
+      <td><a href="${esc(p.eventUrl)}" target="_blank">${esc(p.coinName)} ${esc(p.windowLabel)}</a></td>
+      <td class="${p.side === 'up' ? 'pos' : 'neg'}">${p.side === 'up' ? 'Up' : 'Down'}</td>
+      <td>${p.buyPrice.toFixed(3)}</td><td>${p.shares.toFixed(1)}</td><td>$${p.stake.toFixed(2)}</td>
+      <td>${u ? u.sell.toFixed(3) : '—'}</td>
+      <td class="${u ? pnlCls(u.unreal) : ''}">${u ? usd(u.unreal) + ' (' + pct(u.unrealPct) + ')' : '—'}</td>
+      <td>${tstr(p.buyTime)}</td>
+      <td>${judgs.length + revs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}·复核${revs.length}</button>` : '—'}</td>
+    </tr>
+    <tr class="detail" id="${detailId}" style="display:none"><td colspan="9">
+      ${judgs.length ? `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th></tr>${judgs.slice().reverse().map(j =>
+        `<tr><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td></tr>`).join('')}</table>` : ''}
+      ${revs.length ? `<div class="dh">🛟 退出复核</div><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th></tr>${revs.slice().reverse().map(r =>
+        `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${r.sellPrice}</td><td class="${pnlCls(r.unreal)}">${usd(r.unreal)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td></tr>`).join('')}</table>` : ''}
+    </td></tr>`;
+  }).join('');
+
+  const tradeRows = ledger.trades.slice().reverse().slice(0, 60).map(t =>
+    `<tr><td>${tstr(t.time)}</td><td>${esc(t.slug || '')}</td>
+     <td class="${t.side === 'buy' ? 'pos' : t.side === 'sell' ? 'neg' : ''}">${t.side === 'buy' ? '买入' : t.side === 'sell' ? '卖出' : '结算'}</td>
+     <td>${t.outcome ? t.outcome.toUpperCase() : '—'}</td><td>${t.price}</td><td>${t.shares}</td>
+     <td>$${Number(t.stake).toFixed(2)}</td><td class="rs">${esc(t.reason || '')}</td></tr>`).join('');
+
+  const settleRows = settled.slice().reverse().slice(0, 40).map(s =>
+    `<tr><td>${tstr(s.time)}</td><td><a href="${esc(s.eventUrl)}" target="_blank">${esc(s.coin)} ${esc(s.windowLabel)}</a></td>
+     <td>${s.side.toUpperCase()}</td><td class="${s.win ? 'pos' : 'neg'}">${s.win ? '命中' : '归零'}</td>
+     <td>$${s.shares.toFixed(1)}股</td><td>$${(s.payout).toFixed(2)}</td>
+     <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td></tr>`).join('');
+
+  const errRows = ledger.errors.slice().reverse().slice(0, 10).map(e =>
+    `<tr><td>${tstr(e.time)}</td><td>${esc(e.where)}</td><td class="rs">${esc(e.message)}</td></tr>`).join('');
+
+  return `<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Polymarket Crypto 15m 模拟盘${live}</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0f1420;color:#e6e9f0;margin:0;padding:16px}
+h1{font-size:20px;margin:0 0 4px}.tag{background:#2f81f7;border-radius:4px;font-size:11px;padding:2px 6px;vertical-align:middle}
+.meta{color:#8b93a7;font-size:12px;margin-bottom:12px}
+.cards{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.card{background:#1a2233;border-radius:8px;padding:10px 14px;min-width:120px}
+.card .k{font-size:11px;color:#8b93a7}.card .v{font-size:20px;font-weight:700}
+.pos{color:#3fb950}.neg{color:#f85149}
+h2{font-size:15px;margin:18px 0 8px;color:#c9d1d9}
+table{width:100%;border-collapse:collapse;font-size:12px;background:#1a2233;border-radius:8px;overflow:hidden}
+th,td{padding:7px 8px;text-align:left;border-bottom:1px solid #2a3348}
+th{color:#8b93a7;font-weight:600;background:#161d2e}
+tr.mainrow{cursor:pointer}tr.mainrow:hover td{background:#222c44}
+a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d1d9;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:12px}
+.sub{margin:8px 0;background:#141b2c}.dh{font-size:12px;color:#8b93a7;margin:10px 0 4px}
+.rs{max-width:340px;word-break:break-word;color:#9aa4b8}
+.empty{color:#5c6579;padding:14px;font-size:12px}
+</style></head><body>
+<h1>🪙 Polymarket Crypto 15m 模拟盘${live}</h1>
+<div class="meta">更新：${updated} · BTC/ETH × 15m · 本金 $${cfg.BANKROLL_USD} · PAPER_MODE</div>
+<div class="cards">
+<div class="card"><div class="k">钱包</div><div class="v">$${ledger.wallet.toFixed(2)}</div></div>
+<div class="card"><div class="k">总盈亏</div><div class="v ${pnlCls(totalPnl)}">${usd(totalPnl)}</div></div>
+<div class="card"><div class="k">持仓</div><div class="v">${ledger.positions.length}</div></div>
+<div class="card"><div class="k">已结算</div><div class="v">${settled.length}（命中${winN}）</div></div>
+<div class="card"><div class="k">成交</div><div class="v">${ledger.trades.length}</div></div>
+</div>
+<h2>📦 持仓（点击行展开判断/复核明细）</h2>
+${ledger.positions.length ? `<table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>现价(卖)</th><th>浮盈亏</th><th>买入时间</th><th>明细</th></tr>${posRows}</table>` : '<div class="empty">暂无持仓</div>'}
+<h2>🔴 结算记录</h2>
+${settled.length ? `<table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>股数</th><th>收回</th><th>盈亏</th></tr>${settleRows}</table>` : '<div class="empty">暂无结算</div>'}
+<h2>📒 成交记录（近60）</h2>
+${ledger.trades.length ? `<table><tr><th>时间</th><th>slug</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table>` : '<div class="empty">暂无成交</div>'}
+${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table>` : ''}
+<script>
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.exp'); if(!b) return;
+  const d=document.getElementById(b.dataset.t);
+  const open=d.style.display!=='none';
+  d.style.display=open?'none':'table-row';
+  b.textContent=(open?'▸ ':'▾ ')+b.textContent.replace(/^[▸▾] /,'');
+});
+</script>
+</body></html>`;
+}
+
+function round2(n) { return Math.round(n * 100) / 100; }
+
+function loadPrices() {
+  try { return JSON.parse(fs.readFileSync(require('path').join(cfg.DATA_DIR, 'prices.json'), 'utf8')); }
+  catch { return {}; }
+}
+
+function buildReport() {
+  const ledger = load();
+  const html = renderHtml(ledger, loadPrices());
+  fs.writeFileSync(cfg.REPORT_PATH, html);
+  return cfg.REPORT_PATH;
+}
+
+if (require.main === module) {
+  console.log(buildReport());
+}
+
+module.exports = { renderHtml, buildReport, loadPrices };

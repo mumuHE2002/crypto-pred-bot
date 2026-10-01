@@ -48,7 +48,7 @@ module.exports = {
   DS_REVERSE_BLOCK_CONF: num('DS_REVERSE_BLOCK_CONF', 0.85), // DeepSeek 置信度≥此值时，不许反向买彩票
   EDGE_CONFIRM_HITS: num('EDGE_CONFIRM_HITS', 2), // edge 双重确认：同窗口同方向连续达标 N 次才开仓，过滤闪动报价的幻影 edge
   EVAL_COOLDOWN_MS: num('EVAL_COOLDOWN_MS', 30000), // 上次评估结束后等待 30s
-  MIN_SECONDS_LEFT: num('MIN_SECONDS_LEFT', 60), // 剩余不足 60s 不再开新仓
+  MIN_SECONDS_LEFT: num('MIN_SECONDS_LEFT', 180), // 剩余不足 3 分钟不再开新仓（2026-10-01 用户要求）
   MAX_BUY_PRICE: num('MAX_BUY_PRICE', 0.92), // 买入价高于此视为结果已定
   EXIT_UNREAL_PCT: num('EXIT_UNREAL_PCT', 0.15), // 浮盈亏 |≥15%| 才触发退出复核
   EXIT_HOLD_PROB: num('EXIT_HOLD_PROB', 0.45), // 持有更优概率 <45% 则卖出

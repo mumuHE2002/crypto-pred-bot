@@ -30,7 +30,8 @@ module.exports = {
   JEV_TIMEOUT_MS: 90000,
   DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash-fast',
   DEEPSEEK_MAX_TOKENS: Number(process.env.DEEPSEEK_MAX_TOKENS) || 8000,
-  DEEPSEEK_TIMEOUT_MS: 90000,
+  // Fast 是重推理模型，单次调用常超过 90s；给到 180s（.env 可调）
+  DEEPSEEK_TIMEOUT_MS: Number(process.env.DEEPSEEK_TIMEOUT_MS) || 180000,
 
   PORT: num('PORT', 3200),
   PAPER_MODE: process.env.PAPER_MODE !== 'false',
@@ -47,7 +48,6 @@ module.exports = {
   MAX_BUY_PRICE: num('MAX_BUY_PRICE', 0.92), // 买入价高于此视为结果已定
   EXIT_UNREAL_PCT: num('EXIT_UNREAL_PCT', 0.15), // 浮盈亏 |≥15%| 才触发退出复核
   EXIT_HOLD_PROB: num('EXIT_HOLD_PROB', 0.45), // 持有更优概率 <45% 则卖出
-  EXIT_COOLDOWN_MS: num('EXIT_COOLDOWN_MS', 180000), // 同一持仓 3 分钟冷静期
 
   DATA_DIR: require('path').join(__dirname, '..', 'data'),
   REPORT_PATH: '/home/hatch/workspace/your_files/crypto-polymarket-report.html',

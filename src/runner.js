@@ -6,6 +6,7 @@ const spot = require('./spot');
 const ds = require('./deepseek');
 const jev = require('./jev');
 const brain = require('./brain');
+const fillMod = require('./fill');
 const { buildReport } = require('./report');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -107,26 +108,60 @@ async function evaluateMarket(coin) {
           judgment.reason = `决策通过但未执行：${judgment.refetch.reason}`;
           console.log(`[${coin} ${label}] 重抓价后放弃：${judgment.refetch.reason}`);
         } else {
-          const buyPrice = d2.price; // 实际成交价（新鲜价）
+          // 深度撮合：按实际订单簿逐档吃 asks，能成交多少买多少；edge 按加权均价重算
+          const token = d2.side === 'up' ? mkt.upToken : mkt.downToken;
+          let fill = null;
+          try {
+            const book = await fillMod.getBook(token);
+            fill = fillMod.walkBuy(book.asks, d2.stake);
+          } catch (e) {
+            judgment.bet = false;
+            judgment.reason = `决策通过但未执行：拉取订单簿失败（${String(e.message || e).slice(0, 80)}），跳过`;
+            logError(ledger, `eval-${coin}-book`, e);
+            console.log(`[${coin} ${label}] 订单簿失败放弃`);
+            judgment.ms = Date.now() - t0;
+            pushCapped(ledger.judgments, judgment, 300);
+            persist();
+            try { buildReport(); } catch (e2) { console.error('[report]', e2.message); }
+            return;
+          }
           const decidePrice = d.price; // 决策时价（思考前）
-          const id = `${mkt.slug}-${d2.side}-${Date.now()}`;
-          ledger.wallet = round2(ledger.wallet - d2.stake);
-          ledger.positions.push({
-            id, coin, coinName, slug: mkt.slug, windowLabel: label, eventUrl: mkt.eventUrl,
-            side: d2.side, buyPrice: r4(buyPrice), decidePrice: r4(decidePrice),
-            shares: round2(d2.stake / buyPrice),
-            stake: d2.stake, buyTime: nowIso(), pUp: r4(j.pUp), lastExitReviewAt: 0,
-          });
-          ledger.trades.push({
-            time: nowIso(), slug: mkt.slug, side: 'buy', outcome: d2.side,
-            price: r4(buyPrice), decidePrice: r4(decidePrice), shares: round2(d2.stake / buyPrice), stake: d2.stake,
-            reason: `edge ${(d2.edge * 100).toFixed(1)}%（决策价${decidePrice.toFixed(3)}→成交${buyPrice.toFixed(3)}）`,
-          });
-          Object.assign(judgment, {
-            bet: true, side: d2.side, stake: d2.stake,
-            reason: `${d2.reason}（决策价${decidePrice.toFixed(3)}→成交${buyPrice.toFixed(3)}）`,
-          });
-          console.log(`[${coin} ${label}] 开仓 ${d2.side.toUpperCase()} $${d2.stake} @${buyPrice.toFixed(3)}（决策${decidePrice.toFixed(3)}→成交，edge ${(d2.edge * 100).toFixed(1)}%）`);
+          const probSide = d2.side === 'up' ? j.pUp : 1 - j.pUp;
+          const edgeAvg = probSide - fill.avgPrice; // 按实际加权成交价重算
+          judgment.fill = {
+            targetStake: d2.stake, filledCost: fill.filledCost, filledShares: fill.filledShares,
+            avgPrice: r4(fill.avgPrice), levelsUsed: fill.levelsUsed,
+            unfilledCost: fill.unfilledCost, edgeAvg: r4(edgeAvg),
+          };
+          const skipFill =
+            fill.filledCost < cfg.MIN_BET_USD ? `盘口深度不足，仅能成交 $${fill.filledCost.toFixed(2)}` :
+            edgeAvg < cfg.REQUIRED_EDGE ? `按加权成交价${fill.avgPrice.toFixed(3)}重算 edge ${(edgeAvg * 100).toFixed(1)}%<${cfg.REQUIRED_EDGE * 100}%` : null;
+          if (skipFill) {
+            judgment.bet = false;
+            judgment.reason = `决策通过但未执行：${skipFill}`;
+            console.log(`[${coin} ${label}] 深度撮合后放弃：${skipFill}`);
+          } else {
+            const buyPrice = fill.avgPrice; // 实际加权成交价
+            const id = `${mkt.slug}-${d2.side}-${Date.now()}`;
+            ledger.wallet = round2(ledger.wallet - fill.filledCost);
+            ledger.positions.push({
+              id, coin, coinName, slug: mkt.slug, windowLabel: label, eventUrl: mkt.eventUrl,
+              side: d2.side, buyPrice: r4(buyPrice), decidePrice: r4(decidePrice),
+              shares: fill.filledShares,
+              stake: fill.filledCost, buyTime: nowIso(), pUp: r4(j.pUp), lastExitReviewAt: 0,
+              fillLevels: fill.levelsUsed, unfilledCost: fill.unfilledCost,
+            });
+            ledger.trades.push({
+              time: nowIso(), slug: mkt.slug, side: 'buy', outcome: d2.side,
+              price: r4(buyPrice), decidePrice: r4(decidePrice), shares: fill.filledShares, stake: fill.filledCost,
+              reason: `edge ${(edgeAvg * 100).toFixed(1)}%（决策价${decidePrice.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
+            });
+            Object.assign(judgment, {
+              bet: true, side: d2.side, stake: fill.filledCost,
+              reason: `edge ${(edgeAvg * 100).toFixed(1)}%（决策价${decidePrice.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档）`,
+            });
+            console.log(`[${coin} ${label}] 开仓 ${d2.side.toUpperCase()} $${fill.filledCost} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，edge ${(edgeAvg * 100).toFixed(1)}%）`);
+          }
         }
       } else {
         console.log(`[${coin} ${label}] 跳过：${d.reason}`);
@@ -187,23 +222,41 @@ async function reviewExit(coin, mkt, pos, label) {
     pos.lastExitReviewAt = Date.now();
     const revIo = io ? { jev: io } : null;
     if (probHoldBetter < cfg.EXIT_HOLD_PROB) {
-      // 执行前重抓最新卖出价成交；失败则跳过本轮（保守）
-      let fillSell;
-      try { fillSell = await pm.clobPrice(token, 'sell'); }
-      catch (e) { logError(ledger, `exit-${coin}-refetch`, e); persist(); return; }
-      const fillUnreal = pos.shares * fillSell - pos.stake;
-      const proceeds = round2(pos.shares * fillSell);
+      // 深度撮合：按实际订单簿逐档吃 bids，能卖多少卖多少；深度不足时部分平仓，剩余继续持有
+      let fill;
+      try {
+        const book = await fillMod.getBook(token);
+        fill = fillMod.walkSell(book.bids, pos.shares);
+      } catch (e) { logError(ledger, `exit-${coin}-book`, e); persist(); return; }
+      if (fill.soldShares <= 0) {
+        console.log(`[${coin} ${label}] 卖盘无深度，跳过本轮卖出`);
+        persist();
+        return;
+      }
+      const proceeds = fill.proceeds;
+      const costBasisSold = round2(pos.stake * (fill.soldShares / pos.shares));
+      const fillUnreal = round2(proceeds - costBasisSold);
       ledger.wallet = round2(ledger.wallet + proceeds);
-      ledger.positions = ledger.positions.filter(p => p.id !== pos.id);
+      const remainShares = round2(pos.shares - fill.soldShares);
+      const closed = remainShares < 0.01 || fill.unfilledShares <= 0;
+      if (closed) {
+        ledger.positions = ledger.positions.filter(p => p.id !== pos.id);
+      } else {
+        pos.shares = remainShares;
+        pos.stake = round2(pos.stake - costBasisSold);
+      }
+      const depthNote = `逐档${fill.levelsUsed}档${fill.unfilledShares > 0 ? `，${fill.unfilledShares}股未成交继续持有` : ''}`;
       ledger.trades.push({
         time: nowIso(), slug: mkt.slug, side: 'sell', outcome: pos.side,
-        price: r4(fillSell), decidePrice: r4(sellPrice), shares: pos.shares, stake: proceeds,
-        reason: `持有更优 ${(probHoldBetter * 100).toFixed(0)}%<${cfg.EXIT_HOLD_PROB * 100}%（决策价${sellPrice.toFixed(3)}→成交${fillSell.toFixed(3)}），锁定 ${usd(fillUnreal)}`,
+        price: r4(fill.avgPrice), decidePrice: r4(sellPrice), shares: fill.soldShares, stake: proceeds,
+        reason: `持有更优 ${(probHoldBetter * 100).toFixed(0)}%<${cfg.EXIT_HOLD_PROB * 100}%（决策价${sellPrice.toFixed(3)}→加权成交${fill.avgPrice.toFixed(3)}，${depthNote}），锁定 ${usd(fillUnreal)}`,
       });
-      pushCapped(ledger.exitReviews, { ...base, io: revIo, decision: 'sell', probHoldBetter: r4(probHoldBetter),
-        fillPrice: r4(fillSell), fillUnreal: round2(fillUnreal),
-        reason: `卖出锁定 ${usd(fillUnreal)}（决策价${sellPrice.toFixed(3)}→成交${fillSell.toFixed(3)}）` }, 200);
-      console.log(`[${coin} ${label}] 止盈/止损卖出 ${pos.side.toUpperCase()}：${usd(fillUnreal)}（决策${sellPrice.toFixed(3)}→成交${fillSell.toFixed(3)}，持有更优 ${(probHoldBetter * 100).toFixed(0)}%）`);
+      pushCapped(ledger.exitReviews, { ...base, io: revIo, decision: closed ? 'sell' : 'sell-partial',
+        probHoldBetter: r4(probHoldBetter),
+        fillPrice: r4(fill.avgPrice), fillUnreal: round2(fillUnreal),
+        soldShares: fill.soldShares, remainShares: closed ? 0 : remainShares,
+        reason: `${closed ? '卖出' : '部分卖出'}锁定 ${usd(fillUnreal)}（决策价${sellPrice.toFixed(3)}→加权成交${fill.avgPrice.toFixed(3)}，${depthNote}）` }, 200);
+      console.log(`[${coin} ${label}] 止盈/止损${closed ? '卖出' : '部分卖出'} ${pos.side.toUpperCase()}：${usd(fillUnreal)}（加权${fill.avgPrice.toFixed(3)}，${depthNote}，持有更优 ${(probHoldBetter * 100).toFixed(0)}%）`);
     } else {
       pushCapped(ledger.exitReviews, { ...base, io: revIo, decision: 'hold', probHoldBetter: r4(probHoldBetter), reason: `持有更优 ${(probHoldBetter * 100).toFixed(0)}%≥${cfg.EXIT_HOLD_PROB * 100}%，继续持有` }, 200);
       console.log(`[${coin} ${label}] 复核：继续持有（持有更优 ${(probHoldBetter * 100).toFixed(0)}%，浮盈亏 ${usd(unreal)}）`);

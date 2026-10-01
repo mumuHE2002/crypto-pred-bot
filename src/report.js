@@ -10,6 +10,19 @@ const usd = n => (n >= 0 ? '+' : '') + '$' + Number(n).toFixed(2);
 const pct = n => (n >= 0 ? '+' : '') + (Number(n) * 100).toFixed(1) + '%';
 const tstr = iso => { const d = new Date(iso); return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`; };
 const pnlCls = n => n > 0 ? 'pos' : n < 0 ? 'neg' : '';
+const evUrl = slug => `https://polymarket.com/event/${esc(slug)}`;
+
+function judgmentSubTable(judgs) {
+  if (!judgs.length) return '';
+  return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th></tr>${judgs.slice().reverse().map(j =>
+    `<tr><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td></tr>`).join('')}</table>`;
+}
+
+function reviewSubTable(revs) {
+  if (!revs.length) return '';
+  return `<div class="dh">🛟 退出复核</div><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th></tr>${revs.slice().reverse().map(r =>
+    `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${r.sellPrice}</td><td class="${pnlCls(r.unreal)}">${usd(r.unreal)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td></tr>`).join('')}</table>`;
+}
 
 function posUnreal(pos, prices) {
   const q = prices[pos.slug];
@@ -42,10 +55,43 @@ function renderHtml(ledger, prices, opts = {}) {
       <td>${judgs.length + revs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}·复核${revs.length}</button>` : '—'}</td>
     </tr>
     <tr class="detail" id="${detailId}" style="display:none"><td colspan="9">
-      ${judgs.length ? `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th></tr>${judgs.slice().reverse().map(j =>
-        `<tr><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td></tr>`).join('')}</table>` : ''}
-      ${revs.length ? `<div class="dh">🛟 退出复核</div><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th></tr>${revs.slice().reverse().map(r =>
-        `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${r.sellPrice}</td><td class="${pnlCls(r.unreal)}">${usd(r.unreal)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td></tr>`).join('')}</table>` : ''}
+      ${judgmentSubTable(judgs)}
+      ${reviewSubTable(revs)}
+    </td></tr>`;
+  }).join('');
+
+  // 已卖出：每笔卖出配对最近一次同盘同向买入，算实现盈亏；可展开看判断/复核
+  const sells = ledger.trades.filter(t => t.side === 'sell');
+  const soldData = sells.slice().reverse().map(s => {
+    const buy = [...ledger.trades].reverse().find(t => t.side === 'buy' && t.slug === s.slug && t.outcome === s.outcome && t.time < s.time);
+    const invested = buy ? buy.stake : null;
+    const pnl = invested != null ? round2(s.stake - invested) : null;
+    const judgs = ledger.judgments.filter(j => j.slug === s.slug);
+    const revs = ledger.exitReviews.filter(r => r.slug === s.slug);
+    const holdM = /持有更优\s*(\d+)%/.exec(s.reason || '');
+    return { s, buy, invested, pnl, judgs, revs, holdBetter: holdM ? holdM[1] + '%' : '—' };
+  });
+  const soldTotal = round2(soldData.reduce((a, d) => a + (d.pnl || 0), 0));
+  const soldRows = soldData.map((d, i) => {
+    const { s, buy, invested, pnl, judgs, revs, holdBetter } = d;
+    const detailId = `sd${i}`;
+    const coinName = s.slug ? s.slug.split('-')[0].toUpperCase() : '';
+    const winLabel = s.slug ? s.slug.split('-updown-')[1] : '';
+    return `<tr class="mainrow" data-detail="${detailId}">
+      <td>${tstr(s.time)}</td>
+      <td><a href="${evUrl(s.slug)}" target="_blank">${coinName} ${esc(winLabel)}</a></td>
+      <td class="${s.outcome === 'up' ? 'pos' : 'neg'}">${(s.outcome || '').toUpperCase()}</td>
+      <td>${buy ? buy.price.toFixed(3) : '—'}→${Number(s.price).toFixed(3)}</td>
+      <td>${Number(s.shares).toFixed(2)}</td>
+      <td>$${invested != null ? invested.toFixed(2) : '—'}→$${Number(s.stake).toFixed(2)}</td>
+      <td class="${pnl != null ? pnlCls(pnl) : ''}">${pnl != null ? usd(pnl) + ' (' + pct(pnl / invested) + ')' : '—'}</td>
+      <td>${holdBetter}</td>
+      <td class="rs">${esc(s.reason || '')}</td>
+      <td>${judgs.length + revs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}·复核${revs.length}</button>` : '—'}</td>
+    </tr>
+    <tr class="detail" id="${detailId}" style="display:none"><td colspan="10">
+      ${judgmentSubTable(judgs)}
+      ${reviewSubTable(revs)}
     </td></tr>`;
   }).join('');
 
@@ -55,11 +101,21 @@ function renderHtml(ledger, prices, opts = {}) {
      <td>${t.outcome ? t.outcome.toUpperCase() : '—'}</td><td>${t.price}</td><td>${t.shares}</td>
      <td>$${Number(t.stake).toFixed(2)}</td><td class="rs">${esc(t.reason || '')}</td></tr>`).join('');
 
-  const settleRows = settled.slice().reverse().slice(0, 40).map(s =>
-    `<tr><td>${tstr(s.time)}</td><td><a href="${esc(s.eventUrl)}" target="_blank">${esc(s.coin)} ${esc(s.windowLabel)}</a></td>
+  const settleRows = settled.slice().reverse().map((s, i) => {
+    const judgs = ledger.judgments.filter(j => j.slug === s.slug);
+    const revs = ledger.exitReviews.filter(r => r.slug === s.slug);
+    const detailId = `st${i}`;
+    return `<tr class="mainrow" data-detail="${detailId}">
+     <td>${tstr(s.time)}</td><td><a href="${esc(s.eventUrl)}" target="_blank">${esc(s.coin)} ${esc(s.windowLabel)}</a></td>
      <td>${s.side.toUpperCase()}</td><td class="${s.win ? 'pos' : 'neg'}">${s.win ? '命中' : '归零'}</td>
      <td>$${s.shares.toFixed(1)}股</td><td>$${(s.payout).toFixed(2)}</td>
-     <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td></tr>`).join('');
+     <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td>
+     <td>${judgs.length + revs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}·复核${revs.length}</button>` : '—'}</td></tr>
+    <tr class="detail" id="${detailId}" style="display:none"><td colspan="8">
+      ${judgmentSubTable(judgs)}
+      ${reviewSubTable(revs)}
+    </td></tr>`;
+  }).join('');
 
   const errRows = ledger.errors.slice().reverse().slice(0, 10).map(e =>
     `<tr><td>${tstr(e.time)}</td><td>${esc(e.where)}</td><td class="rs">${esc(e.message)}</td></tr>`).join('');
@@ -95,8 +151,10 @@ a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d
 </div>
 <h2>📦 持仓（点击行展开判断/复核明细）</h2>
 ${ledger.positions.length ? `<table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>现价(卖)</th><th>浮盈亏</th><th>买入时间</th><th>明细</th></tr>${posRows}</table>` : '<div class="empty">暂无持仓</div>'}
-<h2>🔴 结算记录</h2>
-${settled.length ? `<table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>股数</th><th>收回</th><th>盈亏</th></tr>${settleRows}</table>` : '<div class="empty">暂无结算</div>'}
+<h2>🔴 已卖出（累计 <span class="${pnlCls(soldTotal)}">${usd(soldTotal)}</span>，点击行展开判断/复核明细）</h2>
+${soldData.length ? `<table><tr><th>卖出时间</th><th>市场</th><th>方向</th><th>买入→卖出</th><th>股数</th><th>投入→收回</th><th>实现盈亏</th><th>持有更优</th><th>原因</th><th>明细</th></tr>${soldRows}</table>` : '<div class="empty">暂无卖出</div>'}
+<h2>🏁 结算记录（点击行展开判断/复核明细）</h2>
+${settled.length ? `<table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>股数</th><th>收回</th><th>盈亏</th><th>明细</th></tr>${settleRows}</table>` : '<div class="empty">暂无结算</div>'}
 <h2>📒 成交记录（近60）</h2>
 ${ledger.trades.length ? `<table><tr><th>时间</th><th>slug</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table>` : '<div class="empty">暂无成交</div>'}
 ${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table>` : ''}

@@ -37,10 +37,10 @@ function judgmentSubTable(judgs) {
       mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
       blocks.push(mioBlock(mid, j.io));
     }
-    const mg = j.mgIdx != null ? `第${j.mgIdx + 1}档 $${j.mgStake}` : '—';
-    return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secToNextStart != null ? j.secToNextStart + 's' : '—'}</td><td>${j.upBuy != null ? j.upBuy : '—'}</td><td>${j.downBuy != null ? j.downBuy : '—'}</td><td class="${j.dsDirection === 'up' ? 'pos' : j.dsDirection === 'down' ? 'neg' : ''}">${dsName(j.dsDirection)}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.driftBps != null ? j.driftBps + 'bps·RSI' + j.rsi14 : '—'}</td><td>${mg}</td><td>${j.bet ? '买入' + (j.side === 'up' ? '涨' : '跌') + ' $' + Number(j.stake).toFixed(2) : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
+    const conf = j.confTier != null ? `$${j.confTier}（DS${j.dsConfidence != null ? (j.dsConfidence * 100).toFixed(0) + '%' : ''}）` : '—';
+    return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secToNextStart != null ? j.secToNextStart + 's' : '—'}</td><td>${j.upBuy != null ? j.upBuy : '—'}</td><td>${j.downBuy != null ? j.downBuy : '—'}</td><td class="${j.dsDirection === 'up' ? 'pos' : j.dsDirection === 'down' ? 'neg' : ''}">${dsName(j.dsDirection)}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.driftBps != null ? j.driftBps + 'bps·RSI' + j.rsi14 : '—'}</td><td>${conf}</td><td>${j.bet ? '买入' + (j.side === 'up' ? '涨' : '跌') + ' $' + Number(j.stake).toFixed(2) : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
   }).join('');
-  return `<div class="dh">📝 判断记录</div><div class="twrap"><table class="sub"><tr><th>预测窗口</th><th>判断时间</th><th>距开盘</th><th>Up买入</th><th>Down买入</th><th>DS方向</th><th>动量</th><th>马丁格</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
+  return `<div class="dh">📝 判断记录</div><div class="twrap"><table class="sub"><tr><th>预测窗口</th><th>判断时间</th><th>距开盘</th><th>Up买入</th><th>Down买入</th><th>DS方向</th><th>动量</th><th>置信度</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
 }
 
 // 模型 io 二级展开：发给模型的完整输入 + 原始输出，烘焙进 HTML
@@ -75,9 +75,6 @@ function renderHtml(ledger, prices, opts = {}) {
   const totalPnl = round2(ledger.wallet - cfg.BANKROLL_USD);
   const settled = ledger.settlements;
   const winN = settled.filter(s => s.win).length;
-  const mg = ledger.mg || { btc: 0, eth: 0 };
-  const stakes = cfg.MG_STAKES;
-  const mgLine = c => `第${(mg[c] || 0) + 1}档 $${stakes[mg[c] || 0]}`;
 
   const posRows = ledger.positions.map((p, i) => {
     const u = posUnreal(p, prices);
@@ -91,7 +88,7 @@ function renderHtml(ledger, prices, opts = {}) {
       <td class="${u ? pnlCls(u.unreal) : ''}">${u ? usd(u.unreal) : '—'}</td>
       <td>${tstr(p.buyTime)}</td>
       <td>${p.dsDirection ? dsName(p.dsDirection) + (p.dsConfidence != null ? ' ' + (p.dsConfidence * 100).toFixed(0) + '%' : '') : '—'}</td>
-      <td>第${(p.mgIdx || 0) + 1}档 $${p.mgStake}</td>
+      <td>${p.confTier != null ? `$${p.confTier}（DS${p.dsConfidence != null ? (p.dsConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
       <td>${judgs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}</button>` : '—'}</td>
     </tr>
     <tr class="detail" id="${detailId}" style="display:none"><td colspan="11">
@@ -115,7 +112,7 @@ function renderHtml(ledger, prices, opts = {}) {
      <td>$${(s.stake).toFixed(2)}</td><td>$${(s.payout).toFixed(2)}</td>
      <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td>
      <td>${s.dsDirection ? dsName(s.dsDirection) + (s.dsConfidence != null ? ' ' + (s.dsConfidence * 100).toFixed(0) + '%' : '') : '—'}</td>
-     <td>第${(s.mgBefore || 0) + 1}档→第${(s.mgAfter || 0) + 1}档</td>
+     <td>${s.confTier != null ? `$${s.confTier}（DS${s.dsConfidence != null ? (s.dsConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
      <td>${judgs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}</button>` : '—'}</td></tr>
     <tr class="detail" id="${detailId}" style="display:none"><td colspan="11">
       ${judgmentSubTable(judgs)}
@@ -167,18 +164,17 @@ td.rs{white-space:normal;min-width:120px}
 .dim{font-size:10px;color:#5c6579}
 </style></head><body>
 <h1>⚡ Polymarket Crypto 5m 模拟盘${live}</h1>
-<div class="meta">更新：${updated} · BTC/ETH × 5m · 本金 $${cfg.BANKROLL_USD} · DeepSeek 单模型 · 只买 0.48–0.52 · 持有到期 · PAPER_MODE</div>
+<div class="meta">更新：${updated} · BTC/ETH × 5m · 本金 $${cfg.BANKROLL_USD} · DeepSeek 单模型 · DS≥57%才下（57–60% $1 / 61–70% $2 / ≥71% $3）· 只买 0.48–0.52 · 持有到期 · PAPER_MODE</div>
 <div class="cards">
 <div class="card"><div class="k">钱包</div><div class="v">$${ledger.wallet.toFixed(2)}</div></div><div class="card"><div class="k">总盈亏</div><div class="v ${pnlCls(totalPnl)}">${usd(totalPnl)}</div></div>
 <div class="card"><div class="k">持仓</div><div class="v">${ledger.positions.length}</div></div>
 <div class="card"><div class="k">已结算</div><div class="v">${settled.length}（命中${winN}）</div></div>
-<div class="card"><div class="k">BTC 马丁格</div><div class="v">${mgLine('btc')}</div></div>
-<div class="card"><div class="k">ETH 马丁格</div><div class="v">${mgLine('eth')}</div></div>
+<div class="card"><div class="k">下单规则</div><div class="v" style="font-size:12px;font-weight:400">DS≥57%：57–60% $1 / 61–70% $2 / ≥71% $3</div></div>
 </div>
 <h2>📦 持仓（持有到期，点击行展开判断明细）</h2>
-${ledger.positions.length ? `<div class="twrap"><table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>参考现价</th><th>参考浮盈亏</th><th>买入时间</th><th>DS</th><th>马丁格</th><th>明细</th></tr>${posRows}</table></div>` : '<div class="empty">暂无持仓</div>'}
+${ledger.positions.length ? `<div class="twrap"><table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>参考现价</th><th>参考浮盈亏</th><th>买入时间</th><th>DS</th><th>置信度</th><th>明细</th></tr>${posRows}</table></div>` : '<div class="empty">暂无持仓</div>'}
 <h2>🏁 结算记录（点击行展开判断明细）</h2>
-${settled.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>买入价</th><th>投入</th><th>收回</th><th>盈亏</th><th>DS</th><th>马丁格</th><th>明细</th></tr>${settleRows}</table></div>` : '<div class="empty">暂无结算</div>'}
+${settled.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>买入价</th><th>投入</th><th>收回</th><th>盈亏</th><th>DS</th><th>置信度</th><th>明细</th></tr>${settleRows}</table></div>` : '<div class="empty">暂无结算</div>'}
 <h2>📒 成交记录（近80）</h2>
 ${ledger.trades.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table></div>` : '<div class="empty">暂无成交</div>'}
 ${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><div class="twrap"><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table></div>` : ''}

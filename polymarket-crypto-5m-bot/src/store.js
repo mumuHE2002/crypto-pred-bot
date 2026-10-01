@@ -16,7 +16,6 @@ function blank() {
     settlements: [],    // {time, slug, side, win, shares, payout, pnl}
     equityCurve: [],    // {t, equity}
     errors: [],         // {time, where, message} 保留100
-    mg: { btc: 0, eth: 0 }, // 马丁格档位（MG_STAKES 下标），BTC/ETH 各自独立
   };
 }
 

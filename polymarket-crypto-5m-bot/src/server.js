@@ -22,13 +22,11 @@ const server = http.createServer((req, res) => {
       wallet: ledger.wallet, positions: ledger.positions.length,
       trades: ledger.trades.length, settlements: ledger.settlements.length,
       judgments: ledger.judgments.length, errors: ledger.errors.slice(-5),
-      mg: ledger.mg || { btc: 0, eth: 0 },
       time: new Date().toISOString(),
     });
     if (url.pathname === '/api/positions') return json(res, ledger.positions);
     if (url.pathname === '/api/trades') return json(res, ledger.trades.slice(-100));
     if (url.pathname === '/api/judgments') return json(res, ledger.judgments.slice(-100));
-    if (url.pathname === '/api/martingale') return json(res, ledger.mg || { btc: 0, eth: 0 });
     if (url.pathname === '/api/settlements') return json(res, ledger.settlements.slice(-100));
     if (url.pathname === '/api/equity') return json(res, ledger.equityCurve);
     if (url.pathname === '/api/prices') return json(res, loadPrices());

@@ -2,7 +2,7 @@
 // 规则（2026-10-01 用户拍板）：
 // - 当前盘剩余 ≤120s 时，预测「下一个」5m 窗口；只用 DeepSeek 给方向
 // - 只买 0.48–0.52 价格的，价格不合适不买；中途不卖出，持有到期
-// - 马丁格注额：$1 → 输 $3 → 输 $9 → 输回 $1；BTC/ETH 各自独立
+// - 注额按 DeepSeek 置信度分档：0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3；<0.57 不下单
 const cfg = require('./config');
 const { load, save, pushCapped, recordEquity } = require('./store');
 const pm = require('./polymarket');
@@ -31,7 +31,6 @@ function logError(ledger, where, e) {
 }
 
 let ledger = load();
-if (!ledger.mg) ledger.mg = { btc: 0, eth: 0 };
 function persist() { recordEquity(ledger); save(ledger); }
 
 /** 单币种一次评估：只在「当前盘剩余≤120s」时预测下一个窗口 */
@@ -147,6 +146,15 @@ async function evaluateMarket(coin) {
   const price = side === 'up' ? upBuy : downBuy;
   judgment.side = side;
 
+  // 置信度门槛：DeepSeek 置信度 < 57% 不下单（用户拍板 2026-10-02）
+  const confR = r4(dsr.confidence);
+  if (!(confR >= cfg.DS_MIN_CONF)) {
+    judgment.bet = false;
+    judgment.reason = `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(confR * 100).toFixed(1)}%)，置信度 < 57%，不下注`;
+    console.log(`[${coin} ${nextLabel}] DS 置信度 ${(confR * 100).toFixed(1)}% < 57%，跳过`);
+    return finish();
+  }
+
   // 价格过滤：只买 0.48–0.52
   if (!(price >= cfg.PRICE_MIN && price <= cfg.PRICE_MAX)) {
     judgment.bet = false;
@@ -155,18 +163,15 @@ async function evaluateMarket(coin) {
     return finish();
   }
 
-  // 马丁格注额（本币种独立）。档位只在官方结算时推进：若本币种有未结算持仓，
-  // 下一笔沿用上一次已结算结果定下的档位（用户拍板规则）。
-  const stakes = cfg.MG_STAKES;
-  const mgIdx = Math.min(Math.max(ledger.mg[coin] || 0, 0), stakes.length - 1);
-  const mgStake = stakes[mgIdx];
-  const pendingN = ledger.positions.filter(p => p.coin === coin).length;
+  // 置信度分档注额（用户拍板 2026-10-02）：0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3
+  const confTier = confR <= 0.60 ? 1 : confR <= 0.70 ? 2 : 3;
+  const targetStake = confTier;
   if (ledger.wallet < cfg.MIN_BET_USD) {
     judgment.bet = false; judgment.reason = `钱包 $${ledger.wallet.toFixed(2)} 不足 $1，停止下注`;
     logError(ledger, `eval-${coin}`, new Error('钱包不足 $1'));
     return finish();
   }
-  const stake = Math.min(mgStake, ledger.wallet);
+  const stake = Math.min(targetStake, ledger.wallet);
 
   // 真实撮合：按 asks 逐档吃
   let fill;
@@ -200,24 +205,24 @@ async function evaluateMarket(coin) {
     id, coin, coinName, slug: nextSlug, windowLabel: nextLabel, eventUrl: nmkt.eventUrl,
     side, buyPrice: r4(buyPrice), decidePrice: r4(price),
     shares: fill.filledShares, stake: fill.filledCost,
-    buyTime: nowIso(), mgIdx, mgStake,
+    buyTime: nowIso(), confTier, dsConf: confR,
     fillLevels: fill.levelsUsed, unfilledCost: fill.unfilledCost,
     dsDirection: dsr.direction, dsConfidence: r4(dsr.confidence), dsReason: dsr.reason,
   });
   ledger.trades.push({
     time: nowIso(), slug: nextSlug, side: 'buy', outcome: side,
     price: r4(buyPrice), decidePrice: r4(price), shares: fill.filledShares, stake: fill.filledCost,
-    reason: `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(dsr.confidence * 100).toFixed(0)}%)，马丁格第${mgIdx + 1}档 $${mgStake}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
+    reason: `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(confR * 100).toFixed(1)}%)，置信度分档 $${confTier}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
   });
   Object.assign(judgment, {
-    bet: true, stake: fill.filledCost, mgIdx, mgStake, pendingN,
-    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(dsr.confidence * 100).toFixed(0)}%，马丁格第${mgIdx + 1}档${pendingN > 0 ? '，上一笔未结算、沿用上次结算结果定档' : ''}）`,
+    bet: true, stake: fill.filledCost, confTier,
+    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(confR * 100).toFixed(1)}%，置信度分档 $${confTier}）`,
   });
-  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(dsr.confidence * 100).toFixed(0)}%，马丁格第${mgIdx + 1}档 $${mgStake}${pendingN > 0 ? '，上一笔未结算' : ''}）`);
+  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(confR * 100).toFixed(1)}%，分档 $${confTier}）`);
   return finish();
 }
 
-/** 结算轮询：closed 的盘按 1/0 结算，持有到期（中途不卖）；结算后推进马丁格 */
+/** 结算轮询：closed 的盘按 1/0 结算，持有到期（中途不卖）；注额已改为置信度分档（无马丁格） */
 async function settleOnce() {
   if (ledger.positions.length === 0) return;
   for (const pos of [...ledger.positions]) {
@@ -230,26 +235,19 @@ async function settleOnce() {
     const pnl = round2(payout - pos.stake);
     ledger.wallet = round2(ledger.wallet + payout);
     ledger.positions = ledger.positions.filter(p => p.id !== pos.id);
-    // 马丁格：赢回第1档；输进下一档（$9 再输回到 $1）
-    const stakes = cfg.MG_STAKES;
-    const before = Math.min(Math.max(ledger.mg[pos.coin] || 0, 0), stakes.length - 1);
-    const after = win ? 0 : (before + 1) % stakes.length;
-    ledger.mg[pos.coin] = after;
     ledger.trades.push({
       time: nowIso(), slug: pos.slug, side: 'settle', outcome: pos.side,
       price: win ? 1 : 0, shares: pos.shares, stake: payout,
-      reason: win
-        ? `结算命中 ${usd(pnl)}，马丁格回到第1档 $1`
-        : `结算归零 ${usd(pnl)}，马丁格进第${after + 1}档 $${stakes[after]}`,
+      reason: win ? `结算命中 ${usd(pnl)}` : `结算归零 ${usd(pnl)}`,
     });
     ledger.settlements.push({
       time: nowIso(), slug: pos.slug, windowLabel: pos.windowLabel, eventUrl: pos.eventUrl,
       coin: pos.coin, side: pos.side, win, shares: pos.shares, payout, pnl,
       buyPrice: pos.buyPrice, stake: pos.stake,
       dsDirection: pos.dsDirection, dsConfidence: pos.dsConfidence, dsReason: pos.dsReason,
-      mgBefore: before, mgAfter: after, mgStakeNext: stakes[after],
+      confTier: pos.confTier,
     });
-    console.log(`[settle ${pos.coin} ${pos.windowLabel}] ${pos.side.toUpperCase()} ${win ? '命中' : '归零'} ${usd(pnl)}（马丁格 ${before + 1}→${after + 1} 档）`);
+    console.log(`[settle ${pos.coin} ${pos.windowLabel}] ${pos.side.toUpperCase()} ${win ? '命中' : '归零'} ${usd(pnl)}`);
   }
   persist();
   try { buildReport(); } catch (e) { console.error('[report]', e.message); }
@@ -294,7 +292,7 @@ function loadPrices() {
 async function once(coin) {
   await evaluateMarket(coin);
   await settleOnce();
-  console.log('done. wallet:', ledger.wallet, 'positions:', ledger.positions.length, 'mg:', JSON.stringify(ledger.mg));
+  console.log('done. wallet:', ledger.wallet, 'positions:', ledger.positions.length);
 }
 
 if (require.main === module) {
@@ -302,7 +300,7 @@ if (require.main === module) {
   if (arg === 'once') {
     once(process.argv[3] || 'btc').then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); });
   } else {
-    console.log(`polymarket-crypto-5m-bot 启动（PAPER_MODE=${cfg.PAPER_MODE}，本金 $${cfg.BANKROLL_USD}，5m/DeepSeek/马丁格）`);
+    console.log(`polymarket-crypto-5m-bot 启动（PAPER_MODE=${cfg.PAPER_MODE}，本金 $${cfg.BANKROLL_USD}，5m/DeepSeek/置信度分档）`);
     cfg.COINS.forEach(marketLoop);
     settleLoop();
   }

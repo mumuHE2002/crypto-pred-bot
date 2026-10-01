@@ -41,7 +41,9 @@ module.exports = {
   PREDICT_AHEAD_SEC: num('PREDICT_AHEAD_SEC', 120), // 当前盘剩余≤120s 时预测下一个盘
   PRICE_MIN: num('PRICE_MIN', 0.48), // 只买 0.48–0.52 的价格
   PRICE_MAX: num('PRICE_MAX', 0.52),
-  MG_STAKES: [1, 3, 9], // 马丁格：默认$1，输→$3，输→$9，再输回$1；BTC/ETH 各自独立
+  DS_MIN_CONF: num('DS_MIN_CONF', 0.57), // DeepSeek 置信度低于此不下单
+  // 置信度分档注额（用户拍板 2026-10-02，马丁格已移除）：
+  // 0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3
   EVAL_COOLDOWN_MS: num('EVAL_COOLDOWN_MS', 30000), // 上次评估结束后等待 30s
 
   DATA_DIR: require('path').join(__dirname, '..', 'data'),

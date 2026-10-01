@@ -1,0 +1,311 @@
+// 5m 盘主循环：每币种独立评估循环（上次结束后 30s 再评估）+ 结算轮询（60s）
+// 规则（2026-10-01 用户拍板）：
+// - 当前盘剩余 ≤120s 时，预测「下一个」5m 窗口；只用 DeepSeek 给方向
+// - 只买 0.48–0.52 价格的，价格不合适不买；中途不卖出，持有到期
+// - 马丁格注额：$1 → 输 $3 → 输 $9 → 输回 $1；BTC/ETH 各自独立
+const cfg = require('./config');
+const { load, save, pushCapped, recordEquity } = require('./store');
+const pm = require('./polymarket');
+const spot = require('./spot');
+const ds = require('./deepseek');
+const fillMod = require('./fill');
+const { buildReport } = require('./report');
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const nowIso = () => new Date().toISOString();
+const usd = n => (n >= 0 ? '+' : '') + '$' + n.toFixed(2);
+
+function windowLabel(startSec, endSec) {
+  // 固定东八区，不依赖进程 TZ（历史曾混入 UTC 标签）
+  const f = s => {
+    const d = new Date((s + 8 * 3600) * 1000);
+    return String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0');
+  };
+  return `${f(startSec)}–${f(endSec)}`;
+}
+
+function logError(ledger, where, e) {
+  const msg = String((e && e.message) || e);
+  console.error(`[${where}] ${msg}`);
+  pushCapped(ledger.errors, { time: nowIso(), where, message: msg.slice(0, 300) }, 100);
+}
+
+let ledger = load();
+if (!ledger.mg) ledger.mg = { btc: 0, eth: 0 };
+function persist() { recordEquity(ledger); save(ledger); }
+
+/** 单币种一次评估：只在「当前盘剩余≤120s」时预测下一个窗口 */
+async function evaluateMarket(coin) {
+  const coinName = pm.COIN_NAME[coin];
+  const nowSec = Math.floor(Date.now() / 1000);
+  const curStart = pm.bucketStart(nowSec, cfg.WINDOW_SEC);
+  const curEnd = curStart + cfg.WINDOW_SEC;
+  const secLeftCur = curEnd - nowSec;
+  const curLabel = windowLabel(curStart, curEnd);
+  const t0 = Date.now();
+
+  const nextStart = curStart + cfg.WINDOW_SEC;
+  const nextSlug = pm.slugFor(coin, nextStart, cfg.WINDOW_SEC);
+  const nextLabel = windowLabel(nextStart, nextStart + cfg.WINDOW_SEC);
+
+  // 只记录预测区的判断；未到时间不记，免刷屏
+  const inZone = secLeftCur <= cfg.PREDICT_AHEAD_SEC && nextStart > nowSec;
+
+  const judgment = {
+    id: `${nextSlug}-${Date.now()}`, time: nowIso(), coin, coinName,
+    curWindowLabel: curLabel, secLeftCur,
+    slug: nextSlug, windowLabel: nextLabel,
+    eventUrl: pm.eventUrl(nextSlug),
+    secToNextStart: nextStart - nowSec,
+  };
+
+  const finish = (skip) => {
+    if (skip) return;
+    judgment.ms = Date.now() - t0;
+    pushCapped(ledger.judgments, judgment, 300);
+    // 模型 io 只保留最近 100 条，免账本膨胀
+    const jWithIo = ledger.judgments.filter(x => x.io);
+    for (let k = 0; k < jWithIo.length - 100; k++) delete jWithIo[k].io;
+    persist();
+    try { buildReport(); } catch (e) { console.error('[report]', e.message); }
+  };
+
+  if (!inZone) return; // 未到预测窗口：不记录
+
+  // 同一窗口只买一次
+  const already = ledger.positions.some(p => p.slug === nextSlug)
+    || ledger.trades.some(t => t.side === 'buy' && t.slug === nextSlug);
+  if (already) {
+    judgment.bet = false; judgment.reason = '本窗口已下注，跳过';
+    console.log(`[${coin} ${nextLabel}] 已下注，跳过`);
+    return finish();
+  }
+
+  // 取下个窗口盘口
+  let nmkt;
+  try { nmkt = await pm.fetchMarketAt(coin, nextStart, cfg.WINDOW_SEC); }
+  catch (e) { nmkt = { error: String(e.message || e) }; }
+  if (!nmkt) {
+    judgment.bet = false; judgment.reason = '下个窗口盘口尚未创建，稍后重试';
+    console.log(`[${coin} ${nextLabel}] 盘口未创建，稍后重试`);
+    return finish();
+  }
+  if (nmkt.error) {
+    judgment.bet = false; judgment.reason = '取盘口失败：' + String(nmkt.error).slice(0, 120);
+    logError(ledger, `eval-${coin}-mkt`, nmkt.error);
+    return finish();
+  }
+  judgment.eventUrl = nmkt.eventUrl;
+
+  // 可成交价
+  let upBuy, downBuy, upMid, downMid;
+  try {
+    [upBuy, downBuy] = await Promise.all([pm.clobPrice(nmkt.upToken, 'buy'), pm.clobPrice(nmkt.downToken, 'buy')]);
+    [upMid, downMid] = await Promise.all([pm.clobMid(nmkt.upToken), pm.clobMid(nmkt.downToken)]);
+    if (!Number.isFinite(upMid)) upMid = nmkt.upLast;
+    if (!Number.isFinite(downMid)) downMid = nmkt.downLast;
+    savePriceSnap(nextSlug, { upBuy, downBuy, upMid, downMid });
+  } catch (e) {
+    judgment.bet = false; judgment.reason = '取 CLOB 价格失败：' + String(e.message || e).slice(0, 120);
+    logError(ledger, `eval-${coin}-price`, e);
+    return finish();
+  }
+  Object.assign(judgment, {
+    upBuy: r4(upBuy), downBuy: r4(downBuy), upMid: r4(upMid), downMid: r4(downMid),
+  });
+
+  // DeepSeek 给方向（唯一决策依据）
+  let dsr;
+  try {
+    const candles = await spot.fetchCandles(coin, 30);
+    const feat = spot.features(candles);
+    const candleText = spot.candlesText(candles, 15);
+    dsr = await ds.analyze({
+      coin, coinName, windowLabel: nextLabel, secondsLeft: nextStart - nowSec,
+      feat, candleText, upBuy, downBuy, upMid, downMid,
+    });
+    judgment.io = { ds: dsr.io };
+    Object.assign(judgment, {
+      dsDirection: dsr.direction, dsConfidence: r4(dsr.confidence), dsReason: dsr.reason,
+      driftBps: feat.driftBps, volBps: feat.volBps, rangeBps: feat.rangeBps, rsi14: feat.rsi14,
+    });
+  } catch (e) {
+    if (e._io && !judgment.io) judgment.io = { failed: e._io };
+    judgment.bet = false;
+    judgment.reason = 'DeepSeek 失败，不下单：' + String(e.message || e).slice(0, 150);
+    logError(ledger, `eval-${coin}-ds`, e);
+    return finish();
+  }
+
+  if (dsr.direction === 'neutral') {
+    judgment.bet = false; judgment.reason = 'DeepSeek 中性，无明确方向，不下注';
+    console.log(`[${coin} ${nextLabel}] DS 中性，跳过`);
+    return finish();
+  }
+
+  const side = dsr.direction;
+  const price = side === 'up' ? upBuy : downBuy;
+  judgment.side = side;
+
+  // 价格过滤：只买 0.48–0.52
+  if (!(price >= cfg.PRICE_MIN && price <= cfg.PRICE_MAX)) {
+    judgment.bet = false;
+    judgment.reason = `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(dsr.confidence * 100).toFixed(0)}%)，但${side.toUpperCase()}买入价 ${price.toFixed(3)} 不在 0.48–0.52，不买`;
+    console.log(`[${coin} ${nextLabel}] 价格 ${price.toFixed(3)} 不在区间，跳过`);
+    return finish();
+  }
+
+  // 马丁格注额（本币种独立）。档位只在官方结算时推进：若本币种有未结算持仓，
+  // 下一笔沿用上一次已结算结果定下的档位（用户拍板规则）。
+  const stakes = cfg.MG_STAKES;
+  const mgIdx = Math.min(Math.max(ledger.mg[coin] || 0, 0), stakes.length - 1);
+  const mgStake = stakes[mgIdx];
+  const pendingN = ledger.positions.filter(p => p.coin === coin).length;
+  if (ledger.wallet < cfg.MIN_BET_USD) {
+    judgment.bet = false; judgment.reason = `钱包 $${ledger.wallet.toFixed(2)} 不足 $1，停止下注`;
+    logError(ledger, `eval-${coin}`, new Error('钱包不足 $1'));
+    return finish();
+  }
+  const stake = Math.min(mgStake, ledger.wallet);
+
+  // 真实撮合：按 asks 逐档吃
+  let fill;
+  try {
+    const book = await fillMod.getBook(side === 'up' ? nmkt.upToken : nmkt.downToken);
+    fill = fillMod.walkBuy(book.asks, stake);
+  } catch (e) {
+    judgment.bet = false; judgment.reason = '拉取订单簿失败：' + String(e.message || e).slice(0, 120);
+    logError(ledger, `eval-${coin}-book`, e);
+    return finish();
+  }
+  const avgPrice = fill.avgPrice;
+  judgment.fill = {
+    targetStake: stake, filledCost: fill.filledCost, filledShares: fill.filledShares,
+    avgPrice: r4(avgPrice), levelsUsed: fill.levelsUsed, unfilledCost: fill.unfilledCost,
+  };
+  const skipFill =
+    fill.filledCost < cfg.MIN_BET_USD ? `盘口深度不足，仅能成交 $${fill.filledCost.toFixed(2)}` :
+    (avgPrice < cfg.PRICE_MIN || avgPrice > cfg.PRICE_MAX) ? `加权成交价 ${avgPrice.toFixed(3)} 超出 0.48–0.52` : null;
+  if (skipFill) {
+    judgment.bet = false; judgment.reason = `决策通过但未执行：${skipFill}`;
+    console.log(`[${coin} ${nextLabel}] 撮合后放弃：${skipFill}`);
+    return finish();
+  }
+
+  // 买入（持有到期，中途不卖）
+  const buyPrice = avgPrice;
+  const id = `${nextSlug}-${side}-${Date.now()}`;
+  ledger.wallet = round2(ledger.wallet - fill.filledCost);
+  ledger.positions.push({
+    id, coin, coinName, slug: nextSlug, windowLabel: nextLabel, eventUrl: nmkt.eventUrl,
+    side, buyPrice: r4(buyPrice), decidePrice: r4(price),
+    shares: fill.filledShares, stake: fill.filledCost,
+    buyTime: nowIso(), mgIdx, mgStake,
+    fillLevels: fill.levelsUsed, unfilledCost: fill.unfilledCost,
+    dsDirection: dsr.direction, dsConfidence: r4(dsr.confidence), dsReason: dsr.reason,
+  });
+  ledger.trades.push({
+    time: nowIso(), slug: nextSlug, side: 'buy', outcome: side,
+    price: r4(buyPrice), decidePrice: r4(price), shares: fill.filledShares, stake: fill.filledCost,
+    reason: `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(dsr.confidence * 100).toFixed(0)}%)，马丁格第${mgIdx + 1}档 $${mgStake}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
+  });
+  Object.assign(judgment, {
+    bet: true, stake: fill.filledCost, mgIdx, mgStake, pendingN,
+    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(dsr.confidence * 100).toFixed(0)}%，马丁格第${mgIdx + 1}档${pendingN > 0 ? '，上一笔未结算、沿用上次结算结果定档' : ''}）`,
+  });
+  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(dsr.confidence * 100).toFixed(0)}%，马丁格第${mgIdx + 1}档 $${mgStake}${pendingN > 0 ? '，上一笔未结算' : ''}）`);
+  return finish();
+}
+
+/** 结算轮询：closed 的盘按 1/0 结算，持有到期（中途不卖）；结算后推进马丁格 */
+async function settleOnce() {
+  if (ledger.positions.length === 0) return;
+  for (const pos of [...ledger.positions]) {
+    let s;
+    try { s = await pm.fetchSettlement(pos.slug); }
+    catch (e) { logError(ledger, 'settle-fetch', e); continue; }
+    if (!s.found || !s.closed) continue;
+    const win = (pos.side === 'up' && s.upWon) || (pos.side === 'down' && s.downWon);
+    const payout = win ? round2(pos.shares * 1) : 0;
+    const pnl = round2(payout - pos.stake);
+    ledger.wallet = round2(ledger.wallet + payout);
+    ledger.positions = ledger.positions.filter(p => p.id !== pos.id);
+    // 马丁格：赢回第1档；输进下一档（$9 再输回到 $1）
+    const stakes = cfg.MG_STAKES;
+    const before = Math.min(Math.max(ledger.mg[pos.coin] || 0, 0), stakes.length - 1);
+    const after = win ? 0 : (before + 1) % stakes.length;
+    ledger.mg[pos.coin] = after;
+    ledger.trades.push({
+      time: nowIso(), slug: pos.slug, side: 'settle', outcome: pos.side,
+      price: win ? 1 : 0, shares: pos.shares, stake: payout,
+      reason: win
+        ? `结算命中 ${usd(pnl)}，马丁格回到第1档 $1`
+        : `结算归零 ${usd(pnl)}，马丁格进第${after + 1}档 $${stakes[after]}`,
+    });
+    ledger.settlements.push({
+      time: nowIso(), slug: pos.slug, windowLabel: pos.windowLabel, eventUrl: pos.eventUrl,
+      coin: pos.coin, side: pos.side, win, shares: pos.shares, payout, pnl,
+      buyPrice: pos.buyPrice, stake: pos.stake,
+      dsDirection: pos.dsDirection, dsConfidence: pos.dsConfidence, dsReason: pos.dsReason,
+      mgBefore: before, mgAfter: after, mgStakeNext: stakes[after],
+    });
+    console.log(`[settle ${pos.coin} ${pos.windowLabel}] ${pos.side.toUpperCase()} ${win ? '命中' : '归零'} ${usd(pnl)}（马丁格 ${before + 1}→${after + 1} 档）`);
+  }
+  persist();
+  try { buildReport(); } catch (e) { console.error('[report]', e.message); }
+}
+
+async function marketLoop(coin) {
+  console.log(`[${coin}] 评估循环启动：上次结束后 ${cfg.EVAL_COOLDOWN_MS / 1000}s 再评估`);
+  while (true) {
+    try { await evaluateMarket(coin); }
+    catch (e) { logError(ledger, `loop-${coin}`, e); persist(); }
+    await sleep(cfg.EVAL_COOLDOWN_MS); // 上一次评估结束后计时
+  }
+}
+
+async function settleLoop() {
+  while (true) {
+    try { await settleOnce(); }
+    catch (e) { logError(ledger, 'loop-settle', e); persist(); }
+    await sleep(60000);
+  }
+}
+
+function round2(n) { return Math.round(n * 100) / 100; }
+function round4(n) { return Math.round(n * 10000) / 10000; }
+function r4(n) { return Number.isFinite(n) ? round4(n) : n; }
+
+// 价格快照：持仓浮盈亏 / 面板现价用（每轮刷新，不会冻住）
+const fs = require('fs');
+const path = require('path');
+const PRICES = path.join(cfg.DATA_DIR, 'prices.json');
+function savePriceSnap(slug, q) {
+  let all = {};
+  try { all = JSON.parse(fs.readFileSync(PRICES, 'utf8')); } catch {}
+  all[slug] = { ...q, t: Date.now() };
+  try { fs.writeFileSync(PRICES, JSON.stringify(all)); } catch {}
+}
+function loadPrices() {
+  try { return JSON.parse(fs.readFileSync(PRICES, 'utf8')); } catch { return {}; }
+}
+
+// ---- 单轮调试：node src/runner.js once [btc|eth]
+async function once(coin) {
+  await evaluateMarket(coin);
+  await settleOnce();
+  console.log('done. wallet:', ledger.wallet, 'positions:', ledger.positions.length, 'mg:', JSON.stringify(ledger.mg));
+}
+
+if (require.main === module) {
+  const arg = process.argv[2];
+  if (arg === 'once') {
+    once(process.argv[3] || 'btc').then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); });
+  } else {
+    console.log(`polymarket-crypto-5m-bot 启动（PAPER_MODE=${cfg.PAPER_MODE}，本金 $${cfg.BANKROLL_USD}，5m/DeepSeek/马丁格）`);
+    cfg.COINS.forEach(marketLoop);
+    settleLoop();
+  }
+}
+
+module.exports = { evaluateMarket, settleOnce, loadPrices };

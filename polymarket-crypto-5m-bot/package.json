@@ -1,0 +1,12 @@
+{
+  "description": "Paper-trading bot for Polymarket crypto 5-minute Up/Down markets (BTC/ETH), DeepSeek-only, martingale stakes",
+  "license": "UNLICENSED",
+  "name": "polymarket-crypto-5m-bot",
+  "scripts": {
+    "report": "node -e \"require('./src/report').buildReport()\"",
+    "server": "node src/server.js",
+    "start": "node src/runner.js"
+  },
+  "type": "commonjs",
+  "version": "1.0.0"
+}

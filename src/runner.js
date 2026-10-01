@@ -130,9 +130,9 @@ async function reviewExit(coin, mkt, pos, label) {
   const unreal = pos.shares * sellPrice - pos.stake;
   const unrealPct = unreal / pos.stake;
   const skipReason =
-    Math.abs(unrealPct) < cfg.EXIT_UNREAL_PCT ? `浮盈亏 ${(unrealPct * 100).toFixed(1)}% 未达 ±${cfg.EXIT_UNREAL_PCT * 100}%`
-    : (Date.now() - pos.lastExitReviewAt < cfg.EXIT_COOLDOWN_MS ? '冷静期内'
-    : null);
+    Math.abs(unrealPct) < cfg.EXIT_UNREAL_PCT ? `浮盈亏 ${(unrealPct * 100).toFixed(1)}% 未达 ±${cfg.EXIT_UNREAL_PCT * 100}%` : null;
+  // 2026-10-01 用户拍板：去掉冷静期。每轮评估（约30-60s）只要 |浮盈亏|≥15% 就问 Jev，
+  // 触发器本身就是节流阀；15分钟盘里 3 分钟盲区太长。
   const base = {
     time: nowIso(), coin, slug: mkt.slug, windowLabel: label, eventUrl: mkt.eventUrl,
     side: pos.side, buyPrice: pos.buyPrice, sellPrice: r4(sellPrice),

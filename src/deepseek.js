@@ -1,1 +1,85 @@
-Ly8gRGVlcFNlZWsgVjQuMSBGbGFzaCDliIbmnpDluIjvvJrnu48gY29tbWFuZGNvZGUg572R5YWz77yIT3BlbkFJIOagvOW8j++8iQovLyDms6jmhI/nvZHlhbPkuI3mlK/mjIEgcmVzcG9uc2VfZm9ybWF077yM5LuO5paH5pys6YeM6Kej5p6QIEpTT07vvJvmjqjnkIbmqKHlnosgbWF4X3Rva2VucyDnu5notrMKY29uc3QgY2ZnID0gcmVxdWlyZSgnLi9jb25maWcnKTsKY29uc3QgeyBmZXRjaFdpdGhUaW1lb3V0IH0gPSByZXF1aXJlKCcuL2h0dHAnKTsKCmZ1bmN0aW9uIGV4dHJhY3RKc29uKHRleHQpIHsKICBjb25zdCBtID0gdGV4dC5tYXRjaCgvXHtbXHNcU10qXH0vKTsKICBpZiAoIW0pIHRocm93IG5ldyBFcnJvcignRGVlcFNlZWsg5pyq6L+U5ZueIEpTT04nKTsKICByZXR1cm4gSlNPTi5wYXJzZShtWzBdKTsKfQoKLyoqCiAqIOWIhuaekCAxNW0g56qX5Y+j55qE5rao6LeM5pa55ZCRCiAqIEByZXR1cm5zIHsgZGlyZWN0aW9uOiAndXAnfCdkb3duJ3wnbmV1dHJhbCcsIGNvbmZpZGVuY2U6IDAuLjEsIHJlYXNvbiwgdmlhOiAnZGVlcHNlZWsnIH0KICovCmFzeW5jIGZ1bmN0aW9uIGFuYWx5emUoeyBjb2luLCBjb2luTmFtZSwgd2luZG93TGFiZWwsIHNlY29uZHNMZWZ0LCBmZWF0LCBjYW5kbGVUZXh0LCB1cEJ1eSwgZG93bkJ1eSwgdXBNaWQsIGRvd25NaWQgfSkgewogIGlmICghY2ZnLkpFVl9BUElfS0VZKSB0aHJvdyBuZXcgRXJyb3IoJ+acqumFjee9riBKRVZfQVBJX0tFWe+8iGNvbW1hbmRjb2RlIGtlee+8iScpOwogIGNvbnN0IHByb21wdCA9CiAgICBgWW91IGFyZSBhIGNyeXB0byBtb21lbnR1bSBhbmFseXN0IGZvciBhIFBBUEVSLVRSQURJTkcgYm90IChubyByZWFsIG1vbmV5KS5cbmAgKwogICAgYE1hcmtldDogUG9seW1hcmtldCAiJHtjb2luTmFtZX0gVXAgb3IgRG93biIgMTUtbWludXRlIHdpbmRvdyAke3dpbmRvd0xhYmVsfS5cbmAgKwogICAgYFJlc29sdXRpb24gcnVsZTogdGhlIG1hcmtldCByZXNvbHZlcyB0byAiVXAiIGlmIHRoZSBDaGFpbmxpbmsgVFdBUCBvZiAke2NvaW5OYW1lfSBvdmVyIHRoZSAxNS1taW51dGUgd2luZG93IGAgKwogICAgYGlzIEdSRUFURVIgVEhBTiBPUiBFUVVBTCBUTyB0aGUgcHJpY2UgYXQgdGhlIFNUQVJUIG9mIHRoZSB3aW5kb3c7IG90aGVyd2lzZSAiRG93biIuXG5gICsKICAgIGBTZWNvbmRzIGxlZnQgaW4gd2luZG93OiAke3NlY29uZHNMZWZ0fS5cbmAgKwogICAgYEN1cnJlbnQgUG9seW1hcmtldCBleGVjdXRhYmxlIHByaWNlczogVXAgYnV5PSR7dXBCdXkudG9GaXhlZCgzKX0gLyBtaWQ9JHt1cE1pZC50b0ZpeGVkKDMpfSwgYCArCiAgICBgRG93biBidXk9JHtkb3duQnV5LnRvRml4ZWQoMyl9IC8gbWlkPSR7ZG93bk1pZC50b0ZpeGVkKDMpfSAocHJpY2UgPSBtYXJrZXQtaW1wbGllZCBwcm9iYWJpbGl0eSkuXG5gICsKICAgIGBTcG90IG1vbWVudHVtIChDb2luYmFzZSAxbSBjYW5kbGVzLCBsYXN0ICR7ZmVhdC5ufSBtaW4pOiBkcmlmdD0ke2ZlYXQuZHJpZnRCcHN9YnBzLCBgICsKICAgIGBwZXItbWluIHZvbGF0aWxpdHk9JHtmZWF0LnZvbEJwc31icHMsIHJhbmdlPSR7ZmVhdC5yYW5nZUJwc31icHMsIFJTSTE0PSR7ZmVhdC5yc2kxNH0sIGxhc3Q9JHtmZWF0Lmxhc3R9LlxuYCArCiAgICBgUmVjZW50IGNhbmRsZXMgKFVUQywgY2xvc2UsIDFtIGNoYW5nZSk6XG4ke2NhbmRsZVRleHR9XG5gICsKICAgIGBUYXNrOiBqdWRnZSB3aGV0aGVyIHRoZSB3aW5kb3cgVFdBUCBpcyBtb3JlIGxpa2VseSB0byBmaW5pc2ggQUJPVkUvRVFVQUwgKFVwKSBvciBCRUxPVyAoRG93bikgYCArCiAgICBgdGhlIHdpbmRvdy1zdGFydCBwcmljZS4gQ29uc2lkZXI6IHdpdGggbGl0dGxlIHRpbWUgbGVmdCwgdGhlIGN1cnJlbnQgc3BvdCB2cyB0aGUgc3RhcnQgcHJpY2UgYCArCiAgICBgZG9taW5hdGVzOyB3aXRoIG1vcmUgdGltZSBsZWZ0LCBtb21lbnR1bSBhbmQgdm9sYXRpbGl0eSBtYXR0ZXIgbW9yZS5cbmAgKwogICAgYFJlc3BvbmQgd2l0aCBPTkxZIGEgSlNPTiBvYmplY3Q6IHsiZGlyZWN0aW9uIjoidXAifCJkb3duInwibmV1dHJhbCIsImNvbmZpZGVuY2UiOjAuMC0xLjAsInJlYXNvbiI6Im9uZSBzZW50ZW5jZSJ9LmA7CiAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2hXaXRoVGltZW91dChgJHtjZmcuSkVWX0FQSV9CQVNFfS9wcm92aWRlci92MS9jaGF0L2NvbXBsZXRpb25zYCwgewogICAgbWV0aG9kOiAnUE9TVCcsCiAgICB0aW1lb3V0TXM6IGNmZy5ERUVQU0VFS19USU1FT1VUX01TLAogICAgaGVhZGVyczogewogICAgICAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL2pzb24nLAogICAgICBBdXRob3JpemF0aW9uOiBgQmVhcmVyICR7Y2ZnLkpFVl9BUElfS0VZfWAsCiAgICB9LAogICAgYm9keTogSlNPTi5zdHJpbmdpZnkoewogICAgICBtb2RlbDogY2ZnLkRFRVBTRUVLX01PREVMLAogICAgICBtZXNzYWdlczogW3sgcm9sZTogJ3VzZXInLCBjb250ZW50OiBwcm9tcHQgfV0sCiAgICAgIG1heF90b2tlbnM6IDMwMDAsCiAgICAgIHRlbXBlcmF0dXJlOiAwLjIsCiAgICB9KSwKICB9KTsKICBjb25zdCByYXdUZXh0ID0gYXdhaXQgcmVzLnRleHQoKTsKICBpZiAoIXJlcy5vaykgdGhyb3cgbmV3IEVycm9yKGBEZWVwU2VlayBIVFRQICR7cmVzLnN0YXR1c33vvJoke3Jhd1RleHQuc2xpY2UoMCwgMjAwKX1gKTsKICBsZXQgZGF0YTsKICB0cnkgeyBkYXRhID0gSlNPTi5wYXJzZShyYXdUZXh0KTsgfSBjYXRjaCB7IHRocm93IG5ldyBFcnJvcihgRGVlcFNlZWsg6L+U5Zue5LiN5pivIEpTT07vvJoke3Jhd1RleHQuc2xpY2UoMCwgMTIwKX1gKTsgfQogIGNvbnN0IHRleHQgPSAoZGF0YS5jaG9pY2VzICYmIGRhdGEuY2hvaWNlc1swXSAmJiBkYXRhLmNob2ljZXNbMF0ubWVzc2FnZSAmJiBkYXRhLmNob2ljZXNbMF0ubWVzc2FnZS5jb250ZW50KSB8fCAnJzsKICBjb25zdCBqID0gZXh0cmFjdEpzb24odGV4dCk7CiAgY29uc3QgZGlyZWN0aW9uID0gWyd1cCcsICdkb3duJywgJ25ldXRyYWwnXS5pbmNsdWRlcyhqLmRpcmVjdGlvbikgPyBqLmRpcmVjdGlvbiA6ICduZXV0cmFsJzsKICBjb25zdCBjb25maWRlbmNlID0gTWF0aC5tYXgoMCwgTWF0aC5taW4oMSwgTnVtYmVyKGouY29uZmlkZW5jZSkgfHwgMCkpOwogIHJldHVybiB7IGRpcmVjdGlvbiwgY29uZmlkZW5jZSwgcmVhc29uOiBTdHJpbmcoai5yZWFzb24gfHwgJycpLnNsaWNlKDAsIDMwMCksIHZpYTogJ2RlZXBzZWVrJyB9Owp9Cgptb2R1bGUuZXhwb3J0cyA9IHsgYW5hbHl6ZSB9Owo=
+// DeepSeek V4.1 Flash 分析师：经 commandcode 网关（OpenAI 格式）
+// 注意网关不支持 response_format，从文本里解析 JSON；推理模型 max_tokens 给足
+const cfg = require('./config');
+const { fetchWithTimeout } = require('./http');
+
+function extractJson(text) {
+  const m = text.match(/\{[\s\S]*\}/);
+  if (!m) throw new Error('DeepSeek 未返回 JSON');
+  return JSON.parse(m[0]);
+}
+
+/**
+ * 分析 15m 窗口的涨跌方向（单次调用）
+ * @returns { direction: 'up'|'down'|'neutral', confidence: 0..1, reason, via: 'deepseek' }
+ */
+async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, candleText, upBuy, downBuy, upMid, downMid }) {
+  if (!cfg.JEV_API_KEY) throw new Error('未配置 JEV_API_KEY（commandcode key）');
+  const prompt =
+    `You are a crypto momentum analyst for a PAPER-TRADING bot (no real money).\n` +
+    `Keep your internal reasoning concise (a few sentences max) and always finish with the JSON answer.\n` +
+    `Market: Polymarket "${coinName} Up or Down" 15-minute window ${windowLabel}.\n` +
+    `Resolution rule: the market resolves to "Up" if the Chainlink TWAP of ${coinName} over the 15-minute window ` +
+    `is GREATER THAN OR EQUAL TO the price at the START of the window; otherwise "Down".\n` +
+    `Seconds left in window: ${secondsLeft}.\n` +
+    `Current Polymarket executable prices: Up buy=${upBuy.toFixed(3)} / mid=${upMid.toFixed(3)}, ` +
+    `Down buy=${downBuy.toFixed(3)} / mid=${downMid.toFixed(3)} (price = market-implied probability).\n` +
+    `Spot momentum (Coinbase 1m candles, last ${feat.n} min): drift=${feat.driftBps}bps, ` +
+    `per-min volatility=${feat.volBps}bps, range=${feat.rangeBps}bps, RSI14=${feat.rsi14}, last=${feat.last}.\n` +
+    `Recent candles (UTC, close, 1m change):\n${candleText}\n` +
+    `Task: judge whether the window TWAP is more likely to finish ABOVE/EQUAL (Up) or BELOW (Down) ` +
+    `the window-start price. Consider: with little time left, the current spot vs the start price ` +
+    `dominates; with more time left, momentum and volatility matter more.\n` +
+    `Respond with ONLY a JSON object: {"direction":"up"|"down"|"neutral","confidence":0.0-1.0,"reason":"one sentence"}.`;
+  const res = await fetchWithTimeout(`${cfg.JEV_API_BASE}/provider/v1/chat/completions`, {
+    method: 'POST',
+    timeoutMs: cfg.DEEPSEEK_TIMEOUT_MS,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${cfg.JEV_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: cfg.DEEPSEEK_MODEL,
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: cfg.DEEPSEEK_MAX_TOKENS,
+      temperature: 0.2,
+      // 推理模型会把 budget 先花在 reasoning 上：3000 会被吃光导致空 content。
+      // low 努力 + 8000 上限（完整 prompt 实测 reasoning 约 2800 tokens）
+      reasoning_effort: 'low',
+    }),
+  });
+  const rawText = await res.text();
+  if (!res.ok) throw new Error(`DeepSeek HTTP ${res.status}：${rawText.slice(0, 200)}`);
+  let data;
+  try { data = JSON.parse(rawText); } catch { throw new Error(`DeepSeek 返回不是 JSON：${rawText.slice(0, 120)}`); }
+  const text = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+  const dbg = `finish=${data.choices && data.choices[0] && data.choices[0].finish_reason}，content_len=${text.length}，reasoning=${JSON.stringify(data.usage && data.usage.completion_tokens_details)}`;
+  let j;
+  try {
+    j = extractJson(text);
+  } catch (e) {
+    throw new Error(`DeepSeek JSON 解析失败（${dbg}）：${text.slice(0, 300)}`);
+  }
+  const direction = ['up', 'down', 'neutral'].includes(j.direction) ? j.direction : 'neutral';
+  const confidence = Math.max(0, Math.min(1, Number(j.confidence) || 0));
+  return { direction, confidence, reason: String(j.reason || '').slice(0, 300), via: 'deepseek' };
+}
+
+/**
+ * 带一次重试的分析：Fast 是推理模型，间歇性把 token 预算烧光返回空内容
+ * （finish=length），这种 JSON 失败重试一次往往就能成功；其他硬错误不重试
+ */
+async function analyze(args) {
+  try {
+    return await analyzeOnce(args);
+  } catch (e) {
+    const msg = String((e && e.message) || e);
+    if (/JSON|未返回|解析失败|length/.test(msg)) {
+      console.error(`[deepseek] 首次调用失败，重试一次：${msg.slice(0, 120)}`);
+      return await analyzeOnce(args);
+    }
+    throw e;
+  }
+}
+
+module.exports = { analyze };

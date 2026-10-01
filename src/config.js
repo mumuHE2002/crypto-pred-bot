@@ -1,1 +1,54 @@
-Ly8g5p6B566AIC5lbnYg5Yqg6L2977yI5peg5aSW6YOo5L6d6LWW77yJCmNvbnN0IGZzID0gcmVxdWlyZSgnZnMnKTsKY29uc3QgcGF0aCA9IHJlcXVpcmUoJ3BhdGgnKTsKCmZ1bmN0aW9uIGxvYWRFbnYoKSB7CiAgY29uc3QgcCA9IHBhdGguam9pbihfX2Rpcm5hbWUsICcuLicsICcuZW52Jyk7CiAgaWYgKCFmcy5leGlzdHNTeW5jKHApKSByZXR1cm47CiAgZm9yIChjb25zdCBsaW5lIG9mIGZzLnJlYWRGaWxlU3luYyhwLCAndXRmOCcpLnNwbGl0KCdcbicpKSB7CiAgICBjb25zdCB0ID0gbGluZS50cmltKCk7CiAgICBpZiAoIXQgfHwgdC5zdGFydHNXaXRoKCcjJykpIGNvbnRpbnVlOwogICAgY29uc3QgaSA9IHQuaW5kZXhPZignPScpOwogICAgaWYgKGkgPCAwKSBjb250aW51ZTsKICAgIGNvbnN0IGsgPSB0LnNsaWNlKDAsIGkpLnRyaW0oKTsKICAgIGNvbnN0IHYgPSB0LnNsaWNlKGkgKyAxKS50cmltKCk7CiAgICBpZiAoIShrIGluIHByb2Nlc3MuZW52KSkgcHJvY2Vzcy5lbnZba10gPSB2OwogIH0KfQpsb2FkRW52KCk7Cgpjb25zdCBudW0gPSAoaywgZCkgPT4gewogIGNvbnN0IHYgPSBOdW1iZXIocHJvY2Vzcy5lbnZba10pOwogIHJldHVybiBOdW1iZXIuaXNGaW5pdGUodikgPyB2IDogZDsKfTsKCm1vZHVsZS5leHBvcnRzID0gewogIC8vIOaooeWei+e9keWFs++8iOayv+eUqOWkqeawlOacuuWZqOS6uumCo+S7vSBjb21tYW5kY29kZSBrZXnvvIkKICBKRVZfQVBJX0JBU0U6IChwcm9jZXNzLmVudi5KRVZfQVBJX0JBU0UgfHwgJ2h0dHBzOi8vYXBpLmNvbW1hbmRjb2RlLmFpJykucmVwbGFjZSgvXC8rJC8sICcnKSwKICBKRVZfQVBJX0tFWTogcHJvY2Vzcy5lbnYuSkVWX0FQSV9LRVkgfHwgJycsCiAgSkVWX01PREVMOiBwcm9jZXNzLmVudi5KRVZfTU9ERUwgfHwgJ3R5cGVzYWZlL2pldicsCiAgSkVWX1RJTUVPVVRfTVM6IDkwMDAwLAogIERFRVBTRUVLX01PREVMOiBwcm9jZXNzLmVudi5ERUVQU0VFS19NT0RFTCB8fCAnZGVlcHNlZWsvZGVlcHNlZWstdjQuMS1mbGFzaCcsCiAgREVFUFNFRUtfVElNRU9VVF9NUzogOTAwMDAsCgogIFBPUlQ6IG51bSgnUE9SVCcsIDMyMDApLAogIFBBUEVSX01PREU6IHByb2Nlc3MuZW52LlBBUEVSX01PREUgIT09ICdmYWxzZScsCgogIC8vIOS6pOaYk+WPguaVsO+8iOeUqOaIt+aLjeadv++8iQogIENPSU5TOiBbJ2J0YycsICdldGgnXSwKICBXSU5ET1dfU0VDOiA5MDAsIC8vIDE1bQogIEJBTktST0xMX1VTRDogbnVtKCdCQU5LUk9MTF9VU0QnLCAyMDApLAogIE1JTl9CRVRfVVNEOiBudW0oJ01JTl9CRVRfVVNEJywgMSksCiAgTUFYX0JFVF9VU0Q6IG51bSgnTUFYX0JFVF9VU0QnLCAxMCksCiAgUkVRVUlSRURfRURHRTogbnVtKCdSRVFVSVJFRF9FREdFJywgMC4wOCksIC8vIEplduamgueOhyDiiJIg5Lmw5YWl5Lu3IOKJpSA4JQogIEVWQUxfQ09PTERPV05fTVM6IG51bSgnRVZBTF9DT09MRE9XTl9NUycsIDMwMDAwKSwgLy8g5LiK5qyh6K+E5Lyw57uT5p2f5ZCO562J5b6FIDMwcwogIE1JTl9TRUNPTkRTX0xFRlQ6IG51bSgnTUlOX1NFQ09ORFNfTEVGVCcsIDYwKSwgLy8g5Ymp5L2Z5LiN6LazIDYwcyDkuI3lho3lvIDmlrDku5MKICBNQVhfQlVZX1BSSUNFOiBudW0oJ01BWF9CVVlfUFJJQ0UnLCAwLjkyKSwgLy8g5Lmw5YWl5Lu36auY5LqO5q2k6KeG5Li657uT5p6c5bey5a6aCiAgRVhJVF9VTlJFQUxfUENUOiBudW0oJ0VYSVRfVU5SRUFMX1BDVCcsIDAuMTUpLCAvLyDmta7nm4jkuo8gfOKJpTE1JXwg5omN6Kem5Y+R6YCA5Ye65aSN5qC4CiAgRVhJVF9IT0xEX1BST0I6IG51bSgnRVhJVF9IT0xEX1BST0InLCAwLjQ1KSwgLy8g5oyB5pyJ5pu05LyY5qaC546HIDw0NSUg5YiZ5Y2W5Ye6CiAgRVhJVF9DT09MRE9XTl9NUzogbnVtKCdFWElUX0NPT0xET1dOX01TJywgMTgwMDAwKSwgLy8g5ZCM5LiA5oyB5LuTIDMg5YiG6ZKf5Ya36Z2Z5pyfCgogIERBVEFfRElSOiByZXF1aXJlKCdwYXRoJykuam9pbihfX2Rpcm5hbWUsICcuLicsICdkYXRhJyksCiAgUkVQT1JUX1BBVEg6ICcvaG9tZS9oYXRjaC93b3Jrc3BhY2UveW91cl9maWxlcy9jcnlwdG8tcG9seW1hcmtldC1yZXBvcnQuaHRtbCcsCn07Cg==
+// 极简 .env 加载（无外部依赖）
+const fs = require('fs');
+const path = require('path');
+
+function loadEnv() {
+  const p = path.join(__dirname, '..', '.env');
+  if (!fs.existsSync(p)) return;
+  for (const line of fs.readFileSync(p, 'utf8').split('\n')) {
+    const t = line.trim();
+    if (!t || t.startsWith('#')) continue;
+    const i = t.indexOf('=');
+    if (i < 0) continue;
+    const k = t.slice(0, i).trim();
+    const v = t.slice(i + 1).trim();
+    if (!(k in process.env)) process.env[k] = v;
+  }
+}
+loadEnv();
+
+const num = (k, d) => {
+  const v = Number(process.env[k]);
+  return Number.isFinite(v) ? v : d;
+};
+
+module.exports = {
+  // 模型网关（沿用天气机器人那份 commandcode key）
+  JEV_API_BASE: (process.env.JEV_API_BASE || 'https://api.commandcode.ai').replace(/\/+$/, ''),
+  JEV_API_KEY: process.env.JEV_API_KEY || '',
+  JEV_MODEL: process.env.JEV_MODEL || 'typesafe/jev',
+  JEV_TIMEOUT_MS: 90000,
+  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash-fast',
+  DEEPSEEK_MAX_TOKENS: Number(process.env.DEEPSEEK_MAX_TOKENS) || 8000,
+  DEEPSEEK_TIMEOUT_MS: 90000,
+
+  PORT: num('PORT', 3200),
+  PAPER_MODE: process.env.PAPER_MODE !== 'false',
+
+  // 交易参数（用户拍板）
+  COINS: ['btc', 'eth'],
+  WINDOW_SEC: 900, // 15m
+  BANKROLL_USD: num('BANKROLL_USD', 200),
+  MIN_BET_USD: num('MIN_BET_USD', 1),
+  MAX_BET_USD: num('MAX_BET_USD', 10),
+  REQUIRED_EDGE: num('REQUIRED_EDGE', 0.08), // Jev概率 − 买入价 ≥ 8%
+  EVAL_COOLDOWN_MS: num('EVAL_COOLDOWN_MS', 30000), // 上次评估结束后等待 30s
+  MIN_SECONDS_LEFT: num('MIN_SECONDS_LEFT', 60), // 剩余不足 60s 不再开新仓
+  MAX_BUY_PRICE: num('MAX_BUY_PRICE', 0.92), // 买入价高于此视为结果已定
+  EXIT_UNREAL_PCT: num('EXIT_UNREAL_PCT', 0.15), // 浮盈亏 |≥15%| 才触发退出复核
+  EXIT_HOLD_PROB: num('EXIT_HOLD_PROB', 0.45), // 持有更优概率 <45% 则卖出
+  EXIT_COOLDOWN_MS: num('EXIT_COOLDOWN_MS', 180000), // 同一持仓 3 分钟冷静期
+
+  DATA_DIR: require('path').join(__dirname, '..', 'data'),
+  REPORT_PATH: '/home/hatch/workspace/your_files/crypto-polymarket-report.html',
+};

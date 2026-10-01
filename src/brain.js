@@ -1,1 +1,49 @@
-Ly8g5Yaz562W77yaZWRnZSA9IEplduamgueOhyDiiJIg5Y+v5oiQ5Lqk5Lmw5YWl5Lu3IOKJpSBSRVFVSVJFRF9FREdFIOaJjeS4i+azqAovLyDpk4HlvovvvJpKZXYg5aSx6LSlIOKGkiDkuI3kuIvmlrDljZXvvJtEZWVwU2VlayDlpLHotKUg4oaSIOacrOi9ruS4jeW8gOaWsOS7k++8iOiusOW9leWOn+WboO+8iQpjb25zdCBjZmcgPSByZXF1aXJlKCcuL2NvbmZpZycpOwoKZnVuY3Rpb24gZGVjaWRlKHsgcFVwLCBidXlVcCwgYnV5RG93biwgc2Vjb25kc0xlZnQsIHdhbGxldCwgaGFzUG9zaXRpb24gfSkgewogIGNvbnN0IGVkZ2VVcCA9IHBVcCAtIGJ1eVVwOwogIGNvbnN0IGVkZ2VEb3duID0gKDEgLSBwVXApIC0gYnV5RG93bjsKICBjb25zdCByZWFzb25zID0gW107CiAgaWYgKGhhc1Bvc2l0aW9uKSByZWFzb25zLnB1c2goJ+acrOeql+WPo+W3suacieaMgeS7kycpOwogIGlmIChzZWNvbmRzTGVmdCA8IGNmZy5NSU5fU0VDT05EU19MRUZUKSByZWFzb25zLnB1c2goYOWJqeS9mSR7c2Vjb25kc0xlZnR9c+S4jei2syR7Y2ZnLk1JTl9TRUNPTkRTX0xFRlR9c2ApOwogIGlmICh3YWxsZXQgPCBjZmcuTUlOX0JFVF9VU0QpIHJlYXNvbnMucHVzaChg6ZKx5YyFJCR7d2FsbGV0LnRvRml4ZWQoMil95LiN6Laz5pyA5bCP5LiL5rOoYCk7CgogIGxldCBwaWNrID0gbnVsbDsKICBpZiAoZWRnZVVwID49IGNmZy5SRVFVSVJFRF9FREdFICYmIGVkZ2VVcCA+PSBlZGdlRG93bikgcGljayA9IHsgc2lkZTogJ3VwJywgZWRnZTogZWRnZVVwLCBwcmljZTogYnV5VXAgfTsKICBlbHNlIGlmIChlZGdlRG93biA+PSBjZmcuUkVRVUlSRURfRURHRSAmJiBlZGdlRG93biA+IGVkZ2VVcCkgcGljayA9IHsgc2lkZTogJ2Rvd24nLCBlZGdlOiBlZGdlRG93biwgcHJpY2U6IGJ1eURvd24gfTsKCiAgaWYgKHBpY2sgJiYgcGljay5wcmljZSA+IGNmZy5NQVhfQlVZX1BSSUNFKSB7CiAgICByZWFzb25zLnB1c2goYOS5sOWFpeS7tyR7cGljay5wcmljZS50b0ZpeGVkKDMpfT4wLjky77yM57uT5p6c5Z+65pys5bey5a6aYCk7CiAgICBwaWNrID0gbnVsbDsKICB9CiAgaWYgKCFwaWNrICYmIHJlYXNvbnMubGVuZ3RoID09PSAwKSB7CiAgICByZWFzb25zLnB1c2goYGVkZ2XkuI3otrPvvIhVcCAkeyhlZGdlVXAgKiAxMDApLnRvRml4ZWQoMSl9JSAvIERvd24gJHsoZWRnZURvd24gKiAxMDApLnRvRml4ZWQoMSl9Je+8jOe6vyAke2NmZy5SRVFVSVJFRF9FREdFICogMTAwfSXvvIlgKTsKICB9CiAgbGV0IHN0YWtlID0gMDsKICBpZiAocGljayAmJiByZWFzb25zLmxlbmd0aCA9PT0gMCkgewogICAgLy8gZWRnZSA4JeKGkiQ077yMMjAl4oaSJDEw77yb6ZKz5Yi2IDHigJMxMHUKICAgIHN0YWtlID0gTWF0aC5yb3VuZChwaWNrLmVkZ2UgKiA1MCk7CiAgICBzdGFrZSA9IE1hdGgubWF4KGNmZy5NSU5fQkVUX1VTRCwgTWF0aC5taW4oY2ZnLk1BWF9CRVRfVVNELCBzdGFrZSkpOwogICAgc3Rha2UgPSBNYXRoLm1pbihzdGFrZSwgTWF0aC5mbG9vcih3YWxsZXQpKTsgLy8g5LiN6LaF6L+H6ZKx5YyFCiAgICBpZiAoc3Rha2UgPCBjZmcuTUlOX0JFVF9VU0QpIHsgcmVhc29ucy5wdXNoKCfpkrHljIXkvZnpop3kuI3otrPkuIvms6gnKTsgcGljayA9IG51bGw7IHN0YWtlID0gMDsgfQogIH0KICByZXR1cm4gewogICAgYmV0OiAhIShwaWNrICYmIHJlYXNvbnMubGVuZ3RoID09PSAwKSwKICAgIHNpZGU6IHBpY2sgPyBwaWNrLnNpZGUgOiBudWxsLAogICAgZWRnZTogcGljayA/IHBpY2suZWRnZSA6IE1hdGgubWF4KGVkZ2VVcCwgZWRnZURvd24pLAogICAgZWRnZVVwLCBlZGdlRG93biwKICAgIHByaWNlOiBwaWNrID8gcGljay5wcmljZSA6IG51bGwsCiAgICBzdGFrZSwKICAgIHNoYXJlczogcGljayAmJiBzdGFrZSA+IDAgPyBzdGFrZSAvIHBpY2sucHJpY2UgOiAwLAogICAgcmVhc29uOiByZWFzb25zLmpvaW4oJ++8mycpIHx8IChwaWNrID8gYGVkZ2UgJHsocGljay5lZGdlICogMTAwKS50b0ZpeGVkKDEpfSUg4omlICR7Y2ZnLlJFUVVJUkVEX0VER0UgKiAxMDB9JWAgOiAn4oCUJyksCiAgfTsKfQoKbW9kdWxlLmV4cG9ydHMgPSB7IGRlY2lkZSB9Owo=
+// 决策：edge = Jev概率 − 可成交买入价 ≥ REQUIRED_EDGE 才下注
+// 铁律：Jev 失败 → 不下新单；DeepSeek 失败 → 本轮不开新仓（记录原因）
+const cfg = require('./config');
+
+function decide({ pUp, buyUp, buyDown, secondsLeft, wallet, hasPosition }) {
+  const edgeUp = pUp - buyUp;
+  const edgeDown = (1 - pUp) - buyDown;
+  const reasons = [];
+  if (hasPosition) reasons.push('本窗口已有持仓');
+  if (secondsLeft < cfg.MIN_SECONDS_LEFT) reasons.push(`剩余${secondsLeft}s不足${cfg.MIN_SECONDS_LEFT}s`);
+  if (wallet < cfg.MIN_BET_USD) reasons.push(`钱包$${wallet.toFixed(2)}不足最小下注`);
+
+  let pick = null;
+  if (edgeUp >= cfg.REQUIRED_EDGE && edgeUp >= edgeDown) pick = { side: 'up', edge: edgeUp, price: buyUp };
+  else if (edgeDown >= cfg.REQUIRED_EDGE && edgeDown > edgeUp) pick = { side: 'down', edge: edgeDown, price: buyDown };
+
+  if (pick && pick.price > cfg.MAX_BUY_PRICE) {
+    reasons.push(`买入价${pick.price.toFixed(3)}>0.92，结果基本已定`);
+    pick = null;
+  }
+  // 报价异常（CLOB 在窗口尾声可能返回 0）：价格必须在 (0,1] 才算有效成交价
+  if (pick && !(pick.price > 0 && pick.price <= 1)) {
+    reasons.push(`买入价异常（${pick.price}），跳过本轮`);
+    pick = null;
+  }
+  if (!pick && reasons.length === 0) {
+    reasons.push(`edge不足（Up ${(edgeUp * 100).toFixed(1)}% / Down ${(edgeDown * 100).toFixed(1)}%，线 ${cfg.REQUIRED_EDGE * 100}%）`);
+  }
+  let stake = 0;
+  if (pick && reasons.length === 0) {
+    // edge 8%→$4，20%→$10；钳制 1–10u
+    stake = Math.round(pick.edge * 50);
+    stake = Math.max(cfg.MIN_BET_USD, Math.min(cfg.MAX_BET_USD, stake));
+    stake = Math.min(stake, Math.floor(wallet)); // 不超过钱包
+    if (stake < cfg.MIN_BET_USD) { reasons.push('钱包余额不足下注'); pick = null; stake = 0; }
+  }
+  return {
+    bet: !!(pick && reasons.length === 0),
+    side: pick ? pick.side : null,
+    edge: pick ? pick.edge : Math.max(edgeUp, edgeDown),
+    edgeUp, edgeDown,
+    price: pick ? pick.price : null,
+    stake,
+    shares: pick && stake > 0 ? stake / pick.price : 0,
+    reason: reasons.join('；') || (pick ? `edge ${(pick.edge * 100).toFixed(1)}% ≥ ${cfg.REQUIRED_EDGE * 100}%` : '—'),
+  };
+}
+
+module.exports = { decide };

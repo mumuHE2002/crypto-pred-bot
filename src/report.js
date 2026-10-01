@@ -35,9 +35,9 @@ function judgmentSubTable(judgs) {
       mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
       blocks.push(mioBlock(mid, j.io));
     }
-    return `<tr><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
+    return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
   }).join('');
-  return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table>${blocks.join('')}`;
+  return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>盘口</th><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table>${blocks.join('')}`;
 }
 
 function reviewSubTable(revs) {

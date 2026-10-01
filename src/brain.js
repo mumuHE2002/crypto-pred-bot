@@ -14,8 +14,11 @@ function sizeStake(edge, price) {
 }
 
 function decide({ pUp, buyUp, buyDown, secondsLeft, wallet, hasPosition }) {
-  const edgeUp = pUp - buyUp;
-  const edgeDown = (1 - pUp) - buyDown;
+  // 浮点边界：(1-0.76)-0.16 = 0.07999999999999999 < 0.08，会把真 8.0% 误杀。
+  // 先抹到 4 位小数（0.01% 精度足够），再比较，显示与决策一致。
+  const r4 = x => Math.round(x * 10000) / 10000;
+  const edgeUp = r4(pUp - buyUp);
+  const edgeDown = r4((1 - pUp) - buyDown);
   const reasons = [];
   if (hasPosition) reasons.push('本窗口已有持仓');
   if (secondsLeft < cfg.MIN_SECONDS_LEFT) reasons.push(`剩余${secondsLeft}s不足${cfg.MIN_SECONDS_LEFT}s`);
@@ -35,7 +38,7 @@ function decide({ pUp, buyUp, buyDown, secondsLeft, wallet, hasPosition }) {
     pick = null;
   }
   if (!pick && reasons.length === 0) {
-    reasons.push(`edge不足（Up ${(edgeUp * 100).toFixed(1)}% / Down ${(edgeDown * 100).toFixed(1)}%，线 ${cfg.REQUIRED_EDGE * 100}%）`);
+    reasons.push(`edge不足（Up ${(edgeUp * 100).toFixed(2)}% / Down ${(edgeDown * 100).toFixed(2)}%，线 ${cfg.REQUIRED_EDGE * 100}%）`);
   }
   let stake = 0;
   if (pick && reasons.length === 0) {

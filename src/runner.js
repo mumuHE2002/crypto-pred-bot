@@ -109,6 +109,7 @@ async function evaluateMarket(coin) {
       const d = brain.decide({
         pUp: j.pUp, buyUp: upBuy, buyDown: downBuy,
         secondsLeft: mkt.secondsLeft, wallet: ledger.wallet, hasPosition: hasPos,
+        dsDirection: dsr.direction, dsConfidence: dsr.confidence,
       });
       Object.assign(judgment, {
         pUp: r4(j.pUp), edgeUp: r4(d.edgeUp), edgeDown: r4(d.edgeDown),
@@ -124,6 +125,7 @@ async function evaluateMarket(coin) {
           d2 = brain.decide({
             pUp: j.pUp, buyUp: fUp, buyDown: fDown,
             secondsLeft: mkt.secondsLeft, wallet: ledger.wallet, hasPosition: hasPos,
+            dsDirection: dsr.direction, dsConfidence: dsr.confidence,
           });
         } catch (e) {
           refetchOk = false;

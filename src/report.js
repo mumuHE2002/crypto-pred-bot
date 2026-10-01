@@ -12,6 +12,19 @@ const tstr = iso => { const d = new Date(iso); return `${d.getMonth() + 1}/${d.g
 const pnlCls = n => n > 0 ? 'pos' : n < 0 ? 'neg' : '';
 const evUrl = slug => `https://polymarket.com/event/${esc(slug)}`;
 
+// 全页面统一盘口名：BTC 15m-1790817300（09:15–09:30）
+// 一律从 slug 时间戳按东八区算窗口，不依赖各进程 TZ 环境，避免历史混有时区
+function mktName(slug) {
+  const m = /^([a-z]+)-updown-(\d+m)-(\d+)$/.exec(slug || '');
+  if (!m) return esc(slug || '—');
+  const f = s => {
+    const d = new Date((Number(s) + 8 * 3600) * 1000);
+    return String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0');
+  };
+  const start = m[3];
+  return `${m[1].toUpperCase()} ${m[2]}-${start}（${f(start)}–${f(Number(start) + 900)}）`;
+}
+
 function judgmentSubTable(judgs) {
   if (!judgs.length) return '';
   return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th></tr>${judgs.slice().reverse().map(j =>
@@ -46,7 +59,7 @@ function renderHtml(ledger, prices, opts = {}) {
     const revs = ledger.exitReviews.filter(r => r.slug === p.slug);
     const detailId = `pd${i}`;
     return `<tr class="mainrow" data-detail="${detailId}">
-      <td><a href="${esc(p.eventUrl)}" target="_blank">${esc(p.coinName)} ${esc(p.windowLabel)}</a></td>
+      <td><a href="${esc(p.eventUrl)}" target="_blank">${mktName(p.slug)}</a></td>
       <td class="${p.side === 'up' ? 'pos' : 'neg'}">${p.side === 'up' ? 'Up' : 'Down'}</td>
       <td>${p.buyPrice.toFixed(3)}</td><td>${p.shares.toFixed(1)}</td><td>$${p.stake.toFixed(2)}</td>
       <td>${u ? u.sell.toFixed(3) : '—'}</td>
@@ -75,11 +88,9 @@ function renderHtml(ledger, prices, opts = {}) {
   const soldRows = soldData.map((d, i) => {
     const { s, buy, invested, pnl, judgs, revs, holdBetter } = d;
     const detailId = `sd${i}`;
-    const coinName = s.slug ? s.slug.split('-')[0].toUpperCase() : '';
-    const winLabel = s.slug ? s.slug.split('-updown-')[1] : '';
     return `<tr class="mainrow" data-detail="${detailId}">
       <td>${tstr(s.time)}</td>
-      <td><a href="${evUrl(s.slug)}" target="_blank">${coinName} ${esc(winLabel)}</a></td>
+      <td><a href="${evUrl(s.slug)}" target="_blank">${mktName(s.slug)}</a></td>
       <td class="${s.outcome === 'up' ? 'pos' : 'neg'}">${(s.outcome || '').toUpperCase()}</td>
       <td>${buy ? buy.price.toFixed(3) : '—'}→${Number(s.price).toFixed(3)}</td>
       <td>${Number(s.shares).toFixed(2)}</td>
@@ -96,7 +107,7 @@ function renderHtml(ledger, prices, opts = {}) {
   }).join('');
 
   const tradeRows = ledger.trades.slice().reverse().slice(0, 60).map(t =>
-    `<tr><td>${tstr(t.time)}</td><td>${esc(t.slug || '')}</td>
+    `<tr><td>${tstr(t.time)}</td><td>${mktName(t.slug)}</td>
      <td class="${t.side === 'buy' ? 'pos' : t.side === 'sell' ? 'neg' : ''}">${t.side === 'buy' ? '买入' : t.side === 'sell' ? '卖出' : '结算'}</td>
      <td>${t.outcome ? t.outcome.toUpperCase() : '—'}</td><td>${t.price}</td><td>${t.shares}</td>
      <td>$${Number(t.stake).toFixed(2)}</td><td class="rs">${esc(t.reason || '')}</td></tr>`).join('');
@@ -106,7 +117,7 @@ function renderHtml(ledger, prices, opts = {}) {
     const revs = ledger.exitReviews.filter(r => r.slug === s.slug);
     const detailId = `st${i}`;
     return `<tr class="mainrow" data-detail="${detailId}">
-     <td>${tstr(s.time)}</td><td><a href="${esc(s.eventUrl)}" target="_blank">${esc(s.coin)} ${esc(s.windowLabel)}</a></td>
+     <td>${tstr(s.time)}</td><td><a href="${esc(s.eventUrl)}" target="_blank">${mktName(s.slug)}</a></td>
      <td>${s.side.toUpperCase()}</td><td class="${s.win ? 'pos' : 'neg'}">${s.win ? '命中' : '归零'}</td>
      <td>$${s.shares.toFixed(1)}股</td><td>$${(s.payout).toFixed(2)}</td>
      <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td>
@@ -156,7 +167,7 @@ ${soldData.length ? `<table><tr><th>卖出时间</th><th>市场</th><th>方向</
 <h2>🏁 结算记录（点击行展开判断/复核明细）</h2>
 ${settled.length ? `<table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>股数</th><th>收回</th><th>盈亏</th><th>明细</th></tr>${settleRows}</table>` : '<div class="empty">暂无结算</div>'}
 <h2>📒 成交记录（近60）</h2>
-${ledger.trades.length ? `<table><tr><th>时间</th><th>slug</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table>` : '<div class="empty">暂无成交</div>'}
+${ledger.trades.length ? `<table><tr><th>时间</th><th>市场</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table>` : '<div class="empty">暂无成交</div>'}
 ${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table>` : ''}
 <script>
 document.addEventListener('click',e=>{

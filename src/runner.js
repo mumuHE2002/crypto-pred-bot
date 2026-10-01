@@ -13,9 +13,10 @@ const nowIso = () => new Date().toISOString();
 const usd = n => (n >= 0 ? '+' : '') + '$' + n.toFixed(2);
 
 function windowLabel(startSec, endSec) {
+  // 固定东八区，不依赖进程 TZ（历史曾混入 UTC 标签）
   const f = s => {
-    const d = new Date(s * 1000);
-    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    const d = new Date((s + 8 * 3600) * 1000);
+    return String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0');
   };
   return `${f(startSec)}–${f(endSec)}`;
 }

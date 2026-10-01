@@ -46,8 +46,10 @@ async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, can
       messages: [{ role: 'user', content: prompt }],
       max_tokens: cfg.DEEPSEEK_MAX_TOKENS,
       temperature: 0.2,
-      // 推理模型会把 budget 先花在 reasoning 上：3000 会被吃光导致空 content。
-      // low 努力 + 8000 上限（完整 prompt 实测 reasoning 约 2800 tokens）
+      // 推理模型会把 budget 先花在 reasoning 上：max_tokens 太小会被吃光导致空 content。
+      // 实测 reasoning_effort='low' 未被网关/模型遵守（reasoning 照样烧到 8000），
+      // 所以上限给到 32000，保证 reasoning 烧满也有正文预算。按实际用量计费，成本几乎不涨。
+      // low 努力保留，万一哪天网关开始遵守还能省一点。
       reasoning_effort: 'low',
     }),
   });

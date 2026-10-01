@@ -60,12 +60,22 @@ async function calibrateUp({ coinName, windowLabel, secondsLeft, feat, ds, upBuy
 
 /**
  * 退出复核：持有到期 vs 现在按卖出价卖出，哪个总盈亏更高？
+ * feat/candleText：现货 K 线动量上下文（B方案，不再盲判）；缺失时走盲判兜底
  * @returns { probHoldBetter: 0..1, via: 'jev' }（失败直接抛错，不回退）
  */
-async function askExit({ pos, curSellPrice, secondsLeft }) {
+async function askExit({ pos, curSellPrice, secondsLeft, feat, candleText, triggerPct }) {
   const usd = n => (n >= 0 ? '+' : '') + '$' + n.toFixed(2);
   const unreal = pos.shares * curSellPrice - pos.stake;
   const unrealPct = unreal / pos.stake;
+  const withCtx = feat && candleText;
+  const ctxBlock = withCtx ?
+    `--- Spot market context (${pos.coinName}, last ${feat.n} min) ---\n` +
+    `Drift: ${feat.driftBps} bps | per-min volatility: ${feat.volBps} bps | range: ${feat.rangeBps} bps | RSI(14): ${feat.rsi14}.\n` +
+    `Last 15 one-minute closes (UTC, bps vs prior minute):\n${candleText}\n` +
+    `Use this to judge whether the recent move is a short-lived spike (likely to revert before expiry) ` +
+    `or a sustained trend. A drift WITH your ${pos.side.toUpperCase()} position favors holding; a drift AGAINST it ` +
+    `means spot is moving away — sell only if you believe the move will persist into expiry.\n`
+    : `No market context available — judge from position numbers alone.\n`;
   const state =
     `You are reviewing a PAPER-TRADING position (no real money).\n` +
     `Market: Polymarket "${pos.coinName} Up or Down" 15-minute window ${pos.windowLabel} (${pos.eventUrl}).\n` +
@@ -74,7 +84,10 @@ async function askExit({ pos, curSellPrice, secondsLeft }) {
     `Current SELL price: $${curSellPrice.toFixed(4)} → unrealized P&L ${usd(unreal)} (${(unrealPct * 100).toFixed(1)}%).\n` +
     `If you SELL NOW you lock in ≈ ${usd(unreal)}. If you HOLD to expiry (≈${Math.max(0, Math.round(secondsLeft))}s left), ` +
     `you receive $1/share if ${pos.side.toUpperCase()} wins, $0 otherwise.\n` +
-    `Resolution: Chainlink TWAP over the window vs window-start price.`;
+    `Resolution: Chainlink TWAP over the window vs window-start price.\n` +
+    ctxBlock +
+    `This review was triggered because |unrealized P&L| reached ${triggerPct}%. ` +
+    `Do NOT default to "take profit on any green" or "hold any red" — weigh the spot momentum against the time left.`;
   const questions = {
     exit: { type: 'noul', instructions: `What is the probability (0-100%) that HOLDING this ${pos.side.toUpperCase()} position to expiry yields a HIGHER total P&L than SELLING it NOW at $${curSellPrice.toFixed(4)}/share?` },
   };

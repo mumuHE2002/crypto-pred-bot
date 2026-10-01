@@ -253,8 +253,29 @@ async function reviewExit(coin, mkt, pos, label) {
     }
     return;
   }
+  // B方案（2026-10-01 用户拍板）：复核不再盲判，先抓 K 线动量上下文再问 Jev。
+  // K 线抓取失败则本轮跳过复核（不盲判），下一轮再试。
+  let feat = null, candleText = '';
   try {
-    const { probHoldBetter, io } = await jev.askExit({ pos, curSellPrice: sellPrice, secondsLeft: mkt.secondsLeft });
+    const candles = await spot.fetchCandles(coin, 30);
+    feat = spot.features(candles);
+    candleText = spot.candlesText(candles, 15);
+  } catch (e) {
+    logError(ledger, `exit-${coin}-spot`, e);
+    const last = [...ledger.exitReviews].reverse().find(r => r.slug === mkt.slug && r.side === pos.side);
+    const sr = 'K线抓取失败，本轮跳过复核';
+    if (!last || last.decision !== 'skip' || last.reason !== sr) {
+      pushCapped(ledger.exitReviews, { ...base, decision: 'skip', reason: sr }, 200);
+      persist();
+    }
+    return;
+  }
+  Object.assign(base, { driftBps: feat.driftBps, rsi14: feat.rsi14 });
+  try {
+    const { probHoldBetter, io } = await jev.askExit({
+      pos, curSellPrice: sellPrice, secondsLeft: mkt.secondsLeft,
+      feat, candleText, triggerPct: (cfg.EXIT_UNREAL_PCT * 100).toFixed(0),
+    });
     pos.lastExitReviewAt = Date.now();
     const revIo = io ? { jev: io } : null;
     if (probHoldBetter < cfg.EXIT_HOLD_PROB) {

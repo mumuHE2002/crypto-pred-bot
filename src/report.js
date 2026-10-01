@@ -52,9 +52,9 @@ function reviewSubTable(revs) {
       mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
       blocks.push(mioBlock(mid, r.io));
     }
-    return `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${sellP}</td><td class="${pnlCls(un)}">${usd(un)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td><td>${mioBtn}</td></tr>`;
+    return `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${sellP}</td><td class="${pnlCls(un)}">${usd(un)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.driftBps != null ? r.driftBps + 'bps·RSI' + r.rsi14 : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td><td>${mioBtn}</td></tr>`;
   }).join('');
-  return `<div class="dh">🛟 退出复核</div><div class="twrap"><div class="twrap"><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
+  return `<div class="dh">🛟 退出复核</div><div class="twrap"><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>动量</th><th>决策</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
 }
 
 // 模型 io 二级展开：发给模型的完整输入 + 原始输出，烘焙进 HTML

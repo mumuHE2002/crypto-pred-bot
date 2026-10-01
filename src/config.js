@@ -47,6 +47,7 @@ module.exports = {
   LOTTERY_EDGE: num('LOTTERY_EDGE', 0.20), // 彩票区 edge 门槛：尾部概率是模型最测不准的地方，要求 20% 才动手
   DS_REVERSE_BLOCK_CONF: num('DS_REVERSE_BLOCK_CONF', 0.85), // DeepSeek 置信度≥此值时，不许反向买彩票
   EDGE_CONFIRM_HITS: num('EDGE_CONFIRM_HITS', 2), // edge 双重确认：同窗口同方向连续达标 N 次才开仓，过滤闪动报价的幻影 edge
+  EDGE_CONFIRM_MAX_PUP_DRIFT: num('EDGE_CONFIRM_MAX_PUP_DRIFT', 0.15), // 确认链概率稳定性：两次确认间 Jev P(Up) 变化超过 15 个百分点则重置（2026-10-01 用户拍板，防概率崩了但价格崩更快造出的幻影 edge）
   EVAL_COOLDOWN_MS: num('EVAL_COOLDOWN_MS', 30000), // 上次评估结束后等待 30s
   MIN_SECONDS_LEFT: num('MIN_SECONDS_LEFT', 180), // 剩余不足 3 分钟不再开新仓（2026-10-01 用户要求）
   MAX_BUY_PRICE: num('MAX_BUY_PRICE', 0.92), // 买入价高于此视为结果已定

@@ -34,25 +34,35 @@ function persist() { recordEquity(ledger); save(ledger); }
 /** edge 双重确认（去抖）：同窗口同方向连续 N 次评估 edge 达标才开仓。
  *  15m 盘报价闪动快，单次评估的 8% gap 常是过期报价/薄订单簿打印的幻影；
  *  真实分歧应能挺过约 1 分钟（一次评估间隔）。内存态，重启丢失=保守跳过。 */
-const edgeConfirm = new Map(); // `${coin}:${slug}` → { side, hits }
+const edgeConfirm = new Map(); // `${coin}:${slug}` → { side, hits, pUp }
 const confirmKey = (coin, mkt) => `${coin}:${mkt.slug}`;
 function edgeConfirmed(coin, mkt, d2, judgment, label) {
   const ck = confirmKey(coin, mkt);
   const need = Math.max(1, cfg.EDGE_CONFIRM_HITS || 2);
+  const maxDrift = cfg.EDGE_CONFIRM_MAX_PUP_DRIFT ?? 0.15;
   const prev = edgeConfirm.get(ck);
-  const hits = (prev && prev.side === d2.side) ? prev.hits + 1 : 1;
+  const pUp = judgment.pUp;
+  // 同方向还不够：Jev 概率本身也要稳定，否则是两次基于完全不同判断的"达标"
+  // 漂移抹到 4 位小数再比较，避开 0.65-0.50=0.15000000000000002 这类浮点边界误杀
+  const stable = prev && prev.side === d2.side
+    && typeof prev.pUp === 'number' && typeof pUp === 'number'
+    && r4(Math.abs(pUp - prev.pUp)) <= maxDrift;
+  const driftReset = prev && prev.side === d2.side && !stable;
+  const hits = stable ? prev.hits + 1 : 1;
   if (hits >= need) {
     edgeConfirm.delete(ck);
     judgment.edgeConfirm = `confirmed(${hits}/${need})`;
     return true;
   }
-  edgeConfirm.set(ck, { side: d2.side, hits });
+  edgeConfirm.set(ck, { side: d2.side, hits, pUp });
   const edge = d2.side === 'up' ? d2.edgeUp : d2.edgeDown;
   judgment.bet = false;
   judgment.side = d2.side; judgment.stake = d2.stake;
   judgment.edgeConfirm = `pending(${hits}/${need})`;
-  judgment.reason = `edge ${(edge * 100).toFixed(1)}% 达标，等待二次确认（${hits}/${need}，${d2.side}）`;
-  console.log(`[${coin} ${label}] edge 达标，等待二次确认（${hits}/${need}）`);
+  judgment.reason = driftReset
+    ? `P(Up) ${(prev.pUp * 100).toFixed(0)}%→${(pUp * 100).toFixed(0)}% 变化过大，确认链重置（${hits}/${need}，${d2.side}）`
+    : `edge ${(edge * 100).toFixed(1)}% 达标，等待二次确认（${hits}/${need}，${d2.side}）`;
+  console.log(`[${coin} ${label}] edge 达标，等待二次确认（${hits}/${need}）${driftReset ? '（概率漂移重置）' : ''}`);
   return false;
 }
 
@@ -159,7 +169,7 @@ async function evaluateMarket(coin) {
             try { buildReport(); } catch (e2) { console.error('[report]', e2.message); }
             return;
           }
-          const decidePrice = d.price; // 决策时价（思考前）
+          const decidePrice = d2.price; // 决策时价：执行依据的是重抓价后的 d2，用 d2 的价
           const probSide = d2.side === 'up' ? j.pUp : 1 - j.pUp;
           const edgeAvg = probSide - fill.avgPrice; // 按实际加权成交价重算
           judgment.fill = {

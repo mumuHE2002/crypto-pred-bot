@@ -171,6 +171,9 @@ function renderHtml(ledger, prices, opts = {}) {
   const errRows = ledger.errors.slice().reverse().slice(0, 10).map(e =>
     `<tr><td>${tstr(e.time)}</td><td>${esc(e.where)}</td><td class="rs">${esc(e.message)}</td></tr>`).join('');
 
+  // 最近评估：无持仓时页面也不至于全空，判断表复用（含模型输入/输出展开）
+  const recentJudgs = ledger.judgments.slice(-10);
+
   return `<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Polymarket Crypto 15m 模拟盘${live}</title>
 <style>
@@ -199,12 +202,13 @@ a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d
 <h1>🪙 Polymarket Crypto 15m 模拟盘${live}</h1>
 <div class="meta">更新：${updated} · BTC/ETH × 15m · 本金 $${cfg.BANKROLL_USD} · PAPER_MODE</div>
 <div class="cards">
-<div class="card"><div class="k">钱包</div><div class="v">$${ledger.wallet.toFixed(2)}</div></div>
-<div class="card"><div class="k">总盈亏</div><div class="v ${pnlCls(totalPnl)}">${usd(totalPnl)}</div></div>
+<div class="card"><div class="k">钱包</div><div class="v">$${ledger.wallet.toFixed(2)}</div></div><div class="card"><div class="k">总盈亏</div><div class="v ${pnlCls(totalPnl)}">${usd(totalPnl)}</div></div>
 <div class="card"><div class="k">持仓</div><div class="v">${ledger.positions.length}</div></div>
 <div class="card"><div class="k">已结算</div><div class="v">${settled.length}（命中${winN}）</div></div>
 <div class="card"><div class="k">成交</div><div class="v">${ledger.trades.length}</div></div>
 </div>
+<h2>🕐 最近评估（近10轮）</h2>
+${recentJudgs.length ? judgmentSubTable(recentJudgs) : '<div class="empty">暂无评估记录</div>'}
 <h2>📦 持仓（点击行展开判断/复核明细）</h2>
 ${ledger.positions.length ? `<table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>现价(卖)</th><th>浮盈亏</th><th>买入时间</th><th>明细</th></tr>${posRows}</table>` : '<div class="empty">暂无持仓</div>'}
 <h2>🔴 已卖出（累计 <span class="${pnlCls(soldTotal)}">${usd(soldTotal)}</span>，点击行展开判断/复核明细）</h2>

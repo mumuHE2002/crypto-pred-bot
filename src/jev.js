@@ -44,10 +44,18 @@ async function calibrateUp({ coinName, windowLabel, secondsLeft, feat, ds, upBuy
     `Down buy=${downBuy.toFixed(3)} mid=${downMid.toFixed(3)}.\n` +
     `Calibrate against momentum and time left; do NOT just echo the market price. ` +
     `With little time left, the current spot level vs the window-start price dominates the outcome.`;
-  const data = await callJev(state, {
+  const questions = {
     up: { type: 'noul', instructions: `What is the probability (0-100%) that this 15-minute "${coinName} Up or Down" market resolves to "Up"?` },
-  });
-  return { pUp: noulProb(data, 'up'), via: 'jev' };
+  };
+  const io = { state, questions };
+  try {
+    const data = await callJev(state, questions);
+    io.raw = JSON.stringify(data).slice(0, 4000);
+    return { pUp: noulProb(data, 'up'), via: 'jev', io };
+  } catch (e) {
+    e._io = io;
+    throw e;
+  }
 }
 
 /**
@@ -67,10 +75,18 @@ async function askExit({ pos, curSellPrice, secondsLeft }) {
     `If you SELL NOW you lock in ≈ ${usd(unreal)}. If you HOLD to expiry (≈${Math.max(0, Math.round(secondsLeft))}s left), ` +
     `you receive $1/share if ${pos.side.toUpperCase()} wins, $0 otherwise.\n` +
     `Resolution: Chainlink TWAP over the window vs window-start price.`;
-  const data = await callJev(state, {
+  const questions = {
     exit: { type: 'noul', instructions: `What is the probability (0-100%) that HOLDING this ${pos.side.toUpperCase()} position to expiry yields a HIGHER total P&L than SELLING it NOW at $${curSellPrice.toFixed(4)}/share?` },
-  });
-  return { probHoldBetter: noulProb(data, 'exit'), via: 'jev' };
+  };
+  const io = { state, questions };
+  try {
+    const data = await callJev(state, questions);
+    io.raw = JSON.stringify(data).slice(0, 4000);
+    return { probHoldBetter: noulProb(data, 'exit'), via: 'jev', io };
+  } catch (e) {
+    e._io = io;
+    throw e;
+  }
 }
 
 module.exports = { calibrateUp, askExit };

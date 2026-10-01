@@ -27,14 +27,54 @@ function mktName(slug) {
 
 function judgmentSubTable(judgs) {
   if (!judgs.length) return '';
-  return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th></tr>${judgs.slice().reverse().map(j =>
-    `<tr><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td></tr>`).join('')}</table>`;
+  const blocks = [];
+  const rows = judgs.slice().reverse().map(j => {
+    let mioBtn = '—';
+    if (j.io) {
+      const mid = mioId();
+      mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
+      blocks.push(mioBlock(mid, j.io));
+    }
+    return `<tr><td>${tstr(j.time)}</td><td>${j.secondsLeft}s</td><td>${j.upBuy}</td><td>${j.downBuy}</td><td>${j.pUp != null ? (j.pUp * 100).toFixed(1) + '%' : '—'}</td><td>${j.edgeUp != null ? pct(Math.max(j.edgeUp, j.edgeDown)) : '—'}</td><td>${j.dsDirection || '—'}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.bet ? '买入' + j.side + ' $' + j.stake : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
+  }).join('');
+  return `<div class="dh">📝 判断记录</div><table class="sub"><tr><th>时间</th><th>剩余</th><th>Up买入</th><th>Down买入</th><th>P(Up)</th><th>edge</th><th>DS</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table>${blocks.join('')}`;
 }
 
 function reviewSubTable(revs) {
   if (!revs.length) return '';
-  return `<div class="dh">🛟 退出复核</div><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th></tr>${revs.slice().reverse().map(r =>
-    `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${r.sellPrice}</td><td class="${pnlCls(r.unreal)}">${usd(r.unreal)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td></tr>`).join('')}</table>`;
+  const blocks = [];
+  const rows = revs.slice().reverse().map(r => {
+    const sellP = r.fillPrice != null ? r.fillPrice : r.sellPrice;
+    const un = r.fillUnreal != null ? r.fillUnreal : r.unreal;
+    let mioBtn = '—';
+    if (r.io) {
+      const mid = mioId();
+      mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
+      blocks.push(mioBlock(mid, r.io));
+    }
+    return `<tr><td>${tstr(r.time)}</td><td>${r.buyPrice}→${sellP}</td><td class="${pnlCls(un)}">${usd(un)}</td><td>${r.secondsLeft}s</td><td>${r.probHoldBetter != null ? (r.probHoldBetter * 100).toFixed(0) + '%' : '—'}</td><td>${r.decision === 'sell' ? '卖出' : r.decision === 'hold' ? '持有' : '跳过'}</td><td class="rs">${esc(r.reason || '')}</td><td>${mioBtn}</td></tr>`;
+  }).join('');
+  return `<div class="dh">🛟 退出复核</div><table class="sub"><tr><th>时间</th><th>买入→卖出</th><th>浮盈亏</th><th>剩余</th><th>持有更优</th><th>决策</th><th>原因</th><th>模型</th></tr>${rows}</table>${blocks.join('')}`;
+}
+
+// 模型 io 二级展开：发给模型的完整输入 + 原始输出，烘焙进 HTML
+let mioSeq = 0;
+function mioId() { return `mio${++mioSeq}`; }
+function mioBlock(mid, io) {
+  const secs = [];
+  if (io.ds) {
+    secs.push(`<div class="mioh">DeepSeek 输入（完整 prompt）</div><pre>${esc(io.ds.prompt || '')}</pre>`);
+    if (io.ds.raw) secs.push(`<div class="mioh">DeepSeek 原始返回</div><pre>${esc(io.ds.raw)}</pre>`);
+  }
+  if (io.jev) {
+    secs.push(`<div class="mioh">Jev 输入（state + 题目）</div><pre>${esc(io.jev.state || '')}\n\n题目：${esc(JSON.stringify(io.jev.questions))}</pre>`);
+    if (io.jev.raw) secs.push(`<div class="mioh">Jev 原始返回</div><pre>${esc(io.jev.raw)}</pre>`);
+  }
+  if (io.failed) {
+    secs.push(`<div class="mioh">失败时的输入（未拿到输出）</div><pre>${esc(io.failed.prompt || io.failed.state || '')}</pre>`);
+    if (io.failed.raw) secs.push(`<div class="mioh">失败时的原始返回</div><pre>${esc(io.failed.raw)}</pre>`);
+  }
+  return `<div class="mio" id="${mid}" style="display:none">${secs.join('')}</div>`;
 }
 
 function posUnreal(pos, prices) {
@@ -61,7 +101,7 @@ function renderHtml(ledger, prices, opts = {}) {
     return `<tr class="mainrow" data-detail="${detailId}">
       <td><a href="${esc(p.eventUrl)}" target="_blank">${mktName(p.slug)}</a></td>
       <td class="${p.side === 'up' ? 'pos' : 'neg'}">${p.side === 'up' ? 'Up' : 'Down'}</td>
-      <td>${p.buyPrice.toFixed(3)}</td><td>${p.shares.toFixed(1)}</td><td>$${p.stake.toFixed(2)}</td>
+      <td>${p.buyPrice.toFixed(3)}${p.decidePrice && p.decidePrice !== p.buyPrice ? `<div class="dim">决策${p.decidePrice.toFixed(3)}</div>` : ''}</td><td>${p.shares.toFixed(1)}</td><td>$${p.stake.toFixed(2)}</td>
       <td>${u ? u.sell.toFixed(3) : '—'}</td>
       <td class="${u ? pnlCls(u.unreal) : ''}">${u ? usd(u.unreal) + ' (' + pct(u.unrealPct) + ')' : '—'}</td>
       <td>${tstr(p.buyTime)}</td>
@@ -109,7 +149,7 @@ function renderHtml(ledger, prices, opts = {}) {
   const tradeRows = ledger.trades.slice().reverse().slice(0, 60).map(t =>
     `<tr><td>${tstr(t.time)}</td><td>${mktName(t.slug)}</td>
      <td class="${t.side === 'buy' ? 'pos' : t.side === 'sell' ? 'neg' : ''}">${t.side === 'buy' ? '买入' : t.side === 'sell' ? '卖出' : '结算'}</td>
-     <td>${t.outcome ? t.outcome.toUpperCase() : '—'}</td><td>${t.price}</td><td>${t.shares}</td>
+     <td>${t.outcome ? t.outcome.toUpperCase() : '—'}</td><td>${t.price}${t.decidePrice && t.decidePrice !== t.price ? `<div class="dim">决策${Number(t.decidePrice).toFixed(3)}</div>` : ''}</td><td>${t.shares}</td>
      <td>$${Number(t.stake).toFixed(2)}</td><td class="rs">${esc(t.reason || '')}</td></tr>`).join('');
 
   const settleRows = settled.slice().reverse().map((s, i) => {
@@ -150,6 +190,11 @@ a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d
 .sub{margin:8px 0;background:#141b2c}.dh{font-size:12px;color:#8b93a7;margin:10px 0 4px}
 .rs{max-width:340px;word-break:break-word;color:#9aa4b8}
 .empty{color:#5c6579;padding:14px;font-size:12px}
+.exp2{background:#2a3348;border:0;color:#c9d1d9;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:12px}
+.mio{margin:6px 0 12px;background:#10182a;border-radius:6px;padding:4px 10px 10px}
+.mioh{font-size:11px;color:#8b93a7;margin:10px 0 4px}
+.mio pre{background:#0b1120;padding:8px;border-radius:4px;font-size:11px;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;margin:0;color:#c9d1d9}
+.dim{font-size:10px;color:#5c6579}
 </style></head><body>
 <h1>🪙 Polymarket Crypto 15m 模拟盘${live}</h1>
 <div class="meta">更新：${updated} · BTC/ETH × 15m · 本金 $${cfg.BANKROLL_USD} · PAPER_MODE</div>
@@ -171,11 +216,19 @@ ${ledger.trades.length ? `<table><tr><th>时间</th><th>市场</th><th>动作</t
 ${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table>` : ''}
 <script>
 document.addEventListener('click',e=>{
-  const b=e.target.closest('.exp'); if(!b) return;
-  const d=document.getElementById(b.dataset.t);
-  const open=d.style.display!=='none';
-  d.style.display=open?'none':'table-row';
-  b.textContent=(open?'▸ ':'▾ ')+b.textContent.replace(/^[▸▾] /,'');
+  const b=e.target.closest('.exp');
+  if(b){
+    const d=document.getElementById(b.dataset.t);
+    const open=d.style.display!=='none';
+    d.style.display=open?'none':'table-row';
+    b.textContent=(open?'▸ ':'▾ ')+b.textContent.replace(/^[▸▾] /,'');
+    return;
+  }
+  const b2=e.target.closest('.exp2'); if(!b2) return;
+  const d2=document.getElementById(b2.dataset.t);
+  const open2=d2.style.display!=='none';
+  d2.style.display=open2?'none':'block';
+  b2.textContent=(open2?'▸ ':'▾ ')+b2.textContent.replace(/^[▸▾] /,'');
 });
 </script>
 </body></html>`;

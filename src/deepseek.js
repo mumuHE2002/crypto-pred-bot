@@ -31,7 +31,10 @@ async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, can
     `the window-start price. Consider: with little time left, the current spot vs the start price ` +
     `dominates; with more time left, momentum and volatility matter more.\n` +
     `Respond with ONLY a JSON object: {"direction":"up"|"down"|"neutral","confidence":0.0-1.0,"reason":"one sentence"}.`;
-  const res = await fetchWithTimeout(`${cfg.JEV_API_BASE}/provider/v1/chat/completions`, {
+  // io 留档：页面可展开看每次发给模型的完整输入和原始输出
+  const io = { prompt };
+  try {
+    const res = await fetchWithTimeout(`${cfg.JEV_API_BASE}/provider/v1/chat/completions`, {
     method: 'POST',
     timeoutMs: cfg.DEEPSEEK_TIMEOUT_MS,
     headers: {
@@ -62,7 +65,12 @@ async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, can
   }
   const direction = ['up', 'down', 'neutral'].includes(j.direction) ? j.direction : 'neutral';
   const confidence = Math.max(0, Math.min(1, Number(j.confidence) || 0));
-  return { direction, confidence, reason: String(j.reason || '').slice(0, 300), via: 'deepseek' };
+  io.raw = String(text).slice(0, 6000);
+  return { direction, confidence, reason: String(j.reason || '').slice(0, 300), via: 'deepseek', io };
+  } catch (e) {
+    e._io = io; // 失败也把 prompt 留给调用方存档
+    throw e;
+  }
 }
 
 /**
@@ -74,7 +82,8 @@ async function analyze(args) {
     return await analyzeOnce(args);
   } catch (e) {
     const msg = String((e && e.message) || e);
-    if (/JSON|未返回|解析失败|length/.test(msg)) {
+    // 本地超时掐断（abort）也重试一次：推理模型间歇性慢，>90s 会被自家超时杀掉
+    if (/JSON|未返回|解析失败|length|abort|aborted|超时|timeout/i.test(msg)) {
       console.error(`[deepseek] 首次调用失败，重试一次：${msg.slice(0, 120)}`);
       return await analyzeOnce(args);
     }

@@ -13,7 +13,7 @@ function extractJson(text) {
  * 分析 15m 窗口的涨跌方向（单次调用）
  * @returns { direction: 'up'|'down'|'neutral', confidence: 0..1, reason, via: 'deepseek' }
  */
-async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, candleText, upBuy, downBuy, upMid, downMid }) {
+async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, candleText, windowHistoryText, upBuy, downBuy, upMid, downMid }) {
   if (!cfg.JEV_API_KEY) throw new Error('未配置 JEV_API_KEY（commandcode key）');
   const prompt =
     `You are a crypto momentum analyst for a PAPER-TRADING bot (no real money).\n` +
@@ -27,9 +27,13 @@ async function analyzeOnce({ coin, coinName, windowLabel, secondsLeft, feat, can
     `Spot momentum (Coinbase 1m candles, last ${feat.n} min): drift=${feat.driftBps}bps, ` +
     `per-min volatility=${feat.volBps}bps, range=${feat.rangeBps}bps, RSI14=${feat.rsi14}, last=${feat.last}.\n` +
     `Recent candles (UTC, close, 1m change):\n${candleText}\n` +
+    (windowHistoryText
+      ? `Recent 15-minute windows, Coinbase spot (TWAP vs window-start price; labels +08:00; Chainlink TWAP may differ slightly, use as context only):\n${windowHistoryText}\n`
+      : '') +
     `Task: judge whether the window TWAP is more likely to finish ABOVE/EQUAL (Up) or BELOW (Down) ` +
     `the window-start price. Consider: with little time left, the current spot vs the start price ` +
-    `dominates; with more time left, momentum and volatility matter more.\n` +
+    `dominates (see the last line of the window history for the exact bias); with more time left, momentum and volatility matter more. ` +
+    `Use the past windows only as regime context (trend day vs choppy day), not as a vote count.\n` +
     `Respond with ONLY a JSON object: {"direction":"up"|"down"|"neutral","confidence":0.0-1.0,"reason":"one sentence"}.`;
   // io 留档：页面可展开看每次发给模型的完整输入和原始输出
   const io = { prompt };

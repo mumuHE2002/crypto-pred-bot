@@ -3,6 +3,7 @@ const cfg = require('./config');
 const { load, save, pushCapped, recordEquity } = require('./store');
 const pm = require('./polymarket');
 const spot = require('./spot');
+const wh = require('./windowhist');
 const ds = require('./deepseek');
 const jev = require('./jev');
 const brain = require('./brain');
@@ -103,9 +104,14 @@ async function evaluateMarket(coin) {
   const hasPos = ledger.positions.some(p => p.slug === mkt.slug);
   if (!hasPos && mkt.secondsLeft >= cfg.MIN_SECONDS_LEFT && ledger.wallet >= cfg.MIN_BET_USD) {
     try {
-      const candles = await spot.fetchCandles(coin, 30);
-      const feat = spot.features(candles);
-      const candleText = spot.candlesText(candles, 15);
+      const candles = await spot.fetchCandles(coin, 120);
+      const c30 = candles.slice(-30); // 动量特征保持原口径：只用最近30根
+      const feat = spot.features(c30);
+      const candleText = spot.candlesText(c30, 15);
+      // 2026-10-02 用户拍板：喂历史窗口数据（前6个15m窗口 UP/DOWN+幅度，最后一行是当前盘实时偏向），照搬5m
+      let histText = '';
+      try { histText = wh.windowHistoryText(candles, mkt.start, cfg.WINDOW_SEC, cfg.HISTORY_WINDOWS); }
+      catch (he) { console.error(`[${coin}] 历史窗口数据失败，继续：${he.message}`); }
       // C方案（2026-10-02 用户拍板降本）：Jev 先行粗筛。Jev 单次约 $0.00002，
       // DeepSeek 约 $0.0013/次；maxEdge < JEV_PREFILTER_EDGE 直接跳过 DS。
       // 预筛不用 DS 视角（还没调 DS）；通过后走原流程，终判仍用带 DS 视角的校准。
@@ -123,7 +129,7 @@ async function evaluateMarket(coin) {
         pre = await jev.calibrateUp({
           coinName, windowLabel: label, secondsLeft: mkt.secondsLeft,
           feat, ds: { direction: 'n/a', confidence: 0, reason: 'pre-screen without analyst view' },
-          upBuy, downBuy, upMid, downMid,
+          upBuy, downBuy, upMid, downMid, windowHistoryText: histText,
         });
       } catch (e) {
         // Jev 粗筛失败 → 按铁律不下单（等同模型失败，确认链断裂）
@@ -149,12 +155,12 @@ async function evaluateMarket(coin) {
       }
       const dsr = await ds.analyze({
         coin, coinName, windowLabel: label, secondsLeft: mkt.secondsLeft,
-        feat, candleText, upBuy, downBuy, upMid, downMid,
+        feat, candleText, windowHistoryText: histText, upBuy, downBuy, upMid, downMid,
       });
       judgment.io.ds = dsr.io; // 保留前面的 jevPre，不覆盖
       const j = await jev.calibrateUp({
         coinName, windowLabel: label, secondsLeft: mkt.secondsLeft,
-        feat, ds: dsr, upBuy, downBuy, upMid, downMid,
+        feat, ds: dsr, upBuy, downBuy, upMid, downMid, windowHistoryText: histText,
       });
       judgment.io.jev = j.io;
       const d = brain.decide({

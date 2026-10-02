@@ -50,6 +50,7 @@ module.exports = {
   EDGE_CONFIRM_MAX_PUP_DRIFT: num('EDGE_CONFIRM_MAX_PUP_DRIFT', 0.15), // 确认链概率稳定性：两次确认间 Jev P(Up) 变化超过 15 个百分点则重置（2026-10-01 用户拍板，防概率崩了但价格崩更快造出的幻影 edge）
   EVAL_COOLDOWN_MS: num('EVAL_COOLDOWN_MS', 60000), // 上次评估结束后等待 60s（2026-10-02 用户拍板降本，30s→60s）
   JEV_PREFILTER_EDGE: num('JEV_PREFILTER_EDGE', 0.04), // Jev 粗筛线：maxEdge 低于此直接跳过 DeepSeek（2026-10-02 用户拍板降本；Jev 单次约$0.00002，DS 约$0.0013）
+  HISTORY_WINDOWS: num('HISTORY_WINDOWS', 6), // 喂给模型的历史窗口数（不含当前盘；2026-10-02 用户拍板，照搬5m）
   MIN_SECONDS_LEFT: num('MIN_SECONDS_LEFT', 180), // 剩余不足 3 分钟不再开新仓（2026-10-01 用户要求）
   MAX_BUY_PRICE: num('MAX_BUY_PRICE', 0.92), // 买入价高于此视为结果已定
   EXIT_UNREAL_PCT: num('EXIT_UNREAL_PCT', 0.15), // 浮盈亏 |≥15%| 才触发退出复核

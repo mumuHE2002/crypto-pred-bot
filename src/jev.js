@@ -30,7 +30,7 @@ function noulProb(data, name) {
  * 校准 P(Up)：DeepSeek 分析 + 现货动量 + 盘口价 → Up 获胜概率
  * @returns { pUp: 0..1, via: 'jev' }
  */
-async function calibrateUp({ coinName, windowLabel, secondsLeft, feat, ds, upBuy, downBuy, upMid, downMid }) {
+async function calibrateUp({ coinName, windowLabel, secondsLeft, feat, ds, upBuy, downBuy, upMid, downMid, windowHistoryText }) {
   if (!cfg.JEV_API_KEY) throw new Error('未配置 JEV_API_KEY');
   const state =
     `You are calibrating a probability for a PAPER-TRADING bot (no real money).\n` +
@@ -42,8 +42,13 @@ async function calibrateUp({ coinName, windowLabel, secondsLeft, feat, ds, upBuy
     `range=${feat.rangeBps}bps, RSI14=${feat.rsi14}.\n` +
     `Market prices (implied probabilities): Up buy=${upBuy.toFixed(3)} mid=${upMid.toFixed(3)} | ` +
     `Down buy=${downBuy.toFixed(3)} mid=${downMid.toFixed(3)}.\n` +
+    (windowHistoryText
+      ? `Recent 15-minute windows, Coinbase spot (TWAP vs window-start price; labels +08:00; Chainlink TWAP may differ slightly, use as context only):\n${windowHistoryText}\n`
+      : '') +
     `Calibrate against momentum and time left; do NOT just echo the market price. ` +
-    `With little time left, the current spot level vs the window-start price dominates the outcome.`;
+    `With little time left, the current spot level vs the window-start price dominates the outcome ` +
+    `(see the last line of the window history for the exact bias). ` +
+    `Use past windows only as regime context, not as a vote count.`;
   const questions = {
     up: { type: 'noul', instructions: `What is the probability (0-100%) that this 15-minute "${coinName} Up or Down" market resolves to "Up"?` },
   };

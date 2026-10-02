@@ -106,11 +106,52 @@ async function evaluateMarket(coin) {
       const candles = await spot.fetchCandles(coin, 30);
       const feat = spot.features(candles);
       const candleText = spot.candlesText(candles, 15);
+      // C方案（2026-10-02 用户拍板降本）：Jev 先行粗筛。Jev 单次约 $0.00002，
+      // DeepSeek 约 $0.0013/次；maxEdge < JEV_PREFILTER_EDGE 直接跳过 DS。
+      // 预筛不用 DS 视角（还没调 DS）；通过后走原流程，终判仍用带 DS 视角的校准。
+      // 注意：预筛 edge 用 brain.decide 同口径（抹 4 位小数后比可成交价）。
+      const finishEarly = () => {
+        judgment.ms = Date.now() - t0;
+        pushCapped(ledger.judgments, judgment, 300);
+        const jWithIo = ledger.judgments.filter(x => x.io);
+        for (let k = 0; k < jWithIo.length - 100; k++) delete jWithIo[k].io;
+        persist();
+        try { buildReport(); } catch (e2) { console.error('[report]', e2.message); }
+      };
+      let pre = null;
+      try {
+        pre = await jev.calibrateUp({
+          coinName, windowLabel: label, secondsLeft: mkt.secondsLeft,
+          feat, ds: { direction: 'n/a', confidence: 0, reason: 'pre-screen without analyst view' },
+          upBuy, downBuy, upMid, downMid,
+        });
+      } catch (e) {
+        // Jev 粗筛失败 → 按铁律不下单（等同模型失败，确认链断裂）
+        edgeConfirm.delete(confirmKey(coin, mkt));
+        if (e._io) judgment.io = { jevPreFailed: e._io };
+        judgment.error = String(e.message || e).slice(0, 200);
+        judgment.bet = false; judgment.reason = 'Jev 粗筛失败，不下单：' + judgment.error;
+        logError(ledger, `eval-${coin}-jevpre`, e);
+        console.log(`[${coin} ${label}] Jev 粗筛失败，跳过`);
+        finishEarly(); return;
+      }
+      const preEdgeUp = r4(pre.pUp - upBuy), preEdgeDown = r4((1 - pre.pUp) - downBuy);
+      const preEdge = Math.max(preEdgeUp, preEdgeDown);
+      judgment.io = { jevPre: pre.io };
+      judgment.pUp = r4(pre.pUp); judgment.edgeUp = preEdgeUp; judgment.edgeDown = preEdgeDown;
+      if (preEdge < cfg.JEV_PREFILTER_EDGE) {
+        // 粗筛未过 → 等同未达标，确认链断裂，不调 DeepSeek
+        edgeConfirm.delete(confirmKey(coin, mkt));
+        judgment.bet = false;
+        judgment.reason = `Jev 粗筛 maxEdge ${(preEdge * 100).toFixed(1)}%<${(cfg.JEV_PREFILTER_EDGE * 100).toFixed(0)}%，跳过 DeepSeek`;
+        console.log(`[${coin} ${label}] 粗筛未过（maxEdge ${(preEdge * 100).toFixed(1)}%），跳过 DS`);
+        finishEarly(); return;
+      }
       const dsr = await ds.analyze({
         coin, coinName, windowLabel: label, secondsLeft: mkt.secondsLeft,
         feat, candleText, upBuy, downBuy, upMid, downMid,
       });
-      judgment.io = { ds: dsr.io };
+      judgment.io.ds = dsr.io; // 保留前面的 jevPre，不覆盖
       const j = await jev.calibrateUp({
         coinName, windowLabel: label, secondsLeft: mkt.secondsLeft,
         feat, ds: dsr, upBuy, downBuy, upMid, downMid,
@@ -247,7 +288,7 @@ async function reviewExit(coin, mkt, pos, label) {
   const unrealPct = unreal / pos.stake;
   const skipReason =
     Math.abs(unrealPct) < cfg.EXIT_UNREAL_PCT ? `浮盈亏 ${(unrealPct * 100).toFixed(1)}% 未达 ±${cfg.EXIT_UNREAL_PCT * 100}%` : null;
-  // 2026-10-01 用户拍板：去掉冷静期。每轮评估（约30-60s）只要 |浮盈亏|≥15% 就问 Jev，
+  // 2026-10-01 用户拍板：去掉冷静期。每轮评估（约60-120s，2026-10-02 降本 30s→60s）只要 |浮盈亏|≥15% 就问 Jev，
   // 触发器本身就是节流阀；15分钟盘里 3 分钟盲区太长。
   const base = {
     time: nowIso(), coin, slug: mkt.slug, windowLabel: label, eventUrl: mkt.eventUrl,

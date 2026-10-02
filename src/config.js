@@ -28,7 +28,7 @@ module.exports = {
   JEV_API_KEY: process.env.JEV_API_KEY || '',
   JEV_MODEL: process.env.JEV_MODEL || 'typesafe/jev',
   JEV_TIMEOUT_MS: 90000,
-  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash-fast',
+  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash',
   DEEPSEEK_MAX_TOKENS: Number(process.env.DEEPSEEK_MAX_TOKENS) || 32000,
   // Fast 是重推理模型，单次调用常超过 90s；给到 180s（.env 可调）
   DEEPSEEK_TIMEOUT_MS: Number(process.env.DEEPSEEK_TIMEOUT_MS) || 180000,

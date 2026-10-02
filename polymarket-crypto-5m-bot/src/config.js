@@ -26,7 +26,7 @@ module.exports = {
   // 模型网关（沿用 commandcode key，只用 DeepSeek，不用 Jev）
   JEV_API_BASE: (process.env.JEV_API_BASE || 'https://api.commandcode.ai').replace(/\/+$/, ''),
   JEV_API_KEY: process.env.JEV_API_KEY || '',
-  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash-fast',
+  DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash',
   DEEPSEEK_MAX_TOKENS: Number(process.env.DEEPSEEK_MAX_TOKENS) || 32000,
   DEEPSEEK_TIMEOUT_MS: Number(process.env.DEEPSEEK_TIMEOUT_MS) || 180000,
 

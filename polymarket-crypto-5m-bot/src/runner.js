@@ -1,12 +1,15 @@
 // 5m 盘主循环：每币种独立评估循环（上次结束后 30s 再评估）+ 结算轮询（60s）
-// 规则（2026-10-01 用户拍板）：
-// - 当前盘剩余 ≤120s 时，预测「下一个」5m 窗口；只用 DeepSeek 给方向
+// 规则（2026-10-02 用户拍板）：
+// - 当前盘剩余 ≤50s 时，预测「下一个」5m 窗口
+// - 双模型确认：DeepSeek V4.1 Flash + Muse Spark 1.3 Contributor，方向一致才下单
+// - 输入：Coinbase 30 根 1m K 线及动量特征 + 当前盘及前 6 个盘的窗口数据
 // - 只买 0.48–0.52 价格的，价格不合适不买；中途不卖出，持有到期
-// - 注额按 DeepSeek 置信度分档：0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3；<0.57 不下单
+// - 注额按双模型置信度较低者分档：0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3；<0.57 不下单
 const cfg = require('./config');
 const { load, save, pushCapped, recordEquity } = require('./store');
 const pm = require('./polymarket');
 const spot = require('./spot');
+const wh = require('./windowhist');
 const ds = require('./deepseek');
 const fillMod = require('./fill');
 const { buildReport } = require('./report');
@@ -113,32 +116,63 @@ async function evaluateMarket(coin) {
     upBuy: r4(upBuy), downBuy: r4(downBuy), upMid: r4(upMid), downMid: r4(downMid),
   });
 
-  // DeepSeek 给方向（唯一决策依据）
-  let dsr;
+  // 双模型给方向：DeepSeek V4.1 Flash + Muse Spark 1.3 Contributor，方向一致才下单（用户拍板 2026-10-02）
+  let dsr, muser, feat;
   try {
-    const candles = await spot.fetchCandles(coin, 30);
-    const feat = spot.features(candles);
-    const candleText = spot.candlesText(candles, 15);
-    dsr = await ds.analyze({
+    const candles = await spot.fetchCandles(coin, 45);
+    const c30 = candles.slice(-30);
+    feat = spot.features(c30);
+    const candleText = spot.candlesText(c30, 15);
+    let histText = '';
+    try { histText = wh.windowHistoryText(candles, curStart, cfg.WINDOW_SEC, cfg.HISTORY_WINDOWS); }
+    catch (he) { console.error(`[${coin}] 历史窗口数据失败，继续：${he.message}`); }
+    const modelArgs = {
       coin, coinName, windowLabel: nextLabel, secondsLeft: nextStart - nowSec,
-      feat, candleText, upBuy, downBuy, upMid, downMid,
-    });
-    judgment.io = { ds: dsr.io };
+      feat, candleText, windowHistoryText: histText, upBuy, downBuy, upMid, downMid,
+    };
+    const [dsRes, museRes] = await Promise.allSettled([ds.analyze(modelArgs), ds.analyzeMuse(modelArgs)]);
+    if (dsRes.status === 'rejected') {
+      const e = dsRes.reason;
+      if (e._io && !judgment.io) judgment.io = { failed: e._io };
+      judgment.bet = false;
+      judgment.reason = 'DeepSeek 失败，不下单：' + String(e.message || e).slice(0, 150);
+      logError(ledger, `eval-${coin}-ds`, e);
+      return finish();
+    }
+    if (museRes.status === 'rejected') {
+      const e = museRes.reason;
+      if (e._io) judgment.io = { ...(judgment.io || {}), museFailed: e._io };
+      judgment.bet = false;
+      judgment.reason = 'Muse 失败，不下单：' + String(e.message || e).slice(0, 150);
+      logError(ledger, `eval-${coin}-muse`, e);
+      return finish();
+    }
+    dsr = dsRes.value; muser = museRes.value;
+    judgment.io = { ds: dsr.io, muse: muser.io };
     Object.assign(judgment, {
       dsDirection: dsr.direction, dsConfidence: r4(dsr.confidence), dsReason: dsr.reason,
+      museDirection: muser.direction, museConfidence: r4(muser.confidence), museReason: muser.reason,
       driftBps: feat.driftBps, volBps: feat.volBps, rangeBps: feat.rangeBps, rsi14: feat.rsi14,
     });
   } catch (e) {
     if (e._io && !judgment.io) judgment.io = { failed: e._io };
     judgment.bet = false;
-    judgment.reason = 'DeepSeek 失败，不下单：' + String(e.message || e).slice(0, 150);
-    logError(ledger, `eval-${coin}-ds`, e);
+    judgment.reason = '取 K 线失败，不下单：' + String(e.message || e).slice(0, 150);
+    logError(ledger, `eval-${coin}-spot`, e);
     return finish();
   }
 
-  if (dsr.direction === 'neutral') {
-    judgment.bet = false; judgment.reason = 'DeepSeek 中性，无明确方向，不下注';
-    console.log(`[${coin} ${nextLabel}] DS 中性，跳过`);
+  const dirName = d => d === 'up' ? '涨' : d === 'down' ? '跌' : '中性';
+  if (dsr.direction === 'neutral' || muser.direction === 'neutral') {
+    judgment.bet = false;
+    judgment.reason = `有模型中性（DS${dirName(dsr.direction)} / Muse${dirName(muser.direction)}），无明确方向，不下注`;
+    console.log(`[${coin} ${nextLabel}] 有模型中性，跳过`);
+    return finish();
+  }
+  if (dsr.direction !== muser.direction) {
+    judgment.bet = false;
+    judgment.reason = `双模型方向不一致（DS看${dirName(dsr.direction)} / Muse看${dirName(muser.direction)}），不下注`;
+    console.log(`[${coin} ${nextLabel}] 双模型方向不一致，跳过`);
     return finish();
   }
 
@@ -146,19 +180,19 @@ async function evaluateMarket(coin) {
   const price = side === 'up' ? upBuy : downBuy;
   judgment.side = side;
 
-  // 置信度门槛：DeepSeek 置信度 < 57% 不下单（用户拍板 2026-10-02）
-  const confR = r4(dsr.confidence);
+  // 置信度门槛：取双模型置信度较低者，< 57% 不下单（用户拍板 2026-10-02 双模型确认）
+  const confR = r4(Math.min(dsr.confidence, muser.confidence));
   if (!(confR >= cfg.DS_MIN_CONF)) {
     judgment.bet = false;
-    judgment.reason = `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(confR * 100).toFixed(1)}%)，置信度 < 57%，不下注`;
-    console.log(`[${coin} ${nextLabel}] DS 置信度 ${(confR * 100).toFixed(1)}% < 57%，跳过`);
+    judgment.reason = `双模型看${side === 'up' ? '涨' : '跌'}（DS ${(r4(dsr.confidence) * 100).toFixed(1)}% / Muse ${(r4(muser.confidence) * 100).toFixed(1)}%），取较低者 ${(confR * 100).toFixed(1)}% < 57%，不下注`;
+    console.log(`[${coin} ${nextLabel}] 双模型较低置信度 ${(confR * 100).toFixed(1)}% < 57%，跳过`);
     return finish();
   }
 
   // 价格过滤：只买 0.48–0.52
   if (!(price >= cfg.PRICE_MIN && price <= cfg.PRICE_MAX)) {
     judgment.bet = false;
-    judgment.reason = `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(dsr.confidence * 100).toFixed(0)}%)，但${side.toUpperCase()}买入价 ${price.toFixed(3)} 不在 0.48–0.52，不买`;
+    judgment.reason = `双模型看${side === 'up' ? '涨' : '跌'}(较低置信度${(confR * 100).toFixed(0)}%)，但${side.toUpperCase()}买入价 ${price.toFixed(3)} 不在 0.48–0.52，不买`;
     console.log(`[${coin} ${nextLabel}] 价格 ${price.toFixed(3)} 不在区间，跳过`);
     return finish();
   }
@@ -208,17 +242,18 @@ async function evaluateMarket(coin) {
     buyTime: nowIso(), confTier, dsConf: confR,
     fillLevels: fill.levelsUsed, unfilledCost: fill.unfilledCost,
     dsDirection: dsr.direction, dsConfidence: r4(dsr.confidence), dsReason: dsr.reason,
+    museDirection: muser.direction, museConfidence: r4(muser.confidence), museReason: muser.reason,
   });
   ledger.trades.push({
     time: nowIso(), slug: nextSlug, side: 'buy', outcome: side,
     price: r4(buyPrice), decidePrice: r4(price), shares: fill.filledShares, stake: fill.filledCost,
-    reason: `DeepSeek 看${side === 'up' ? '涨' : '跌'}(${(confR * 100).toFixed(1)}%)，置信度分档 $${confTier}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
+    reason: `双模型看${side === 'up' ? '涨' : '跌'}(DS ${(r4(dsr.confidence) * 100).toFixed(1)}% / Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，取较低${(confR * 100).toFixed(1)}%)，置信度分档 $${confTier}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
   });
   Object.assign(judgment, {
     bet: true, stake: fill.filledCost, confTier,
-    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(confR * 100).toFixed(1)}%，置信度分档 $${confTier}）`,
+    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(r4(dsr.confidence) * 100).toFixed(1)}% + Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，置信度分档 $${confTier}）`,
   });
-  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(confR * 100).toFixed(1)}%，分档 $${confTier}）`);
+  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(r4(dsr.confidence) * 100).toFixed(1)}% + Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，分档 $${confTier}）`);
   return finish();
 }
 
@@ -245,6 +280,7 @@ async function settleOnce() {
       coin: pos.coin, side: pos.side, win, shares: pos.shares, payout, pnl,
       buyPrice: pos.buyPrice, stake: pos.stake,
       dsDirection: pos.dsDirection, dsConfidence: pos.dsConfidence, dsReason: pos.dsReason,
+      museDirection: pos.museDirection, museConfidence: pos.museConfidence, museReason: pos.museReason,
       confTier: pos.confTier,
     });
     console.log(`[settle ${pos.coin} ${pos.windowLabel}] ${pos.side.toUpperCase()} ${win ? '命中' : '归零'} ${usd(pnl)}`);
@@ -300,7 +336,7 @@ if (require.main === module) {
   if (arg === 'once') {
     once(process.argv[3] || 'btc').then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1); });
   } else {
-    console.log(`polymarket-crypto-5m-bot 启动（PAPER_MODE=${cfg.PAPER_MODE}，本金 $${cfg.BANKROLL_USD}，5m/DeepSeek/置信度分档）`);
+    console.log(`polymarket-crypto-5m-bot 启动（PAPER_MODE=${cfg.PAPER_MODE}，本金 $${cfg.BANKROLL_USD}，5m/双模型/置信度分档）`);
     cfg.COINS.forEach(marketLoop);
     settleLoop();
   }

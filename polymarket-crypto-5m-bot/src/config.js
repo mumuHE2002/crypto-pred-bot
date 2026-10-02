@@ -29,6 +29,11 @@ module.exports = {
   DEEPSEEK_MODEL: process.env.DEEPSEEK_MODEL || 'deepseek/deepseek-v4.1-flash',
   DEEPSEEK_MAX_TOKENS: Number(process.env.DEEPSEEK_MAX_TOKENS) || 32000,
   DEEPSEEK_TIMEOUT_MS: Number(process.env.DEEPSEEK_TIMEOUT_MS) || 180000,
+  // 第二确认模型：Muse Spark 1.3 Contributor（双模型方向一致才下单，用户拍板 2026-10-02）
+  MUSE_MODEL: process.env.MUSE_MODEL || 'meta/muse-spark-1.3-contributor',
+  MUSE_MAX_TOKENS: Number(process.env.MUSE_MAX_TOKENS) || 16000,
+  MUSE_TIMEOUT_MS: Number(process.env.MUSE_TIMEOUT_MS) || 180000,
+  HISTORY_WINDOWS: num('HISTORY_WINDOWS', 6), // 喂给模型的历史窗口数（不含当前盘）
 
   PORT: num('PORT', 3201),
   PAPER_MODE: process.env.PAPER_MODE !== 'false',
@@ -38,7 +43,7 @@ module.exports = {
   WINDOW_SEC: 300, // 5m
   BANKROLL_USD: num('BANKROLL_USD', 200),
   MIN_BET_USD: num('MIN_BET_USD', 1),
-  PREDICT_AHEAD_SEC: num('PREDICT_AHEAD_SEC', 120), // 当前盘剩余≤120s 时预测下一个盘
+  PREDICT_AHEAD_SEC: num('PREDICT_AHEAD_SEC', 50), // 当前盘剩余≤50s 时预测下一个盘（用户拍板 2026-10-02）
   PRICE_MIN: num('PRICE_MIN', 0.48), // 只买 0.48–0.52 的价格
   PRICE_MAX: num('PRICE_MAX', 0.52),
   DS_MIN_CONF: num('DS_MIN_CONF', 0.57), // DeepSeek 置信度低于此不下单

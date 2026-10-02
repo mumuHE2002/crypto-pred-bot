@@ -37,8 +37,10 @@ function judgmentSubTable(judgs) {
       mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
       blocks.push(mioBlock(mid, j.io));
     }
-    const conf = j.confTier != null ? `$${j.confTier}（DS${j.dsConfidence != null ? (j.dsConfidence * 100).toFixed(0) + '%' : ''}）` : '—';
-    return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secToNextStart != null ? j.secToNextStart + 's' : '—'}</td><td>${j.upBuy != null ? j.upBuy : '—'}</td><td>${j.downBuy != null ? j.downBuy : '—'}</td><td class="${j.dsDirection === 'up' ? 'pos' : j.dsDirection === 'down' ? 'neg' : ''}">${dsName(j.dsDirection)}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}</td><td>${j.driftBps != null ? j.driftBps + 'bps·RSI' + j.rsi14 : '—'}</td><td>${conf}</td><td>${j.bet ? '买入' + (j.side === 'up' ? '涨' : '跌') + ' $' + Number(j.stake).toFixed(2) : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}</td><td>${mioBtn}</td></tr>`;
+    const conf = j.confTier != null ? `$${j.confTier}（DS${j.dsConfidence != null ? (j.dsConfidence * 100).toFixed(0) + '%' : ''}·Muse${j.museConfidence != null ? (j.museConfidence * 100).toFixed(0) + '%' : ''}）` : '—';
+    const dirCell = `${dsName(j.dsDirection)}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}` +
+      (j.museDirection ? `<br><span class="dim">Muse ${dsName(j.museDirection)}${j.museConfidence != null ? ' ' + (j.museConfidence * 100).toFixed(0) + '%' : ''}</span>` : '');
+    return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secToNextStart != null ? j.secToNextStart + 's' : '—'}</td><td>${j.upBuy != null ? j.upBuy : '—'}</td><td>${j.downBuy != null ? j.downBuy : '—'}</td><td class="${j.dsDirection === 'up' ? 'pos' : j.dsDirection === 'down' ? 'neg' : ''}">${dirCell}</td><td>${j.driftBps != null ? j.driftBps + 'bps·RSI' + j.rsi14 : '—'}</td><td>${conf}</td><td>${j.bet ? '买入' + (j.side === 'up' ? '涨' : '跌') + ' $' + Number(j.stake).toFixed(2) : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}${j.museReason ? '<br>Muse：' + esc(j.museReason) : ''}</td><td>${mioBtn}</td></tr>`;
   }).join('');
   return `<div class="dh">📝 判断记录</div><div class="twrap"><table class="sub"><tr><th>预测窗口</th><th>判断时间</th><th>距开盘</th><th>Up买入</th><th>Down买入</th><th>DS方向</th><th>动量</th><th>置信度</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
 }
@@ -51,6 +53,9 @@ function mioBlock(mid, io) {
   if (io.ds) {
     secs.push(`<div class="mioh">DeepSeek 输入（完整 prompt）</div><pre>${esc(io.ds.prompt || '')}</pre>`);
     if (io.ds.raw) secs.push(`<div class="mioh">DeepSeek 原始返回</div><pre>${esc(io.ds.raw)}</pre>`);
+  }
+  if (io.muse) {
+    if (io.muse.raw) secs.push(`<div class="mioh">Muse Spark 1.3 Contributor 原始返回</div><pre>${esc(io.muse.raw)}</pre>`);
   }
   if (io.failed) {
     secs.push(`<div class="mioh">失败时的输入（未拿到输出）</div><pre>${esc(io.failed.prompt || io.failed.state || '')}</pre>`);
@@ -87,8 +92,8 @@ function renderHtml(ledger, prices, opts = {}) {
       <td>${u ? u.px.toFixed(3) : '—'}</td>
       <td class="${u ? pnlCls(u.unreal) : ''}">${u ? usd(u.unreal) : '—'}</td>
       <td>${tstr(p.buyTime)}</td>
-      <td>${p.dsDirection ? dsName(p.dsDirection) + (p.dsConfidence != null ? ' ' + (p.dsConfidence * 100).toFixed(0) + '%' : '') : '—'}</td>
-      <td>${p.confTier != null ? `$${p.confTier}（DS${p.dsConfidence != null ? (p.dsConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
+      <td>${p.dsDirection ? dsName(p.dsDirection) + (p.dsConfidence != null ? ' ' + (p.dsConfidence * 100).toFixed(0) + '%' : '') + (p.museDirection ? '<div class="dim">Muse ' + dsName(p.museDirection) + (p.museConfidence != null ? ' ' + (p.museConfidence * 100).toFixed(0) + '%' : '') + '</div>' : '') : '—'}</td>
+      <td>${p.confTier != null ? `$${p.confTier}（DS${p.dsConfidence != null ? (p.dsConfidence * 100).toFixed(0) + '%' : ''}·Muse${p.museConfidence != null ? (p.museConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
       <td>${judgs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}</button>` : '—'}</td>
     </tr>
     <tr class="detail" id="${detailId}" style="display:none"><td colspan="11">
@@ -111,8 +116,8 @@ function renderHtml(ledger, prices, opts = {}) {
      <td>${s.buyPrice != null ? s.buyPrice.toFixed(3) : '—'}</td>
      <td>$${(s.stake).toFixed(2)}</td><td>$${(s.payout).toFixed(2)}</td>
      <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td>
-     <td>${s.dsDirection ? dsName(s.dsDirection) + (s.dsConfidence != null ? ' ' + (s.dsConfidence * 100).toFixed(0) + '%' : '') : '—'}</td>
-     <td>${s.confTier != null ? `$${s.confTier}（DS${s.dsConfidence != null ? (s.dsConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
+     <td>${s.dsDirection ? dsName(s.dsDirection) + (s.dsConfidence != null ? ' ' + (s.dsConfidence * 100).toFixed(0) + '%' : '') + (s.museDirection ? '<div class="dim">Muse ' + dsName(s.museDirection) + (s.museConfidence != null ? ' ' + (s.museConfidence * 100).toFixed(0) + '%' : '') + '</div>' : '') : '—'}</td>
+     <td>${s.confTier != null ? `$${s.confTier}（DS${s.dsConfidence != null ? (s.dsConfidence * 100).toFixed(0) + '%' : ''}·Muse${s.museConfidence != null ? (s.museConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
      <td>${judgs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}</button>` : '—'}</td></tr>
     <tr class="detail" id="${detailId}" style="display:none"><td colspan="11">
       ${judgmentSubTable(judgs)}
@@ -164,7 +169,7 @@ td.rs{white-space:normal;min-width:120px}
 .dim{font-size:10px;color:#5c6579}
 </style></head><body>
 <h1>⚡ Polymarket Crypto 5m 模拟盘${live}</h1>
-<div class="meta">更新：${updated} · BTC/ETH × 5m · 本金 $${cfg.BANKROLL_USD} · DeepSeek 单模型 · DS≥57%才下（57–60% $1 / 61–70% $2 / ≥71% $3）· 只买 0.48–0.52 · 持有到期 · PAPER_MODE</div>
+<div class="meta">更新：${updated} · BTC/ETH × 5m · 本金 $${cfg.BANKROLL_USD} · DeepSeek + Muse 双模型方向一致才下 · 置信度取较低者≥57%（57–60% $1 / 61–70% $2 / ≥71% $3）· 开盘前50s预测 · 只买 0.48–0.52 · 持有到期 · PAPER_MODE</div>
 <div class="cards">
 <div class="card"><div class="k">钱包</div><div class="v">$${ledger.wallet.toFixed(2)}</div></div><div class="card"><div class="k">总盈亏</div><div class="v ${pnlCls(totalPnl)}">${usd(totalPnl)}</div></div>
 <div class="card"><div class="k">持仓</div><div class="v">${ledger.positions.length}</div></div>

@@ -3,7 +3,7 @@
 // - 当前盘剩余 ≤50s 时，预测「下一个」5m 窗口；每盘只判断一次（已调过模型的窗口不重复判断）
 // - 双模型确认：DeepSeek V4.1 Flash + Muse Spark 1.3 Contributor，方向一致才下单
 // - 输入：Coinbase 30 根 1m K 线及动量特征 + 当前盘及前 6 个盘的窗口数据
-// - 只买 0.45–0.55 价格的，价格不合适不买；中途不卖出，持有到期
+// - 只买 ≤0.55 价格的（下限已放开，用户拍板 2026-10-03），价格不合适不买；中途不卖出，持有到期
 // - 注额按双模型置信度较低者分档：0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3；<0.57 不下单
 const cfg = require('./config');
 const { load, save, pushCapped, recordEquity } = require('./store');
@@ -12,6 +12,7 @@ const spot = require('./spot');
 const wh = require('./windowhist');
 const ds = require('./deepseek');
 const fillMod = require('./fill');
+const winrateMod = require('./winrate');
 const { buildReport } = require('./report');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -64,7 +65,7 @@ async function evaluateMarket(coin) {
   const finish = (skip) => {
     if (skip) return;
     judgment.ms = Date.now() - t0;
-    pushCapped(ledger.judgments, judgment, 800);
+    pushCapped(ledger.judgments, judgment, 800, 'judgment');
     // 模型 io 只保留最近 100 条，免账本膨胀
     const jWithIo = ledger.judgments.filter(x => x.io);
     for (let k = 0; k < jWithIo.length - 100; k++) delete jWithIo[k].io;
@@ -197,17 +198,22 @@ async function evaluateMarket(coin) {
     return finish();
   }
 
-  // 价格过滤：只买 0.45–0.55
+  // 价格过滤：只买 ≤0.55（下限已放开，用户拍板 2026-10-03）
   if (!(price >= cfg.PRICE_MIN && price <= cfg.PRICE_MAX)) {
     judgment.bet = false;
-    judgment.reason = `双模型看${side === 'up' ? '涨' : '跌'}(较低置信度${(confR * 100).toFixed(0)}%)，但${side.toUpperCase()}买入价 ${price.toFixed(3)} 不在 0.45–0.55，不买`;
+    judgment.reason = `双模型看${side === 'up' ? '涨' : '跌'}(较低置信度${(confR * 100).toFixed(0)}%)，但${side.toUpperCase()}买入价 ${price.toFixed(3)} 高于 ${cfg.PRICE_MAX}，不买`;
     console.log(`[${coin} ${nextLabel}] 价格 ${price.toFixed(3)} 不在区间，跳过`);
     return finish();
   }
 
   // 置信度分档注额（用户拍板 2026-10-02）：0.57–0.60 → $1，0.61–0.70 → $2，≥0.71 → $3
   const confTier = confR <= 0.60 ? 1 : confR <= 0.70 ? 2 : 3;
-  const targetStake = confTier;
+  // 胜率倍投（用户拍板 2026-10-03）：按币种+方向分桶算已结算胜率，<40%→x2，<35%→x3，<30%→x4，乘在分档注额上
+  const wrStats = winrateMod.bucketStats(ledger.settlements);
+  const wrMult = winrateMod.bucketMultiplier(wrStats, coin, side, cfg.WR_MULT_MIN_SETTLED);
+  const wrB = wrStats[winrateMod.bucketKey(coin, side)] || { n: 0, winRate: 1 };
+  const wrTag = wrMult > 1 ? `，${coin.toUpperCase()}${side === 'up' ? '看涨' : '看跌'}胜率${(wrB.winRate * 100).toFixed(1)}%（${wrB.n}笔）倍投x${wrMult}` : '';
+  const targetStake = confTier * wrMult;
   if (ledger.wallet < cfg.MIN_BET_USD) {
     judgment.bet = false; judgment.reason = `钱包 $${ledger.wallet.toFixed(2)} 不足 $1，停止下注`;
     logError(ledger, `eval-${coin}`, new Error('钱包不足 $1'));
@@ -232,7 +238,7 @@ async function evaluateMarket(coin) {
   };
   const skipFill =
     fill.filledCost < cfg.MIN_BET_USD ? `盘口深度不足，仅能成交 $${fill.filledCost.toFixed(2)}` :
-    (avgPrice < cfg.PRICE_MIN || avgPrice > cfg.PRICE_MAX) ? `加权成交价 ${avgPrice.toFixed(3)} 超出 0.45–0.55` : null;
+    (avgPrice < cfg.PRICE_MIN || avgPrice > cfg.PRICE_MAX) ? `加权成交价 ${avgPrice.toFixed(3)} 高于 ${cfg.PRICE_MAX}` : null;
   if (skipFill) {
     judgment.bet = false; judgment.reason = `决策通过但未执行：${skipFill}`;
     console.log(`[${coin} ${nextLabel}] 撮合后放弃：${skipFill}`);
@@ -248,20 +254,23 @@ async function evaluateMarket(coin) {
     side, buyPrice: r4(buyPrice), decidePrice: r4(price),
     shares: fill.filledShares, stake: fill.filledCost,
     buyTime: nowIso(), confTier, dsConf: confR,
+    wrMult, wrWinRate: r4(wrB.winRate), wrSettled: wrB.n,
     fillLevels: fill.levelsUsed, unfilledCost: fill.unfilledCost,
     dsDirection: dsr.direction, dsConfidence: r4(dsr.confidence), dsReason: dsr.reason,
     museDirection: muser.direction, museConfidence: r4(muser.confidence), museReason: muser.reason,
   });
-  ledger.trades.push({
+  pushCapped(ledger.trades, {
     time: nowIso(), slug: nextSlug, side: 'buy', outcome: side,
     price: r4(buyPrice), decidePrice: r4(price), shares: fill.filledShares, stake: fill.filledCost,
-    reason: `双模型看${side === 'up' ? '涨' : '跌'}(DS ${(r4(dsr.confidence) * 100).toFixed(1)}% / Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，取较低${(confR * 100).toFixed(1)}%)，置信度分档 $${confTier}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
-  });
+    reason: `双模型看${side === 'up' ? '涨' : '跌'}(DS ${(r4(dsr.confidence) * 100).toFixed(1)}% / Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，取较低${(confR * 100).toFixed(1)}%)，置信度分档 $${confTier}${wrTag}（决策价${price.toFixed(3)}→加权成交${buyPrice.toFixed(3)}，逐档${fill.levelsUsed}档${fill.unfilledCost > 0 ? `，未成交$${fill.unfilledCost.toFixed(2)}` : ''}）`,
+    wrMult, wrWinRate: r4(wrB.winRate), wrSettled: wrB.n,
+  }, Infinity, 'trade');
   Object.assign(judgment, {
     bet: true, stake: fill.filledCost, confTier,
-    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(r4(dsr.confidence) * 100).toFixed(1)}% + Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，置信度分档 $${confTier}）`,
+    wrMult, wrWinRate: r4(wrB.winRate), wrSettled: wrB.n,
+    reason: `买入 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（DS ${(r4(dsr.confidence) * 100).toFixed(1)}% + Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，置信度分档 $${confTier}${wrTag}）`,
   });
-  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(r4(dsr.confidence) * 100).toFixed(1)}% + Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，分档 $${confTier}）`);
+  console.log(`[${coin} ${nextLabel}] 开仓 ${side.toUpperCase()} $${fill.filledCost.toFixed(2)} @加权${buyPrice.toFixed(3)}（逐档${fill.levelsUsed}档，${fill.filledShares}股，DS ${(r4(dsr.confidence) * 100).toFixed(1)}% + Muse ${(r4(muser.confidence) * 100).toFixed(1)}%，分档 $${confTier}${wrTag}）`);
   return finish();
 }
 
@@ -278,19 +287,19 @@ async function settleOnce() {
     const pnl = round2(payout - pos.stake);
     ledger.wallet = round2(ledger.wallet + payout);
     ledger.positions = ledger.positions.filter(p => p.id !== pos.id);
-    ledger.trades.push({
+    pushCapped(ledger.trades, {
       time: nowIso(), slug: pos.slug, side: 'settle', outcome: pos.side,
       price: win ? 1 : 0, shares: pos.shares, stake: payout,
       reason: win ? `结算命中 ${usd(pnl)}` : `结算归零 ${usd(pnl)}`,
-    });
-    ledger.settlements.push({
+    }, Infinity, 'trade');
+    pushCapped(ledger.settlements, {
       time: nowIso(), slug: pos.slug, windowLabel: pos.windowLabel, eventUrl: pos.eventUrl,
       coin: pos.coin, side: pos.side, win, shares: pos.shares, payout, pnl,
       buyPrice: pos.buyPrice, stake: pos.stake,
       dsDirection: pos.dsDirection, dsConfidence: pos.dsConfidence, dsReason: pos.dsReason,
       museDirection: pos.museDirection, museConfidence: pos.museConfidence, museReason: pos.museReason,
-      confTier: pos.confTier,
-    });
+      confTier: pos.confTier, wrMult: pos.wrMult != null ? pos.wrMult : 1,
+    }, Infinity, 'settlement');
     console.log(`[settle ${pos.coin} ${pos.windowLabel}] ${pos.side.toUpperCase()} ${win ? '命中' : '归零'} ${usd(pnl)}`);
   }
   persist();

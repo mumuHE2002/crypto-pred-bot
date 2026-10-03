@@ -1,1 +1,249 @@
-Ly8g6Z2Z5oCBIEhUTUwg5oql5ZGK77ya5biC5Zy65ZCN55u06ZO+IFBvbHltYXJrZXQg5a6Y5pa555uY5Y+j77yb5Yik5pat5piO57uG5oqY6L+b5a+55bqU6KGM54K55Ye75bGV5byACmNvbnN0IGZzID0gcmVxdWlyZSgnZnMnKTsKY29uc3QgY2ZnID0gcmVxdWlyZSgnLi9jb25maWcnKTsKY29uc3QgeyBsb2FkIH0gPSByZXF1aXJlKCcuL3N0b3JlJyk7CgpmdW5jdGlvbiBlc2MocykgewogIHJldHVybiBTdHJpbmcocyA9PSBudWxsID8gJycgOiBzKS5yZXBsYWNlKC9bJjw+IiddL2csIGMgPT4gKHsgJyYnOiAnJmFtcDsnLCAnPCc6ICcmbHQ7JywgJz4nOiAnJmd0OycsICciJzogJyZxdW90OycsICInIjogJyYjMzk7JyB9W2NdKSk7Cn0KY29uc3QgdXNkID0gbiA9PiAobiA+PSAwID8gJysnIDogJycpICsgJyQnICsgTnVtYmVyKG4pLnRvRml4ZWQoMik7CmNvbnN0IHBubENscyA9IG4gPT4gbiA+IDAgPyAncG9zJyA6IG4gPCAwID8gJ25lZycgOiAnJzsKY29uc3QgdHN0ciA9IGlzbyA9PiB7IGNvbnN0IGQgPSBuZXcgRGF0ZShpc28pOyByZXR1cm4gYCR7ZC5nZXRNb250aCgpICsgMX0vJHtkLmdldERhdGUoKX0gJHtTdHJpbmcoZC5nZXRIb3VycygpKS5wYWRTdGFydCgyLCAnMCcpfToke1N0cmluZyhkLmdldE1pbnV0ZXMoKSkucGFkU3RhcnQoMiwgJzAnKX06JHtTdHJpbmcoZC5nZXRTZWNvbmRzKCkpLnBhZFN0YXJ0KDIsICcwJyl9YDsgfTsKY29uc3QgZXZVcmwgPSBzbHVnID0+IGBodHRwczovL3BvbHltYXJrZXQuY29tL2V2ZW50LyR7ZXNjKHNsdWcpfWA7CgovLyDlhajpobXpnaLnu5/kuIDnm5jlj6PlkI3vvJpCVEMgNW0tMTc5MDg2OTgwMO+8iDExOjUw4oCTMTE6NTXvvIkKLy8g5LiA5b6L5LuOIHNsdWcg5pe26Ze05oiz5oyJ5Lic5YWr5Yy6566X56qX5Y+j77yM5LiN5L6d6LWW5ZCE6L+b56iLIFRaIOeOr+WigwpmdW5jdGlvbiBta3ROYW1lKHNsdWcpIHsKICBjb25zdCBtID0gL14oW2Etel0rKS11cGRvd24tKFxkKyltLShcZCspJC8uZXhlYyhzbHVnIHx8ICcnKTsKICBpZiAoIW0pIHJldHVybiBlc2Moc2x1ZyB8fCAn4oCUJyk7CiAgY29uc3QgZiA9IHMgPT4gewogICAgY29uc3QgZCA9IG5ldyBEYXRlKChOdW1iZXIocykgKyA4ICogMzYwMCkgKiAxMDAwKTsKICAgIHJldHVybiBTdHJpbmcoZC5nZXRVVENIb3VycygpKS5wYWRTdGFydCgyLCAnMCcpICsgJzonICsgU3RyaW5nKGQuZ2V0VVRDTWludXRlcygpKS5wYWRTdGFydCgyLCAnMCcpOwogIH07CiAgY29uc3Qgc3RhcnQgPSBtWzNdOwogIGNvbnN0IHdpblNlYyA9IE51bWJlcihtWzJdKSAqIDYwOwogIHJldHVybiBgJHttWzFdLnRvVXBwZXJDYXNlKCl9ICR7bVsyXX1tLSR7c3RhcnR977yIJHtmKHN0YXJ0KX3igJMke2YoTnVtYmVyKHN0YXJ0KSArIHdpblNlYyl977yJYDsKfQoKY29uc3QgZHNOYW1lID0gZCA9PiBkID09PSAndXAnID8gJ+a2qCcgOiBkID09PSAnZG93bicgPyAn6LeMJyA6ICfigJQnOwoKZnVuY3Rpb24ganVkZ21lbnRTdWJUYWJsZShqdWRncykgewogIGlmICghanVkZ3MubGVuZ3RoKSByZXR1cm4gJyc7CiAgY29uc3QgYmxvY2tzID0gW107CiAgY29uc3Qgcm93cyA9IGp1ZGdzLnNsaWNlKCkucmV2ZXJzZSgpLm1hcChqID0+IHsKICAgIGxldCBtaW9CdG4gPSAn4oCUJzsKICAgIGlmIChqLmlvKSB7CiAgICAgIGNvbnN0IG1pZCA9IG1pb0lkKCk7CiAgICAgIG1pb0J0biA9IGA8YnV0dG9uIGNsYXNzPSJleHAyIiBkYXRhLXQ9IiR7bWlkfSI+4pa4IOi+k+WFpS/ovpPlh7o8L2J1dHRvbj5gOwogICAgICBibG9ja3MucHVzaChtaW9CbG9jayhtaWQsIGouaW8pKTsKICAgIH0KICAgIGNvbnN0IGNvbmYgPSBqLmNvbmZUaWVyICE9IG51bGwgPyBgJCR7ai5jb25mVGllcn3vvIhEUyR7ai5kc0NvbmZpZGVuY2UgIT0gbnVsbCA/IChqLmRzQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnfcK3TXVzZSR7ai5tdXNlQ29uZmlkZW5jZSAhPSBudWxsID8gKGoubXVzZUNvbmZpZGVuY2UgKiAxMDApLnRvRml4ZWQoMCkgKyAnJScgOiAnJ33vvIlgIDogJ+KAlCc7CiAgICBjb25zdCBkaXJDZWxsID0gYCR7ZHNOYW1lKGouZHNEaXJlY3Rpb24pfSR7ai5kc0NvbmZpZGVuY2UgIT0gbnVsbCA/ICcgJyArIChqLmRzQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnfWAgKwogICAgICAoai5tdXNlRGlyZWN0aW9uID8gYDxicj48c3BhbiBjbGFzcz0iZGltIj5NdXNlICR7ZHNOYW1lKGoubXVzZURpcmVjdGlvbil9JHtqLm11c2VDb25maWRlbmNlICE9IG51bGwgPyAnICcgKyAoai5tdXNlQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnfTwvc3Bhbj5gIDogJycpOwogICAgcmV0dXJuIGA8dHI+PHRkPjxhIGhyZWY9IiR7ZXNjKGouZXZlbnRVcmwgfHwgKCdodHRwczovL3BvbHltYXJrZXQuY29tL2V2ZW50LycgKyAoai5zbHVnIHx8ICcnKSkpfSIgdGFyZ2V0PSJfYmxhbmsiPiR7bWt0TmFtZShqLnNsdWcpfTwvYT48L3RkPjx0ZD4ke3RzdHIoai50aW1lKX08L3RkPjx0ZD4ke2ouc2VjVG9OZXh0U3RhcnQgIT0gbnVsbCA/IGouc2VjVG9OZXh0U3RhcnQgKyAncycgOiAn4oCUJ308L3RkPjx0ZD4ke2oudXBCdXkgIT0gbnVsbCA/IGoudXBCdXkgOiAn4oCUJ308L3RkPjx0ZD4ke2ouZG93bkJ1eSAhPSBudWxsID8gai5kb3duQnV5IDogJ+KAlCd9PC90ZD48dGQgY2xhc3M9IiR7ai5kc0RpcmVjdGlvbiA9PT0gJ3VwJyA/ICdwb3MnIDogai5kc0RpcmVjdGlvbiA9PT0gJ2Rvd24nID8gJ25lZycgOiAnJ30iPiR7ZGlyQ2VsbH08L3RkPjx0ZD4ke2ouZHJpZnRCcHMgIT0gbnVsbCA/IGouZHJpZnRCcHMgKyAnYnBzwrdSU0knICsgai5yc2kxNCA6ICfigJQnfTwvdGQ+PHRkPiR7Y29uZn08L3RkPjx0ZD4ke2ouYmV0ID8gJ+S5sOWFpScgKyAoai5zaWRlID09PSAndXAnID8gJ+a2qCcgOiAn6LeMJykgKyAnICQnICsgTnVtYmVyKGouc3Rha2UpLnRvRml4ZWQoMikgOiAn6Lez6L+HJ308L3RkPjx0ZCBjbGFzcz0icnMiPiR7ZXNjKGoucmVhc29uIHx8ICcnKX0ke2ouZHNSZWFzb24gPyAnPGJyPkRT77yaJyArIGVzYyhqLmRzUmVhc29uKSA6ICcnfSR7ai5tdXNlUmVhc29uID8gJzxicj5NdXNl77yaJyArIGVzYyhqLm11c2VSZWFzb24pIDogJyd9PC90ZD48dGQ+JHttaW9CdG59PC90ZD48L3RyPmA7CiAgfSkuam9pbignJyk7CiAgcmV0dXJuIGA8ZGl2IGNsYXNzPSJkaCI+8J+TnSDliKTmlq3orrDlvZU8L2Rpdj48ZGl2IGNsYXNzPSJ0d3JhcCI+PHRhYmxlIGNsYXNzPSJzdWIiPjx0cj48dGg+6aKE5rWL56qX5Y+jPC90aD48dGg+5Yik5pat5pe26Ze0PC90aD48dGg+6Led5byA55uYPC90aD48dGg+VXDkubDlhaU8L3RoPjx0aD5Eb3du5Lmw5YWlPC90aD48dGg+RFPmlrnlkJE8L3RoPjx0aD7liqjph488L3RoPjx0aD7nva7kv6HluqY8L3RoPjx0aD7mk43kvZw8L3RoPjx0aD7ljp/lm6A8L3RoPjx0aD7mqKHlnos8L3RoPjwvdHI+JHtyb3dzfTwvdGFibGU+PC9kaXY+JHtibG9ja3Muam9pbignJyl9YDsKfQoKLy8g5qih5Z6LIGlvIOS6jOe6p+WxleW8gO+8muWPkee7meaooeWei+eahOWujOaVtOi+k+WFpSArIOWOn+Wni+i+k+WHuu+8jOeDmOeEmei/myBIVE1MCmxldCBtaW9TZXEgPSAwOwpmdW5jdGlvbiBtaW9JZCgpIHsgcmV0dXJuIGBtaW8keysrbWlvU2VxfWA7IH0KZnVuY3Rpb24gbWlvQmxvY2sobWlkLCBpbykgewogIGNvbnN0IHNlY3MgPSBbXTsKICBpZiAoaW8uZHMpIHsKICAgIHNlY3MucHVzaChgPGRpdiBjbGFzcz0ibWlvaCI+RGVlcFNlZWsg6L6T5YWl77yI5a6M5pW0IHByb21wdO+8iTwvZGl2PjxwcmU+JHtlc2MoaW8uZHMucHJvbXB0IHx8ICcnKX08L3ByZT5gKTsKICAgIGlmIChpby5kcy5yYXcpIHNlY3MucHVzaChgPGRpdiBjbGFzcz0ibWlvaCI+RGVlcFNlZWsg5Y6f5aeL6L+U5ZuePC9kaXY+PHByZT4ke2VzYyhpby5kcy5yYXcpfTwvcHJlPmApOwogIH0KICBpZiAoaW8ubXVzZSkgewogICAgaWYgKGlvLm11c2UucmF3KSBzZWNzLnB1c2goYDxkaXYgY2xhc3M9Im1pb2giPk11c2UgU3BhcmsgMS4zIENvbnRyaWJ1dG9yIOWOn+Wni+i/lOWbnjwvZGl2PjxwcmU+JHtlc2MoaW8ubXVzZS5yYXcpfTwvcHJlPmApOwogIH0KICBpZiAoaW8uZmFpbGVkKSB7CiAgICBzZWNzLnB1c2goYDxkaXYgY2xhc3M9Im1pb2giPuWksei0peaXtueahOi+k+WFpe+8iOacquaLv+WIsOi+k+WHuu+8iTwvZGl2PjxwcmU+JHtlc2MoaW8uZmFpbGVkLnByb21wdCB8fCBpby5mYWlsZWQuc3RhdGUgfHwgJycpfTwvcHJlPmApOwogICAgaWYgKGlvLmZhaWxlZC5yYXcpIHNlY3MucHVzaChgPGRpdiBjbGFzcz0ibWlvaCI+5aSx6LSl5pe255qE5Y6f5aeL6L+U5ZuePC9kaXY+PHByZT4ke2VzYyhpby5mYWlsZWQucmF3KX08L3ByZT5gKTsKICB9CiAgcmV0dXJuIGA8ZGl2IGNsYXNzPSJtaW8iIGlkPSIke21pZH0iIHN0eWxlPSJkaXNwbGF5Om5vbmUiPiR7c2Vjcy5qb2luKCcnKX08L2Rpdj5gOwp9CgpmdW5jdGlvbiBwb3NVbnJlYWwocG9zLCBwcmljZXMpIHsKICBjb25zdCBxID0gcHJpY2VzW3Bvcy5zbHVnXTsKICBpZiAoIXEpIHJldHVybiBudWxsOwogIC8vIOaMgeacieWIsOacn++8mueOsOS7t+S7heS+m+WPguiAg++8iGRvd25NaWQg5pys5bCx5pivIERvd24gdG9rZW4g6Ieq5bex55qE5Lu35qC877yM5LiN6KaB5YaN5Y+WIDEt77yJCiAgY29uc3QgcHggPSBwb3Muc2lkZSA9PT0gJ3VwJyA/IHEudXBNaWQgOiBxLmRvd25NaWQ7CiAgaWYgKCFOdW1iZXIuaXNGaW5pdGUocHgpKSByZXR1cm4gbnVsbDsKICBjb25zdCB1bnJlYWwgPSBwb3Muc2hhcmVzICogcHggLSBwb3Muc3Rha2U7CiAgcmV0dXJuIHsgcHgsIHVucmVhbCwgdW5yZWFsUGN0OiB1bnJlYWwgLyBwb3Muc3Rha2UsIHQ6IHEudCB9Owp9CgpmdW5jdGlvbiByZW5kZXJIdG1sKGxlZGdlciwgcHJpY2VzLCBvcHRzID0ge30pIHsKICBjb25zdCBsaXZlID0gb3B0cy5saXZlID8gJyA8c3BhbiBjbGFzcz0idGFnIj5MSVZFPC9zcGFuPicgOiAnJzsKICBjb25zdCB1cGRhdGVkID0gbmV3IERhdGUoKS50b0xvY2FsZVN0cmluZygnemgtQ04nLCB7IGhvdXIxMjogZmFsc2UgfSk7CiAgY29uc3QgdG90YWxQbmwgPSByb3VuZDIobGVkZ2VyLndhbGxldCAtIGNmZy5CQU5LUk9MTF9VU0QpOwogIGNvbnN0IHNldHRsZWQgPSBsZWRnZXIuc2V0dGxlbWVudHM7CiAgY29uc3Qgd2luTiA9IHNldHRsZWQuZmlsdGVyKHMgPT4gcy53aW4pLmxlbmd0aDsKCiAgY29uc3QgcG9zUm93cyA9IGxlZGdlci5wb3NpdGlvbnMubWFwKChwLCBpKSA9PiB7CiAgICBjb25zdCB1ID0gcG9zVW5yZWFsKHAsIHByaWNlcyk7CiAgICBjb25zdCBqdWRncyA9IGxlZGdlci5qdWRnbWVudHMuZmlsdGVyKGogPT4gai5zbHVnID09PSBwLnNsdWcpOwogICAgY29uc3QgZGV0YWlsSWQgPSBgcGQke2l9YDsKICAgIHJldHVybiBgPHRyIGNsYXNzPSJtYWlucm93IiBkYXRhLWRldGFpbD0iJHtkZXRhaWxJZH0iPgogICAgICA8dGQ+PGEgaHJlZj0iJHtlc2MocC5ldmVudFVybCl9IiB0YXJnZXQ9Il9ibGFuayI+JHtta3ROYW1lKHAuc2x1Zyl9PC9hPjwvdGQ+CiAgICAgIDx0ZCBjbGFzcz0iJHtwLnNpZGUgPT09ICd1cCcgPyAncG9zJyA6ICduZWcnfSI+JHtwLnNpZGUgPT09ICd1cCcgPyAn5raoJyA6ICfot4wnfTwvdGQ+CiAgICAgIDx0ZD4ke3AuYnV5UHJpY2UudG9GaXhlZCgzKX08ZGl2IGNsYXNzPSJkaW0iPuWGs+etliR7cC5kZWNpZGVQcmljZSAhPSBudWxsID8gcC5kZWNpZGVQcmljZS50b0ZpeGVkKDMpIDogJ+KAlCd9PC9kaXY+PC90ZD48dGQ+JHtwLnNoYXJlcy50b0ZpeGVkKDEpfTwvdGQ+PHRkPiQke3Auc3Rha2UudG9GaXhlZCgyKX08L3RkPgogICAgICA8dGQ+JHt1ID8gdS5weC50b0ZpeGVkKDMpIDogJ+KAlCd9PC90ZD4KICAgICAgPHRkIGNsYXNzPSIke3UgPyBwbmxDbHModS51bnJlYWwpIDogJyd9Ij4ke3UgPyB1c2QodS51bnJlYWwpIDogJ+KAlCd9PC90ZD4KICAgICAgPHRkPiR7dHN0cihwLmJ1eVRpbWUpfTwvdGQ+CiAgICAgIDx0ZD4ke3AuZHNEaXJlY3Rpb24gPyBkc05hbWUocC5kc0RpcmVjdGlvbikgKyAocC5kc0NvbmZpZGVuY2UgIT0gbnVsbCA/ICcgJyArIChwLmRzQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnKSArIChwLm11c2VEaXJlY3Rpb24gPyAnPGRpdiBjbGFzcz0iZGltIj5NdXNlICcgKyBkc05hbWUocC5tdXNlRGlyZWN0aW9uKSArIChwLm11c2VDb25maWRlbmNlICE9IG51bGwgPyAnICcgKyAocC5tdXNlQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnKSArICc8L2Rpdj4nIDogJycpIDogJ+KAlCd9PC90ZD4KICAgICAgPHRkPiR7cC5jb25mVGllciAhPSBudWxsID8gYCQke3AuY29uZlRpZXJ977yIRFMke3AuZHNDb25maWRlbmNlICE9IG51bGwgPyAocC5kc0NvbmZpZGVuY2UgKiAxMDApLnRvRml4ZWQoMCkgKyAnJScgOiAnJ33Ct011c2Uke3AubXVzZUNvbmZpZGVuY2UgIT0gbnVsbCA/IChwLm11c2VDb25maWRlbmNlICogMTAwKS50b0ZpeGVkKDApICsgJyUnIDogJyd977yJYCA6ICfigJQnfTwvdGQ+CiAgICAgIDx0ZD4ke2p1ZGdzLmxlbmd0aCA/IGA8YnV0dG9uIGNsYXNzPSJleHAiIGRhdGEtdD0iJHtkZXRhaWxJZH0iPuKWuCDliKTmlq0ke2p1ZGdzLmxlbmd0aH08L2J1dHRvbj5gIDogJ+KAlCd9PC90ZD4KICAgIDwvdHI+CiAgICA8dHIgY2xhc3M9ImRldGFpbCIgaWQ9IiR7ZGV0YWlsSWR9IiBzdHlsZT0iZGlzcGxheTpub25lIj48dGQgY29sc3Bhbj0iMTEiPgogICAgICAke2p1ZGdtZW50U3ViVGFibGUoanVkZ3MpfQogICAgPC90ZD48L3RyPmA7CiAgfSkuam9pbignJyk7CgogIGNvbnN0IHRyYWRlUm93cyA9IGxlZGdlci50cmFkZXMuc2xpY2UoKS5yZXZlcnNlKCkuc2xpY2UoMCwgODApLm1hcCh0ID0+CiAgICBgPHRyPjx0ZD4ke3RzdHIodC50aW1lKX08L3RkPjx0ZD4ke21rdE5hbWUodC5zbHVnKX08L3RkPgogICAgIDx0ZCBjbGFzcz0iJHt0LnNpZGUgPT09ICdidXknID8gJ3BvcycgOiAnJ30iPiR7dC5zaWRlID09PSAnYnV5JyA/ICfkubDlhaUnIDogJ+e7k+eulyd9PC90ZD4KICAgICA8dGQ+JHt0Lm91dGNvbWUgPyAodC5vdXRjb21lID09PSAndXAnID8gJ+a2qCcgOiAn6LeMJykgOiAn4oCUJ308L3RkPjx0ZD4ke3QucHJpY2V9JHt0LmRlY2lkZVByaWNlICE9IG51bGwgJiYgdC5kZWNpZGVQcmljZSAhPT0gdC5wcmljZSA/IGA8ZGl2IGNsYXNzPSJkaW0iPuWGs+etliR7TnVtYmVyKHQuZGVjaWRlUHJpY2UpLnRvRml4ZWQoMyl9PC9kaXY+YCA6ICcnfTwvdGQ+PHRkPiR7dC5zaGFyZXN9PC90ZD4KICAgICA8dGQ+JCR7TnVtYmVyKHQuc3Rha2UpLnRvRml4ZWQoMil9PC90ZD48dGQgY2xhc3M9InJzIj4ke2VzYyh0LnJlYXNvbiB8fCAnJyl9PC90ZD48L3RyPmApLmpvaW4oJycpOwoKICBjb25zdCBzZXR0bGVSb3dzID0gc2V0dGxlZC5zbGljZSgpLnJldmVyc2UoKS5tYXAoKHMsIGkpID0+IHsKICAgIGNvbnN0IGp1ZGdzID0gbGVkZ2VyLmp1ZGdtZW50cy5maWx0ZXIoaiA9PiBqLnNsdWcgPT09IHMuc2x1Zyk7CiAgICBjb25zdCBkZXRhaWxJZCA9IGBzdCR7aX1gOwogICAgcmV0dXJuIGA8dHIgY2xhc3M9Im1haW5yb3ciIGRhdGEtZGV0YWlsPSIke2RldGFpbElkfSI+CiAgICAgPHRkPiR7dHN0cihzLnRpbWUpfTwvdGQ+PHRkPjxhIGhyZWY9IiR7ZXNjKHMuZXZlbnRVcmwpfSIgdGFyZ2V0PSJfYmxhbmsiPiR7bWt0TmFtZShzLnNsdWcpfTwvYT48L3RkPgogICAgIDx0ZD4ke3Muc2lkZSA9PT0gJ3VwJyA/ICfmtqgnIDogJ+i3jCd9PC90ZD48dGQgY2xhc3M9IiR7cy53aW4gPyAncG9zJyA6ICduZWcnfSI+JHtzLndpbiA/ICflkb3kuK0nIDogJ+W9kumbtid9PC90ZD4KICAgICA8dGQ+JHtzLmJ1eVByaWNlICE9IG51bGwgPyBzLmJ1eVByaWNlLnRvRml4ZWQoMykgOiAn4oCUJ308L3RkPgogICAgIDx0ZD4kJHsocy5zdGFrZSkudG9GaXhlZCgyKX08L3RkPjx0ZD4kJHsocy5wYXlvdXQpLnRvRml4ZWQoMil9PC90ZD4KICAgICA8dGQgY2xhc3M9IiR7cG5sQ2xzKHMucG5sKX0iPiR7dXNkKHMucG5sKX08L3RkPgogICAgIDx0ZD4ke3MuZHNEaXJlY3Rpb24gPyBkc05hbWUocy5kc0RpcmVjdGlvbikgKyAocy5kc0NvbmZpZGVuY2UgIT0gbnVsbCA/ICcgJyArIChzLmRzQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnKSArIChzLm11c2VEaXJlY3Rpb24gPyAnPGRpdiBjbGFzcz0iZGltIj5NdXNlICcgKyBkc05hbWUocy5tdXNlRGlyZWN0aW9uKSArIChzLm11c2VDb25maWRlbmNlICE9IG51bGwgPyAnICcgKyAocy5tdXNlQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnKSArICc8L2Rpdj4nIDogJycpIDogJ+KAlCd9PC90ZD4KICAgICA8dGQ+JHtzLmNvbmZUaWVyICE9IG51bGwgPyBgJCR7cy5jb25mVGllcn3vvIhEUyR7cy5kc0NvbmZpZGVuY2UgIT0gbnVsbCA/IChzLmRzQ29uZmlkZW5jZSAqIDEwMCkudG9GaXhlZCgwKSArICclJyA6ICcnfcK3TXVzZSR7cy5tdXNlQ29uZmlkZW5jZSAhPSBudWxsID8gKHMubXVzZUNvbmZpZGVuY2UgKiAxMDApLnRvRml4ZWQoMCkgKyAnJScgOiAnJ33vvIlgIDogJ+KAlCd9PC90ZD4KICAgICA8dGQ+JHtqdWRncy5sZW5ndGggPyBgPGJ1dHRvbiBjbGFzcz0iZXhwIiBkYXRhLXQ9IiR7ZGV0YWlsSWR9Ij7ilrgg5Yik5patJHtqdWRncy5sZW5ndGh9PC9idXR0b24+YCA6ICfigJQnfTwvdGQ+PC90cj4KICAgIDx0ciBjbGFzcz0iZGV0YWlsIiBpZD0iJHtkZXRhaWxJZH0iIHN0eWxlPSJkaXNwbGF5Om5vbmUiPjx0ZCBjb2xzcGFuPSIxMSI+CiAgICAgICR7anVkZ21lbnRTdWJUYWJsZShqdWRncyl9CiAgICA8L3RkPjwvdHI+YDsKICB9KS5qb2luKCcnKTsKCiAgY29uc3QgZXJyUm93cyA9IGxlZGdlci5lcnJvcnMuc2xpY2UoKS5yZXZlcnNlKCkuc2xpY2UoMCwgMTApLm1hcChlID0+CiAgICBgPHRyPjx0ZD4ke3RzdHIoZS50aW1lKX08L3RkPjx0ZD4ke2VzYyhlLndoZXJlKX08L3RkPjx0ZCBjbGFzcz0icnMiPiR7ZXNjKGUubWVzc2FnZSl9PC90ZD48L3RyPmApLmpvaW4oJycpOwoKICBjb25zdCByZWNlbnRKdWRncyA9IGxlZGdlci5qdWRnbWVudHMuc2xpY2UoLTEwMCk7CgogIHJldHVybiBgPCFET0NUWVBFIGh0bWw+PGh0bWwgbGFuZz0iemgiPjxoZWFkPjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij48bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLGluaXRpYWwtc2NhbGU9MSI+Cjx0aXRsZT5Qb2x5bWFya2V0IENyeXB0byA1bSDmqKHmi5/nm5gke2xpdmV9PC90aXRsZT4KPHN0eWxlPgpib2R5e2ZvbnQtZmFtaWx5Oi1hcHBsZS1zeXN0ZW0sIlBpbmdGYW5nIFNDIiwiTWljcm9zb2Z0IFlhSGVpIixzYW5zLXNlcmlmO2JhY2tncm91bmQ6IzBmMTQyMDtjb2xvcjojZTZlOWYwO21hcmdpbjowO3BhZGRpbmc6MTZweH0KaDF7Zm9udC1zaXplOjIwcHg7bWFyZ2luOjAgMCA0cHh9LnRhZ3tiYWNrZ3JvdW5kOiMyZjgxZjc7Ym9yZGVyLXJhZGl1czo0cHg7Zm9udC1zaXplOjExcHg7cGFkZGluZzoycHggNnB4O3ZlcnRpY2FsLWFsaWduOm1pZGRsZX0KLm1ldGF7Y29sb3I6IzhiOTNhNztmb250LXNpemU6MTJweDttYXJnaW4tYm90dG9tOjEycHh9Ci5jYXJkc3tkaXNwbGF5OmZsZXg7Z2FwOjEwcHg7ZmxleC13cmFwOndyYXA7bWFyZ2luLWJvdHRvbToxNHB4fQouY2FyZHtiYWNrZ3JvdW5kOiMxYTIyMzM7Ym9yZGVyLXJhZGl1czo4cHg7cGFkZGluZzoxMHB4IDE0cHg7bWluLXdpZHRoOjEyMHB4fQouY2FyZCAua3tmb250LXNpemU6MTFweDtjb2xvcjojOGI5M2E3fS5jYXJkIC52e2ZvbnQtc2l6ZToyMHB4O2ZvbnQtd2VpZ2h0OjcwMH0KLnBvc3tjb2xvcjojM2ZiOTUwfS5uZWd7Y29sb3I6I2Y4NTE0OX0KaDJ7Zm9udC1zaXplOjE1cHg7bWFyZ2luOjE4cHggMCA4cHg7Y29sb3I6I2M5ZDFkOX0KdGFibGV7d2lkdGg6MTAwJTtib3JkZXItY29sbGFwc2U6Y29sbGFwc2U7Zm9udC1zaXplOjEycHg7YmFja2dyb3VuZDojMWEyMjMzO2JvcmRlci1yYWRpdXM6OHB4O292ZXJmbG93OmhpZGRlbn0KdGgsdGR7cGFkZGluZzo3cHggOHB4O3RleHQtYWxpZ246bGVmdDtib3JkZXItYm90dG9tOjFweCBzb2xpZCAjMmEzMzQ4fQp0aHtjb2xvcjojOGI5M2E3O2ZvbnQtd2VpZ2h0OjYwMDtiYWNrZ3JvdW5kOiMxNjFkMmV9CnRyLm1haW5yb3d7Y3Vyc29yOnBvaW50ZXJ9dHIubWFpbnJvdzpob3ZlciB0ZHtiYWNrZ3JvdW5kOiMyMjJjNDR9CmF7Y29sb3I6IzU4YTZmZjt0ZXh0LWRlY29yYXRpb246bm9uZX0uZXhwe2JhY2tncm91bmQ6IzJhMzM0ODtib3JkZXI6MDtjb2xvcjojYzlkMWQ5O2JvcmRlci1yYWRpdXM6NHB4O3BhZGRpbmc6M3B4IDhweDtjdXJzb3I6cG9pbnRlcjtmb250LXNpemU6MTJweH0KLnN1YnttYXJnaW46OHB4IDA7YmFja2dyb3VuZDojMTQxYjJjfS5kaHtmb250LXNpemU6MTJweDtjb2xvcjojOGI5M2E3O21hcmdpbjoxMHB4IDAgNHB4fQoucnN7bWF4LXdpZHRoOjM0MHB4O3dvcmQtYnJlYWs6YnJlYWstd29yZDtjb2xvcjojOWFhNGI4fQouZW1wdHl7Y29sb3I6IzVjNjU3OTtwYWRkaW5nOjE0cHg7Zm9udC1zaXplOjEycHh9Ci5leHAye2JhY2tncm91bmQ6IzJhMzM0ODtib3JkZXI6MDtjb2xvcjojYzlkMWQ5O2JvcmRlci1yYWRpdXM6NHB4O3BhZGRpbmc6M3B4IDhweDtjdXJzb3I6cG9pbnRlcjtmb250LXNpemU6MTJweH0KLnR3cmFwe292ZXJmbG93LXg6YXV0bzstd2Via2l0LW92ZXJmbG93LXNjcm9sbGluZzp0b3VjaH0KQG1lZGlhIChtYXgtd2lkdGg6NjQwcHgpewpib2R5e3BhZGRpbmc6MTBweH0KaDF7Zm9udC1zaXplOjE3cHh9Ci5jYXJkc3tnYXA6OHB4O21hcmdpbi1ib3R0b206MTBweH0KLmNhcmR7cGFkZGluZzo4cHggMTBweDttaW4td2lkdGg6MTAwcHg7ZmxleDoxIDEgMzAlfQouY2FyZCAudntmb250LXNpemU6MTdweH0KaDJ7Zm9udC1zaXplOjE0cHg7bWFyZ2luOjE0cHggMCA2cHh9CnRoLHRke3BhZGRpbmc6OHB4IDZweDtmb250LXNpemU6MTFweDt3aGl0ZS1zcGFjZTpub3dyYXB9CnRkLnJze3doaXRlLXNwYWNlOm5vcm1hbDttaW4td2lkdGg6MTIwcHh9Ci5leHAsLmV4cDJ7cGFkZGluZzo4cHggMTJweDtmb250LXNpemU6MTJweH0KLm1pbyBwcmV7Zm9udC1zaXplOjEwcHh9Ci5kaHtmb250LXNpemU6MTFweH0KfQoubWlve21hcmdpbjo2cHggMCAxMnB4O2JhY2tncm91bmQ6IzEwMTgyYTtib3JkZXItcmFkaXVzOjZweDtwYWRkaW5nOjRweCAxMHB4IDEwcHh9Ci5taW9oe2ZvbnQtc2l6ZToxMXB4O2NvbG9yOiM4YjkzYTc7bWFyZ2luOjEwcHggMCA0cHh9Ci5taW8gcHJle2JhY2tncm91bmQ6IzBiMTEyMDtwYWRkaW5nOjhweDtib3JkZXItcmFkaXVzOjRweDtmb250LXNpemU6MTFweDt3aGl0ZS1zcGFjZTpwcmUtd3JhcDt3b3JkLWJyZWFrOmJyZWFrLXdvcmQ7bWF4LWhlaWdodDozMjBweDtvdmVyZmxvdzphdXRvO21hcmdpbjowO2NvbG9yOiNjOWQxZDl9Ci5kaW17Zm9udC1zaXplOjEwcHg7Y29sb3I6IzVjNjU3OX0KPC9zdHlsZT48L2hlYWQ+PGJvZHk+CjxoMT7imqEgUG9seW1hcmtldCBDcnlwdG8gNW0g5qih5ouf55uYJHtsaXZlfTwvaDE+CjxkaXYgY2xhc3M9Im1ldGEiPuabtOaWsO+8miR7dXBkYXRlZH0gwrcgQlRDL0VUSCDDlyA1bSDCtyDmnKzph5EgJCR7Y2ZnLkJBTktST0xMX1VTRH0gwrcgRGVlcFNlZWsgKyBNdXNlIOWPjOaooeWei+aWueWQkeS4gOiHtOaJjeS4iyDCtyDnva7kv6Hluqblj5bovoPkvY7ogIXiiaU1NyXvvIg1N+KAkzYwJSAkMSAvIDYx4oCTNzAlICQyIC8g4omlNzElICQz77yJwrcg5byA55uY5YmNNTBz6aKE5rWLIMK3IOWPquS5sCAwLjQ14oCTMC41NSDCtyDmjIHmnInliLDmnJ8gwrcgUEFQRVJfTU9ERTwvZGl2Pgo8ZGl2IGNsYXNzPSJjYXJkcyI+CjxkaXYgY2xhc3M9ImNhcmQiPjxkaXYgY2xhc3M9ImsiPumSseWMhTwvZGl2PjxkaXYgY2xhc3M9InYiPiQke2xlZGdlci53YWxsZXQudG9GaXhlZCgyKX08L2Rpdj48L2Rpdj48ZGl2IGNsYXNzPSJjYXJkIj48ZGl2IGNsYXNzPSJrIj7mgLvnm4jkuo88L2Rpdj48ZGl2IGNsYXNzPSJ2ICR7cG5sQ2xzKHRvdGFsUG5sKX0iPiR7dXNkKHRvdGFsUG5sKX08L2Rpdj48L2Rpdj4KPGRpdiBjbGFzcz0iY2FyZCI+PGRpdiBjbGFzcz0iayI+5oyB5LuTPC9kaXY+PGRpdiBjbGFzcz0idiI+JHtsZWRnZXIucG9zaXRpb25zLmxlbmd0aH08L2Rpdj48L2Rpdj4KPGRpdiBjbGFzcz0iY2FyZCI+PGRpdiBjbGFzcz0iayI+5bey57uT566XPC9kaXY+PGRpdiBjbGFzcz0idiI+JHtzZXR0bGVkLmxlbmd0aH3vvIjlkb3kuK0ke3dpbk5977yJPC9kaXY+PC9kaXY+CjxkaXYgY2xhc3M9ImNhcmQiPjxkaXYgY2xhc3M9ImsiPuS4i+WNleinhOWImTwvZGl2PjxkaXYgY2xhc3M9InYiIHN0eWxlPSJmb250LXNpemU6MTJweDtmb250LXdlaWdodDo0MDAiPkRT4omlNTcl77yaNTfigJM2MCUgJDEgLyA2MeKAkzcwJSAkMiAvIOKJpTcxJSAkMzwvZGl2PjwvZGl2Pgo8L2Rpdj4KPGgyPvCfk6Yg5oyB5LuT77yI5oyB5pyJ5Yiw5pyf77yM54K55Ye76KGM5bGV5byA5Yik5pat5piO57uG77yJPC9oMj4KJHtsZWRnZXIucG9zaXRpb25zLmxlbmd0aCA/IGA8ZGl2IGNsYXNzPSJ0d3JhcCI+PHRhYmxlPjx0cj48dGg+5biC5Zy6PC90aD48dGg+5pa55ZCRPC90aD48dGg+5Lmw5YWl5Lu3PC90aD48dGg+6IKh5pWwPC90aD48dGg+5oqV5YWlPC90aD48dGg+5Y+C6ICD546w5Lu3PC90aD48dGg+5Y+C6ICD5rWu55uI5LqPPC90aD48dGg+5Lmw5YWl5pe26Ze0PC90aD48dGg+RFM8L3RoPjx0aD7nva7kv6HluqY8L3RoPjx0aD7mmI7nu4Y8L3RoPjwvdHI+JHtwb3NSb3dzfTwvdGFibGU+PC9kaXY+YCA6ICc8ZGl2IGNsYXNzPSJlbXB0eSI+5pqC5peg5oyB5LuTPC9kaXY+J30KPGgyPvCfj4Eg57uT566X6K6w5b2V77yI54K55Ye76KGM5bGV5byA5Yik5pat5piO57uG77yJPC9oMj4KJHtzZXR0bGVkLmxlbmd0aCA/IGA8ZGl2IGNsYXNzPSJ0d3JhcCI+PHRhYmxlPjx0cj48dGg+5pe26Ze0PC90aD48dGg+5biC5Zy6PC90aD48dGg+5pa55ZCRPC90aD48dGg+57uT5p6cPC90aD48dGg+5Lmw5YWl5Lu3PC90aD48dGg+5oqV5YWlPC90aD48dGg+5pS25ZuePC90aD48dGg+55uI5LqPPC90aD48dGg+RFM8L3RoPjx0aD7nva7kv6HluqY8L3RoPjx0aD7mmI7nu4Y8L3RoPjwvdHI+JHtzZXR0bGVSb3dzfTwvdGFibGU+PC9kaXY+YCA6ICc8ZGl2IGNsYXNzPSJlbXB0eSI+5pqC5peg57uT566XPC9kaXY+J30KPGgyPvCfk5Ig5oiQ5Lqk6K6w5b2V77yI6L+RODDvvIk8L2gyPgoke2xlZGdlci50cmFkZXMubGVuZ3RoID8gYDxkaXYgY2xhc3M9InR3cmFwIj48dGFibGU+PHRyPjx0aD7ml7bpl7Q8L3RoPjx0aD7luILlnLo8L3RoPjx0aD7liqjkvZw8L3RoPjx0aD7mlrnlkJE8L3RoPjx0aD7ku7fmoLw8L3RoPjx0aD7ogqHmlbA8L3RoPjx0aD7ph5Hpop08L3RoPjx0aD7ljp/lm6A8L3RoPjwvdHI+JHt0cmFkZVJvd3N9PC90YWJsZT48L2Rpdj5gIDogJzxkaXYgY2xhc3M9ImVtcHR5Ij7mmoLml6DmiJDkuqQ8L2Rpdj4nfQoke2xlZGdlci5lcnJvcnMubGVuZ3RoID8gYDxoMj7imqDvuI8g6ZSZ6K+v77yI6L+RMTDvvIk8L2gyPjxkaXYgY2xhc3M9InR3cmFwIj48dGFibGU+PHRyPjx0aD7ml7bpl7Q8L3RoPjx0aD7kvY3nva48L3RoPjx0aD7kv6Hmga88L3RoPjwvdHI+JHtlcnJSb3dzfTwvdGFibGU+PC9kaXY+YCA6ICcnfQo8aDI+8J+VkCDmnIDov5Hor4TkvLDvvIjov5ExMDDova7vvIzlj6rorrDpooTmtYvljLrvvIk8L2gyPgoke3JlY2VudEp1ZGdzLmxlbmd0aCA/IGp1ZGdtZW50U3ViVGFibGUocmVjZW50SnVkZ3MpIDogJzxkaXYgY2xhc3M9ImVtcHR5Ij7mmoLml6Dor4TkvLDorrDlvZU8L2Rpdj4nfQo8c2NyaXB0Pgpkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsZT0+ewogIGNvbnN0IGI9ZS50YXJnZXQuY2xvc2VzdCgnLmV4cCcpOwogIGlmKGIpewogICAgY29uc3QgZD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChiLmRhdGFzZXQudCk7CiAgICBjb25zdCBvcGVuPWQuc3R5bGUuZGlzcGxheSE9PSdub25lJzsKICAgIGQuc3R5bGUuZGlzcGxheT1vcGVuPydub25lJzondGFibGUtcm93JzsKICAgIGIudGV4dENvbnRlbnQ9KG9wZW4/J+KWuCAnOifilr4gJykrYi50ZXh0Q29udGVudC5yZXBsYWNlKC9eW+KWuOKWvl0gLywnJyk7CiAgICByZXR1cm47CiAgfQogIGNvbnN0IGIyPWUudGFyZ2V0LmNsb3Nlc3QoJy5leHAyJyk7IGlmKCFiMikgcmV0dXJuOwogIGNvbnN0IGQyPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGIyLmRhdGFzZXQudCk7CiAgY29uc3Qgb3BlbjI9ZDIuc3R5bGUuZGlzcGxheSE9PSdub25lJzsKICBkMi5zdHlsZS5kaXNwbGF5PW9wZW4yPydub25lJzonYmxvY2snOwogIGIyLnRleHRDb250ZW50PShvcGVuMj8n4pa4ICc6J+KWviAnKStiMi50ZXh0Q29udGVudC5yZXBsYWNlKC9eW+KWuOKWvl0gLywnJyk7Cn0pOwo8L3NjcmlwdD4KPC9ib2R5PjwvaHRtbD5gOwp9CgpmdW5jdGlvbiByb3VuZDIobikgeyByZXR1cm4gTWF0aC5yb3VuZChuICogMTAwKSAvIDEwMDsgfQoKZnVuY3Rpb24gbG9hZFByaWNlcygpIHsKICB0cnkgeyByZXR1cm4gSlNPTi5wYXJzZShmcy5yZWFkRmlsZVN5bmMocmVxdWlyZSgncGF0aCcpLmpvaW4oY2ZnLkRBVEFfRElSLCAncHJpY2VzLmpzb24nKSwgJ3V0ZjgnKSk7IH0KICBjYXRjaCB7IHJldHVybiB7fTsgfQp9CgpmdW5jdGlvbiBidWlsZFJlcG9ydCgpIHsKICBjb25zdCBsZWRnZXIgPSBsb2FkKCk7CiAgY29uc3QgaHRtbCA9IHJlbmRlckh0bWwobGVkZ2VyLCBsb2FkUHJpY2VzKCkpOwogIGZzLndyaXRlRmlsZVN5bmMoY2ZnLlJFUE9SVF9QQVRILCBodG1sKTsKICByZXR1cm4gY2ZnLlJFUE9SVF9QQVRIOwp9CgppZiAocmVxdWlyZS5tYWluID09PSBtb2R1bGUpIHsKICBjb25zb2xlLmxvZyhidWlsZFJlcG9ydCgpKTsKfQoKbW9kdWxlLmV4cG9ydHMgPSB7IHJlbmRlckh0bWwsIGJ1aWxkUmVwb3J0LCBsb2FkUHJpY2VzIH07Cg==
+// 静态 HTML 报告：市场名直链 Polymarket 官方盘口；判断明细折进对应行点击展开
+const fs = require('fs');
+const cfg = require('./config');
+const { load } = require('./store');
+const winrateMod = require('./winrate');
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+const usd = n => (n >= 0 ? '+' : '') + '$' + Number(n).toFixed(2);
+const pnlCls = n => n > 0 ? 'pos' : n < 0 ? 'neg' : '';
+const tstr = iso => { const d = new Date(iso); return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`; };
+const evUrl = slug => `https://polymarket.com/event/${esc(slug)}`;
+
+// 全页面统一盘口名：BTC 5m-1790869800（11:50–11:55）
+// 一律从 slug 时间戳按东八区算窗口，不依赖各进程 TZ 环境
+function mktName(slug) {
+  const m = /^([a-z]+)-updown-(\d+)m-(\d+)$/.exec(slug || '');
+  if (!m) return esc(slug || '—');
+  const f = s => {
+    const d = new Date((Number(s) + 8 * 3600) * 1000);
+    return String(d.getUTCHours()).padStart(2, '0') + ':' + String(d.getUTCMinutes()).padStart(2, '0');
+  };
+  const start = m[3];
+  const winSec = Number(m[2]) * 60;
+  return `${m[1].toUpperCase()} ${m[2]}m-${start}（${f(start)}–${f(Number(start) + winSec)}）`;
+}
+
+const dsName = d => d === 'up' ? '涨' : d === 'down' ? '跌' : '—';
+
+function judgmentSubTable(judgs) {
+  if (!judgs.length) return '';
+  const blocks = [];
+  const rows = judgs.slice().reverse().map(j => {
+    let mioBtn = '—';
+    if (j.io) {
+      const mid = mioId();
+      mioBtn = `<button class="exp2" data-t="${mid}">▸ 输入/输出</button>`;
+      blocks.push(mioBlock(mid, j.io));
+    }
+    const conf = j.confTier != null ? `$${j.confTier}${j.wrMult > 1 ? `×${j.wrMult}` : ``}（DS${j.dsConfidence != null ? (j.dsConfidence * 100).toFixed(0) + '%' : ''}·Muse${j.museConfidence != null ? (j.museConfidence * 100).toFixed(0) + '%' : ''}）` : '—';
+    const dirCell = `${dsName(j.dsDirection)}${j.dsConfidence != null ? ' ' + (j.dsConfidence * 100).toFixed(0) + '%' : ''}` +
+      (j.museDirection ? `<br><span class="dim">Muse ${dsName(j.museDirection)}${j.museConfidence != null ? ' ' + (j.museConfidence * 100).toFixed(0) + '%' : ''}</span>` : '');
+    return `<tr><td><a href="${esc(j.eventUrl || ('https://polymarket.com/event/' + (j.slug || '')))}" target="_blank">${mktName(j.slug)}</a></td><td>${tstr(j.time)}</td><td>${j.secToNextStart != null ? j.secToNextStart + 's' : '—'}</td><td>${j.upBuy != null ? j.upBuy : '—'}</td><td>${j.downBuy != null ? j.downBuy : '—'}</td><td class="${j.dsDirection === 'up' ? 'pos' : j.dsDirection === 'down' ? 'neg' : ''}">${dirCell}</td><td>${j.driftBps != null ? j.driftBps + 'bps·RSI' + j.rsi14 : '—'}</td><td>${conf}</td><td>${j.bet ? '买入' + (j.side === 'up' ? '涨' : '跌') + ' $' + Number(j.stake).toFixed(2) : '跳过'}</td><td class="rs">${esc(j.reason || '')}${j.dsReason ? '<br>DS：' + esc(j.dsReason) : ''}${j.museReason ? '<br>Muse：' + esc(j.museReason) : ''}</td><td>${mioBtn}</td></tr>`;
+  }).join('');
+  return `<div class="dh">📝 判断记录</div><div class="twrap"><table class="sub"><tr><th>预测窗口</th><th>判断时间</th><th>距开盘</th><th>Up买入</th><th>Down买入</th><th>DS方向</th><th>动量</th><th>置信度</th><th>操作</th><th>原因</th><th>模型</th></tr>${rows}</table></div>${blocks.join('')}`;
+}
+
+// 模型 io 二级展开：发给模型的完整输入 + 原始输出，烘焙进 HTML
+let mioSeq = 0;
+function mioId() { return `mio${++mioSeq}`; }
+function mioBlock(mid, io) {
+  const secs = [];
+  if (io.ds) {
+    secs.push(`<div class="mioh">DeepSeek 输入（完整 prompt）</div><pre>${esc(io.ds.prompt || '')}</pre>`);
+    if (io.ds.raw) secs.push(`<div class="mioh">DeepSeek 原始返回</div><pre>${esc(io.ds.raw)}</pre>`);
+  }
+  if (io.muse) {
+    if (io.muse.raw) secs.push(`<div class="mioh">Muse Spark 1.3 Contributor 原始返回</div><pre>${esc(io.muse.raw)}</pre>`);
+  }
+  if (io.failed) {
+    secs.push(`<div class="mioh">失败时的输入（未拿到输出）</div><pre>${esc(io.failed.prompt || io.failed.state || '')}</pre>`);
+    if (io.failed.raw) secs.push(`<div class="mioh">失败时的原始返回</div><pre>${esc(io.failed.raw)}</pre>`);
+  }
+  return `<div class="mio" id="${mid}" style="display:none">${secs.join('')}</div>`;
+}
+
+function posUnreal(pos, prices) {
+  const q = prices[pos.slug];
+  if (!q) return null;
+  // 持有到期：现价仅供参考（downMid 本就是 Down token 自己的价格，不要再取 1-）
+  const px = pos.side === 'up' ? q.upMid : q.downMid;
+  if (!Number.isFinite(px)) return null;
+  const unreal = pos.shares * px - pos.stake;
+  return { px, unreal, unrealPct: unreal / pos.stake, t: q.t };
+}
+
+function renderHtml(ledger, prices, opts = {}) {
+  const live = opts.live ? ' <span class="tag">LIVE</span>' : '';
+  const updated = new Date().toLocaleString('zh-CN', { hour12: false });
+  const totalPnl = round2(ledger.wallet - cfg.BANKROLL_USD);
+  const settled = ledger.settlements;
+  const winN = settled.filter(s => s.win).length;
+  // 当前胜率 + 倍投档位（用户拍板 2026-10-03）
+  const wrs = winrateMod.settledWinRate(settled);
+  const wrPct = (wrs.winRate * 100).toFixed(1) + '%';
+  // 分币种分方向胜率 + 分桶倍数（用户要求 2026-10-03）
+  const coinList = [...new Set(settled.map(s => s.coin))].sort();
+  const wrBucketStats = winrateMod.bucketStats(settled);
+  const coinRows = coinList.map(c => {
+    const cell = (side) => {
+      const cu = settled.filter(s => s.coin === c && s.side === side);
+      const wu = cu.filter(s => s.win).length;
+      const pu = cu.length ? (wu / cu.length * 100).toFixed(1) + '%' : '—';
+      const mult = winrateMod.bucketMultiplier(wrBucketStats, c, side, cfg.WR_MULT_MIN_SETTLED);
+      const mTag = mult > 1 ? ` <b>×${mult}</b>` : '';
+      return `${pu}<span class="dim">（${cu.length}笔）</span>${mTag}`;
+    };
+    const ct = settled.filter(s => s.coin === c).length;
+    const wt = settled.filter(s => s.coin === c && s.win).length;
+    const pt = ct ? (wt / ct * 100).toFixed(1) + '%' : '—';
+    return `<tr><td><b>${c.toUpperCase()}</b></td><td>${cell('up')}</td><td>${cell('down')}</td><td>${pt}<span class="dim">（${ct}笔）</span></td></tr>`;
+  }).join('');
+  const coinTable = coinList.length ? `<h2>📊 分币种胜率（已结算）</h2><div class="twrap"><table><tr><th>币种</th><th>看涨胜率</th><th>看跌胜率</th><th>合计胜率</th></tr>${coinRows}</table></div>` : '';
+
+  const posRows = ledger.positions.map((p, i) => {
+    const u = posUnreal(p, prices);
+    const judgs = ledger.judgments.filter(j => j.slug === p.slug);
+    const detailId = `pd${i}`;
+    return `<tr class="mainrow" data-detail="${detailId}">
+      <td><a href="${esc(p.eventUrl)}" target="_blank">${mktName(p.slug)}</a></td>
+      <td class="${p.side === 'up' ? 'pos' : 'neg'}">${p.side === 'up' ? '涨' : '跌'}</td>
+      <td>${p.buyPrice.toFixed(3)}<div class="dim">决策${p.decidePrice != null ? p.decidePrice.toFixed(3) : '—'}</div></td><td>${p.shares.toFixed(1)}</td><td>$${p.stake.toFixed(2)}</td>
+      <td>${u ? u.px.toFixed(3) : '—'}</td>
+      <td class="${u ? pnlCls(u.unreal) : ''}">${u ? usd(u.unreal) : '—'}</td>
+      <td>${tstr(p.buyTime)}</td>
+      <td>${p.dsDirection ? dsName(p.dsDirection) + (p.dsConfidence != null ? ' ' + (p.dsConfidence * 100).toFixed(0) + '%' : '') + (p.museDirection ? '<div class="dim">Muse ' + dsName(p.museDirection) + (p.museConfidence != null ? ' ' + (p.museConfidence * 100).toFixed(0) + '%' : '') + '</div>' : '') : '—'}</td>
+      <td>${p.confTier != null ? `$${p.confTier}${p.wrMult > 1 ? `×${p.wrMult}` : ``}（DS${p.dsConfidence != null ? (p.dsConfidence * 100).toFixed(0) + '%' : ''}·Muse${p.museConfidence != null ? (p.museConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
+      <td>${judgs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}</button>` : '—'}</td>
+    </tr>
+    <tr class="detail" id="${detailId}" style="display:none"><td colspan="11">
+      ${judgmentSubTable(judgs)}
+    </td></tr>`;
+  }).join('');
+
+  const tradeRows = ledger.trades.slice().reverse().slice(0, 80).map(t =>
+    `<tr><td>${tstr(t.time)}</td><td>${mktName(t.slug)}</td>
+     <td class="${t.side === 'buy' ? 'pos' : ''}">${t.side === 'buy' ? '买入' : '结算'}</td>
+     <td>${t.outcome ? (t.outcome === 'up' ? '涨' : '跌') : '—'}</td><td>${t.price}${t.decidePrice != null && t.decidePrice !== t.price ? `<div class="dim">决策${Number(t.decidePrice).toFixed(3)}</div>` : ''}</td><td>${t.shares}</td>
+     <td>$${Number(t.stake).toFixed(2)}</td><td class="rs">${esc(t.reason || '')}</td></tr>`).join('');
+
+  const settleRows = settled.slice().reverse().map((s, i) => {
+    const judgs = ledger.judgments.filter(j => j.slug === s.slug);
+    const detailId = `st${i}`;
+    return `<tr class="mainrow" data-detail="${detailId}">
+     <td>${tstr(s.time)}</td><td><a href="${esc(s.eventUrl)}" target="_blank">${mktName(s.slug)}</a></td>
+     <td>${s.side === 'up' ? '涨' : '跌'}</td><td class="${s.win ? 'pos' : 'neg'}">${s.win ? '命中' : '归零'}</td>
+     <td>${s.buyPrice != null ? s.buyPrice.toFixed(3) : '—'}</td>
+     <td>$${(s.stake).toFixed(2)}</td><td>$${(s.payout).toFixed(2)}</td>
+     <td class="${pnlCls(s.pnl)}">${usd(s.pnl)}</td>
+     <td>${s.dsDirection ? dsName(s.dsDirection) + (s.dsConfidence != null ? ' ' + (s.dsConfidence * 100).toFixed(0) + '%' : '') + (s.museDirection ? '<div class="dim">Muse ' + dsName(s.museDirection) + (s.museConfidence != null ? ' ' + (s.museConfidence * 100).toFixed(0) + '%' : '') + '</div>' : '') : '—'}</td>
+     <td>${s.confTier != null ? `$${s.confTier}${s.wrMult > 1 ? `×${s.wrMult}` : ``}（DS${s.dsConfidence != null ? (s.dsConfidence * 100).toFixed(0) + '%' : ''}·Muse${s.museConfidence != null ? (s.museConfidence * 100).toFixed(0) + '%' : ''}）` : '—'}</td>
+     <td>${judgs.length ? `<button class="exp" data-t="${detailId}">▸ 判断${judgs.length}</button>` : '—'}</td></tr>
+    <tr class="detail" id="${detailId}" style="display:none"><td colspan="11">
+      ${judgmentSubTable(judgs)}
+    </td></tr>`;
+  }).join('');
+
+  const errRows = ledger.errors.slice().reverse().slice(0, 10).map(e =>
+    `<tr><td>${tstr(e.time)}</td><td>${esc(e.where)}</td><td class="rs">${esc(e.message)}</td></tr>`).join('');
+
+  const recentJudgs = ledger.judgments.slice(-100);
+
+  return `<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Polymarket Crypto 5m 模拟盘${live}</title>
+<style>
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0f1420;color:#e6e9f0;margin:0;padding:16px}
+h1{font-size:20px;margin:0 0 4px}.tag{background:#2f81f7;border-radius:4px;font-size:11px;padding:2px 6px;vertical-align:middle}
+.meta{color:#8b93a7;font-size:12px;margin-bottom:12px}
+.cards{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.card{background:#1a2233;border-radius:8px;padding:10px 14px;min-width:120px}
+.card .k{font-size:11px;color:#8b93a7}.card .v{font-size:20px;font-weight:700}
+.pos{color:#3fb950}.neg{color:#f85149}
+h2{font-size:15px;margin:18px 0 8px;color:#c9d1d9}
+table{width:100%;border-collapse:collapse;font-size:12px;background:#1a2233;border-radius:8px;overflow:hidden}
+th,td{padding:7px 8px;text-align:left;border-bottom:1px solid #2a3348}
+th{color:#8b93a7;font-weight:600;background:#161d2e}
+tr.mainrow{cursor:pointer}tr.mainrow:hover td{background:#222c44}
+a{color:#58a6ff;text-decoration:none}.exp{background:#2a3348;border:0;color:#c9d1d9;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:12px}
+.sub{margin:8px 0;background:#141b2c}.dh{font-size:12px;color:#8b93a7;margin:10px 0 4px}
+.rs{max-width:340px;word-break:break-word;color:#9aa4b8}
+.empty{color:#5c6579;padding:14px;font-size:12px}
+.exp2{background:#2a3348;border:0;color:#c9d1d9;border-radius:4px;padding:3px 8px;cursor:pointer;font-size:12px}
+.twrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){
+body{padding:10px}
+h1{font-size:17px}
+.cards{gap:8px;margin-bottom:10px}
+.card{padding:8px 10px;min-width:100px;flex:1 1 30%}
+.card .v{font-size:17px}
+h2{font-size:14px;margin:14px 0 6px}
+th,td{padding:8px 6px;font-size:11px;white-space:nowrap}
+td.rs{white-space:normal;min-width:120px}
+.exp,.exp2{padding:8px 12px;font-size:12px}
+.mio pre{font-size:10px}
+.dh{font-size:11px}
+}
+.mio{margin:6px 0 12px;background:#10182a;border-radius:6px;padding:4px 10px 10px}
+.mioh{font-size:11px;color:#8b93a7;margin:10px 0 4px}
+.mio pre{background:#0b1120;padding:8px;border-radius:4px;font-size:11px;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto;margin:0;color:#c9d1d9}
+.dim{font-size:10px;color:#5c6579}
+</style></head><body>
+<h1>⚡ Polymarket Crypto 5m 模拟盘${live}</h1>
+<div class="meta">更新：${updated} · BTC/ETH/SOL/XRP/DOGE × 5m · 本金 $${cfg.BANKROLL_USD} · DeepSeek + Muse 双模型方向一致才下 · 置信度取较低者≥57%（57–60% $1 / 61–70% $2 / ≥71% $3）· 开盘前50s预测 · 只买 ≤0.55（下限已放开）· 持有到期 · PAPER_MODE</div>
+<div class="cards">
+<div class="card"><div class="k">钱包</div><div class="v">$${ledger.wallet.toFixed(2)}</div></div><div class="card"><div class="k">总盈亏</div><div class="v ${pnlCls(totalPnl)}">${usd(totalPnl)}</div></div>
+<div class="card"><div class="k">持仓</div><div class="v">${ledger.positions.length}</div></div>
+<div class="card"><div class="k">已结算胜率</div><div class="v">${wrPct}<span class="dim">（${wrs.n}笔·命中${winN}）</span></div></div>
+<div class="card"><div class="k">下单规则</div><div class="v" style="font-size:12px;font-weight:400">DS≥57%：57–60% $1 / 61–70% $2 / ≥71% $3 · 胜率&lt;40%×2 / &lt;35%×3 / &lt;30%×4（按币种+方向分桶，每桶${cfg.WR_MULT_MIN_SETTLED}笔激活）</div></div>
+</div>
+${coinTable}
+<h2>📦 持仓（持有到期，点击行展开判断明细）</h2>
+${ledger.positions.length ? `<div class="twrap"><table><tr><th>市场</th><th>方向</th><th>买入价</th><th>股数</th><th>投入</th><th>参考现价</th><th>参考浮盈亏</th><th>买入时间</th><th>DS</th><th>置信度</th><th>明细</th></tr>${posRows}</table></div>` : '<div class="empty">暂无持仓</div>'}
+<h2>🏁 结算记录（点击行展开判断明细）</h2>
+${settled.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>方向</th><th>结果</th><th>买入价</th><th>投入</th><th>收回</th><th>盈亏</th><th>DS</th><th>置信度</th><th>明细</th></tr>${settleRows}</table></div>` : '<div class="empty">暂无结算</div>'}
+<h2>📒 成交记录（近80）</h2>
+${ledger.trades.length ? `<div class="twrap"><table><tr><th>时间</th><th>市场</th><th>动作</th><th>方向</th><th>价格</th><th>股数</th><th>金额</th><th>原因</th></tr>${tradeRows}</table></div>` : '<div class="empty">暂无成交</div>'}
+${ledger.errors.length ? `<h2>⚠️ 错误（近10）</h2><div class="twrap"><table><tr><th>时间</th><th>位置</th><th>信息</th></tr>${errRows}</table></div>` : ''}
+<h2>🕐 最近评估（近100轮，只记预测区）</h2>
+${recentJudgs.length ? judgmentSubTable(recentJudgs) : '<div class="empty">暂无评估记录</div>'}
+<script>
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.exp');
+  if(b){
+    const d=document.getElementById(b.dataset.t);
+    const open=d.style.display!=='none';
+    d.style.display=open?'none':'table-row';
+    b.textContent=(open?'▸ ':'▾ ')+b.textContent.replace(/^[▸▾] /,'');
+    return;
+  }
+  const b2=e.target.closest('.exp2'); if(!b2) return;
+  const d2=document.getElementById(b2.dataset.t);
+  const open2=d2.style.display!=='none';
+  d2.style.display=open2?'none':'block';
+  b2.textContent=(open2?'▸ ':'▾ ')+b2.textContent.replace(/^[▸▾] /,'');
+});
+</script>
+</body></html>`;
+}
+
+function round2(n) { return Math.round(n * 100) / 100; }
+
+function loadPrices() {
+  try { return JSON.parse(fs.readFileSync(require('path').join(cfg.DATA_DIR, 'prices.json'), 'utf8')); }
+  catch { return {}; }
+}
+
+function buildReport() {
+  const ledger = load();
+  const html = renderHtml(ledger, loadPrices());
+  fs.writeFileSync(cfg.REPORT_PATH, html);
+  return cfg.REPORT_PATH;
+}
+
+if (require.main === module) {
+  console.log(buildReport());
+}
+
+module.exports = { renderHtml, buildReport, loadPrices };

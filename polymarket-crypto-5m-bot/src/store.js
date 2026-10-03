@@ -37,9 +37,24 @@ function save(ledger) {
   fs.renameSync(tmp, LEDGER);
 }
 
-function pushCapped(arr, item, cap) {
+function pushCapped(arr, item, cap, archiveKind) {
   arr.push(item);
   if (arr.length > cap) arr.splice(0, arr.length - cap);
+  if (archiveKind) archive(archiveKind, item); // 归档在裁剪/io清理之前，快照完整
+}
+
+// 训练归档：只追加不删除，按天分文件存 JSONL（data/archive/YYYY-MM-DD.jsonl）
+// 热账本照旧裁剪，归档永久保留，供后续训练用；失败不阻断主流程
+const ARCHIVE_DIR = path.join(cfg.DATA_DIR, 'archive');
+function archiveDay(d = new Date()) {
+  return d.toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }); // YYYY-MM-DD
+}
+function archive(kind, obj) {
+  try {
+    fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
+    const line = JSON.stringify({ kind, archivedAt: new Date().toISOString(), ...obj });
+    fs.appendFileSync(path.join(ARCHIVE_DIR, `${archiveDay()}.jsonl`), line + '\n');
+  } catch { /* 归档失败不阻断交易主流程 */ }
 }
 
 function equity(ledger) {
@@ -54,4 +69,4 @@ function recordEquity(ledger) {
   if (ledger.equityCurve.length > 2000) ledger.equityCurve.splice(0, ledger.equityCurve.length - 2000);
 }
 
-module.exports = { LEDGER, blank, load, save, pushCapped, recordEquity };
+module.exports = { LEDGER, blank, load, save, pushCapped, recordEquity, archive, archiveDay };

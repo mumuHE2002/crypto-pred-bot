@@ -1,7 +1,7 @@
 // Coinbase 现货 K 线（信号输入；Binance 在此出口被地域封）
 const { getJson } = require('./http');
 
-const PRODUCT = { btc: 'BTC-USD', eth: 'ETH-USD' };
+const PRODUCT = { btc: 'BTC-USD', eth: 'ETH-USD', sol: 'SOL-USD', xrp: 'XRP-USD', doge: 'DOGE-USD' };
 
 /** 取最近 n 根 1 分钟 K 线 → [{t, o, h, l, c, v}]（时间升序） */
 async function fetchCandles(coin, n = 30) {

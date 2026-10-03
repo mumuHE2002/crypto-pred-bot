@@ -6,7 +6,7 @@ const { getJson } = require('./http');
 const GAMMA = 'https://gamma-api.polymarket.com';
 const CLOB = 'https://clob.polymarket.com';
 
-const COIN_NAME = { btc: 'Bitcoin', eth: 'Ethereum' };
+const COIN_NAME = { btc: 'Bitcoin', eth: 'Ethereum', sol: 'Solana', xrp: 'XRP', doge: 'Dogecoin' };
 
 function bucketStart(tsSec = Math.floor(Date.now() / 1000), windowSec = cfg.WINDOW_SEC) {
   return Math.floor(tsSec / windowSec) * windowSec;
